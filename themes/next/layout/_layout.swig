@@ -61,16 +61,6 @@
     {% endif %}
 
   </div>
-  {# LazyLoad #}
-  <script type="text/javascript" src="{{ url_for(theme.js) }}/lazyload.js"></script>
-  <script type="text/javascript">
-    $(function () {
-      $("#posts").find('img').lazyload({
-        placeholder: "{{ url_for(theme.images) }}/loading.gif",
-        effect: "fadeIn"
-      });
-    });
-  </script>
 
   {% include '_scripts/vendors.swig' %}
   {% include '_scripts/commons.swig' %}
@@ -88,8 +78,5 @@
   {% include '_third-party/seo/baidu-push.swig' %}
   {% include '_third-party/mathjax.swig' %}
   {% include '_third-party/exturl.swig' %}
-  {% if theme.leancloud_visitors.enable %}
-  	 {% include '_scripts/lean-analytics.swig' %}
-  {%  endif %}
 </body>
 </html>
