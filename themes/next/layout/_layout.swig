@@ -61,6 +61,16 @@
     {% endif %}
 
   </div>
+  {# LazyLoad #}
+  <script type="text/javascript" src="{{ url_for(theme.js) }}/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "{{ url_for(theme.images) }}/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
 
   {% include '_scripts/vendors.swig' %}
   {% include '_scripts/commons.swig' %}
