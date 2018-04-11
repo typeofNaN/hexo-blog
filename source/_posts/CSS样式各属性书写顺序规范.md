@@ -13,13 +13,14 @@ tags:
 ### 口诀
 状定形边字背其，上右下左顺时针。
 <!-- more -->
-* 状（状态）
-* 定（定位）
-* 形（形状）
-* 边（边框）
-* 字（字体）
-* 背（背景)
-* 其（其他）
+    * 状（状态）
+    * 定（定位）
+    * 形（形状）
+    * 边（边框）
+    * 字（字体）
+    * 背（背景)
+    * 其（其他）
+
 属性越前则优先级越高。
 
 ## 规范书写顺序原因
@@ -48,107 +49,107 @@ position: absolute;
 
 ## 详细解析
 ### 状态类
-* display: block | none | inline | compact | marker | inline-table | list-item | run-in | table | table-caption | table-cell | table-column | table-column-group | table-footer-group | table-header-group | table-row | table-row-grou 
-* visibility: inherit | visible | collapse | hidden  
-* float: none | left | right  
-* clear: none | left | right | both 
-* overflow: visible | auto | hidden | scroll 
+    * display: block | none | inline | compact | marker | inline-table | list-item | run-in | table | table-caption | table-cell | table-column | table-column-group | table-footer-group | table-header-group | table-row | table-row-grou 
+    * visibility: inherit | visible | collapse | hidden  
+    * float: none | left | right  
+    * clear: none | left | right | both 
+    * overflow: visible | auto | hidden | scroll 
 
 ### 定位类
-* position: static | absolute | fixed | relative  
-* top：auto | length  
-* right: auto | length  
-* bottom: auto | length 
-* left: auto | length  
-* z-index: auto | number 
+    * position: static | absolute | fixed | relative  
+    * top：auto | length  
+    * right: auto | length  
+    * bottom: auto | length 
+    * left: auto | length  
+    * z-index: auto | number 
 
 ### 形状类
 #### 宽
-* width: visible | auto | hidden | scroll 
-* min-width: visible | auto | hidden | scroll 
-* max-width: visible | auto | hidden | scroll 
+    * width: visible | auto | hidden | scroll 
+    * min-width: visible | auto | hidden | scroll 
+    * max-width: visible | auto | hidden | scroll 
 #### 高
-* height: auto | length 
-* min-height: auto | length 
-* max-height: auto | length 
+    * height: auto | length 
+    * min-height: auto | length 
+    * max-height: auto | length 
 
 ### 边框类
 #### maigin
-* margin: auto | length 
-* margin-top: auto | length 
-* margin-right: auto | length 
-* margin-bottom: auto | length 
-* margin-left: auto | length 
+    * margin: auto | length 
+    * margin-top: auto | length 
+    * margin-right: auto | length 
+    * margin-bottom: auto | length 
+    * margin-left: auto | length 
 #### padding
-* padding: auto | length 
-* padding-top: auto | length 
-* padding-right: auto | length 
-* padding-bottom: auto | length 
-* padding-left: auto | length 
+    * padding: auto | length 
+    * padding-top: auto | length 
+    * padding-right: auto | length 
+    * padding-bottom: auto | length 
+    * padding-left: auto | length 
 #### border
 ##### 四边
-* border: border-width || border-style || border-color 
-* border-top: border-width || border-style || border-color 
-* border-right: border-width || border-style || border-color 
-* border-bottom: border-width || border-style || border-color 
-* border-left: border-width || border-style || border-color 
+    * border: border-width || border-style || border-color 
+    * border-top: border-width || border-style || border-color 
+    * border-right: border-width || border-style || border-color 
+    * border-bottom: border-width || border-style || border-color 
+    * border-left: border-width || border-style || border-color 
 ##### 边宽
-* border-width: none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset 
-* border-top-width: medium | thin | thick | length 
-* border-right-width: medium | thin | thick | length 
-* border-bottom-width: medium | thin | thick | length 
-* border-left-width: medium | thin | thick | length 
+    * border-width: none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset 
+    * border-top-width: medium | thin | thick | length 
+    * border-right-width: medium | thin | thick | length 
+    * border-bottom-width: medium | thin | thick | length 
+    * border-left-width: medium | thin | thick | length 
 ##### 边样式
-* border-style: none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset 
-* border-top-style: border-width || border-style || border-color 
-* border-right-style: border-width || border-style || border-color 
-* border-bottom-style: border-width || border-style || border-color 
-* border-left-style: border-width || border-style || border-color 
+    * border-style: none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset 
+    * border-top-style: border-width || border-style || border-color 
+    * border-right-style: border-width || border-style || border-color 
+    * border-bottom-style: border-width || border-style || border-color 
+    * border-left-style: border-width || border-style || border-color 
 ##### 边颜色
-* border-color: color 
-* border-top-color: color 
-* border-right-color: color 
-* border-bottom-color: color 
-* border-left-color: color 
+    * border-color: color 
+    * border-top-color: color 
+    * border-right-color: color 
+    * border-bottom-color: color 
+    * border-left-color: color 
 ##### 边圆角
-* border-radius: length 
+    * border-radius: length 
 ##### 外边线
-* outline: outline-color || outline-style || outline-width 
-* list-style: list-style-image || list-style-position || list-style-type 
+    * outline: outline-color || outline-style || outline-width 
+    * list-style: list-style-image || list-style-position || list-style-type 
 ##### 其他边
-* table-layout: auto | fixed 
-* caption-side: top | right | bottom | left 
-* border-collapse: separate | collapse 
-* border-spacing: length 
-* empty-cells: show | hide 
+    * table-layout: auto | fixed 
+    * caption-side: top | right | bottom | left 
+    * border-collapse: separate | collapse 
+    * border-spacing: length 
+    * empty-cells: show | hide 
 
 ### 字体类
-* font: caption | icon | menu | message-box | small-caption | status-bar 
-* font-family: ncursive | fantasy | monospace | serif | sans-serif 
-* font-size: xx-small | x-small | small | medium | large | x-large | xx-large | larger | smaller | length 
-* line-height: normal | length 
-* font-weight: normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900  
-* text-align: left | right | center | justify 
-* text-indent: length 
-* text-transform: none | capitalize | uppercase | lowercase 
-* text-decoration: none || underline || blink || overline || line-through 
-* letter-spacing: normal | length 
-* word-spacing: normal | length 
-* white-space: normal | pre | nowrap 
-* vertical-align: auto | baseline | sub | super | top | text-top | middle | bottom | text-bottom | length 
-* color: color 
+    * font: caption | icon | menu | message-box | small-caption | status-bar 
+    * font-family: ncursive | fantasy | monospace | serif | sans-serif 
+    * font-size: xx-small | x-small | small | medium | large | x-large | xx-large | larger | smaller | length 
+    * line-height: normal | length 
+    * font-weight: normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900  
+    * text-align: left | right | center | justify 
+    * text-indent: length 
+    * text-transform: none | capitalize | uppercase | lowercase 
+    * text-decoration: none || underline || blink || overline || line-through 
+    * letter-spacing: normal | length 
+    * word-spacing: normal | length 
+    * white-space: normal | pre | nowrap 
+    * vertical-align: auto | baseline | sub | super | top | text-top | middle | bottom | text-bottom | length 
+    * color: color 
 
 ### 背景类
-* background: background-color || background-image || background-repeat || background-attachment || background-position
-* background-color: transparent | color 
-* background-image: none | url ( url ) 
-* background-repeat: repeat | no-repeat | repeat-x | repeat-y
-* background-position: length || length || position 
+    * background: background-color || background-image || background-repeat || background-attachment || background-position
+    * background-color: transparent | color 
+    * background-image: none | url ( url ) 
+    * background-repeat: repeat | no-repeat | repeat-x | repeat-y
+    * background-position: length || length || position 
 
  
 ### 其他
-* opacity：0-1
-* cursor: auto | all-scroll | col-resize| crosshair | default | hand | move | help | no-drop | not-allowed | pointer | progress | row-resize | text | vertical-text | wait | *-resize | url ( url ) 
-* content: attr(alt) | counter(name) | counter(name , list-style-type) | counters(name , string) | counters(name , string , list-style-type) | no-close-quote | no-open-quote | close-quote | open-quote | string | url(url)
-* quotes: none | string 
+    * opacity：0-1
+    * cursor: auto | all-scroll | col-resize| crosshair | default | hand | move | help | no-drop | not-allowed | pointer | progress | row-resize | text | vertical-text | wait | *-resize | url ( url ) 
+    * content: attr(alt) | counter(name) | counter(name , list-style-type) | counters(name , string) | counters(name , string , list-style-type) | no-close-quote | no-open-quote | close-quote | open-quote | string | url(url)
+    * quotes: none | string 
 
