@@ -1,6 +1,6 @@
 ---
 title: CSS样式各属性书写顺序规范
-date: 2018-04-11 15:28:12
+date: 2018-04-11 21:25:45
 categories: 技术文章
 tags:
     - CSS
@@ -152,4 +152,3 @@ position: absolute;
     * cursor: auto | all-scroll | col-resize| crosshair | default | hand | move | help | no-drop | not-allowed | pointer | progress | row-resize | text | vertical-text | wait | *-resize | url ( url ) 
     * content: attr(alt) | counter(name) | counter(name , list-style-type) | counters(name , string) | counters(name , string , list-style-type) | no-close-quote | no-open-quote | close-quote | open-quote | string | url(url)
     * quotes: none | string 
-
