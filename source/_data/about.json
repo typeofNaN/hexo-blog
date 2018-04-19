@@ -1,30 +1,27 @@
 {
     "avatar": "avatar.jpg",
-    "name": "DM2N",
+    "name": "六碗面",
 	"tag": "Web前端/技术宅",
     "desc": "想你所想，做你想做",
     "skills": {
         "Javascript": 8,
-		"Python": 6,
-		
-		"invisible-split-line-1": -1,
-
+		"C#": 6,
 		"Node.js": 4
     },
     "projects": [{
-		"name": "你的项目A",
+		"name": "NBNB",
 		"image": "https://d13yacurqjgara.cloudfront.net/users/138819/screenshots/2578899/dribbble_800x600_01_1x.png",
-		"tags": ["2016年", "项目标签"],
+		"tags": ["NBNB", "ASP.NET web-forms"],
 		"description": "你的项目A的简介",
-		"link_text": "网站链接",
-		"link": "https://dribbble.com/"
+		"link_text": "Github地址",
+		"link": "https://github.com/DM2N/NBNB-Web-Forms.git"
 	}, {
-		"name": "你的作品B",
+		"name": "NBNB",
 		"image": "https://d13yacurqjgara.cloudfront.net/users/4094/screenshots/2578885/time-lords-drib_1x.jpg",
 		"description": "你的作品B的简介",
-		"tags": ["Github", "设计"],
+		"tags": ["NBNB", "ASP.NET MVC"],
 		"link_text": "Github地址",
-		"link": "https://github.com/"
+		"link": "https://github.com/DM2N/NBNB.git"
 	}],
 	"reward": [
 	    null
