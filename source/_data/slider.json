@@ -1,0 +1,20 @@
+
+[{
+    "image": "http://lorempixel.com/580/250/nature/1",
+    "align": "center",
+    "title": "DM2N",
+    "subtitle": "像2的N次方一样成长",
+	"link": "/"
+}, {
+    "image": "http://lorempixel.com/580/250/nature/2",
+    "align": "left",
+    "title": "顺其自然，一切如故",
+    "subtitle": "平凡造就伟大",
+	"link": null
+}, {
+    "image": "http://lorempixel.com/580/250/nature/3",
+    "align": "right",
+    "title": "想你所想，做你所做",
+    "subtitle": "一切随你心",
+	"link": null
+}]
