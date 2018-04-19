@@ -8,13 +8,13 @@
 }, {
     "image": "http://lorempixel.com/580/250/nature/2",
     "align": "left",
-    "title": "顺其自然，一切如故",
-    "subtitle": "平凡造就伟大",
+    "title": "顺其自然",
+    "subtitle": "一切如故",
 	"link": null
 }, {
     "image": "http://lorempixel.com/580/250/nature/3",
     "align": "right",
-    "title": "想你所想，做你所做",
-    "subtitle": "一切随你心",
+    "title": "想你所想",
+    "subtitle": "做你所做",
 	"link": null
 }]
