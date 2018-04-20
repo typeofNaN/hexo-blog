@@ -34,13 +34,13 @@ menu:
 
 # 颜色配置
 color:
-  header: grey
+  header: blue
   footer: grey
   page_nav: indigo
-  side_nav: indigo darken-1
-  tag: grey lighten-1
+  side_nav: grey darken-3
+  tag: blue
   article_title_link: red
-  link: grey
+  link: orange
   pagination: grey
   tab: pink
   archive_item: grey
@@ -48,7 +48,7 @@ color:
   fab_2: green
   fab_3: yellow darken-1
   new: red
-  about_header: grey
+  about_header: grey darken-3
   about_title: grey
 
 archive_yearly: true
