@@ -326,5 +326,5 @@ class Program
 ``` c#
 Db Models Cache Loading ... Down!
 ID: #1001 Name: John Doe
-ID：#2001 Name: Illustrated C# 2012 Price: ￥89.00
+ID: #2001 Name: Illustrated C# 2012 Price: ￥89.00
 ```
