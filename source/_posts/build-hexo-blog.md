@@ -49,11 +49,13 @@ Hexo是基于nodeJS环境的静态博客，里面的npm工具很有用啊，所�
 先创建一个文件夹（用来存放所有blog的东西），然后cd到该文件夹下。
 
 安装hexo命令：（在新建的文件夹里右键Git Bash Here）
+
 ```
 $ npm i -g hexo
 ```
 
 接着初始化命令：hexo init ：
+
 ```
 $ hexo init
 ```
