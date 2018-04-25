@@ -9,42 +9,42 @@ tags:
     - 原型模式
 ---
 
-# 前言
+# **前言**
 
-最近在工作室课上在讲ASP.NET的设计模式，恰巧看到设计模式中的原型模式与JavaScript中的继承机制——原型链有异曲同工之妙，便深入研究了一下。
+&emsp;&emsp;最近在工作室课上在讲ASP.NET的设计模式，恰巧看到设计模式中的原型模式与JavaScript中的继承机制——原型链有异曲同工之妙，便深入研究了一下。
 
-在实际的程序开发中，使用一个最适合的设计模式往往能够起到事半功倍的效果。原型模式的使用场景为：
+&emsp;&emsp;在实际的程序开发中，使用一个最适合的设计模式往往能够起到事半功倍的效果。原型模式的使用场景为：
 
 * 资源优化场景：类初始化需要消化非常多的资源，这个资源包括数据、硬件资源等。
 * 性能和安全要求的场景：通过new产生一个对象需要非常繁琐的数据准备或访问权限，则可以使用原型模式。
 * 一个对象多个修改者的场景：一个对象需要提供给其他对象访问，而且各个调用者可能都需要修改其值时，可以考虑使用原型模式拷贝多个对象供调用者使用。
 
-在实际项目中，原型模式很少单独出现，一般是和工厂方法模式一起出现，通过clone的方法创建一个对象，然后由工厂方法提供给调用者。
+&emsp;&emsp;在实际项目中，原型模式很少单独出现，一般是和工厂方法模式一起出现，通过clone的方法创建一个对象，然后由工厂方法提供给调用者。
 
-现特将本人学习心得分享与此以方便大家更好地掌握学习原型模式。
+&emsp;&emsp;现将本人学习心得分享与此以方便大家更好地掌握学习原型模式。
 
 <!-- more -->
 
-# 问题引入
+# **问题引入**
 
-当运行以下代码时，会产生什么样的结果呢？
+&emsp;&emsp;当运行以下代码时，会产生什么样的结果呢？
 
-``` c#
+``` cs
 Person a = new Person("Jack",20);
 Person b = a;
 b.SetInfo("John",21);
 a.Display();    // a显示的信息是什么？
 ```
 
-答案是：（看下面！！！）
+&emsp;&emsp;答案是：（看下面！！！）
 
 ```
 John 21
 ```
 
-# 为什么
+# **为什么**
 
-通过以下图片我们可以看到对象的值的传递情况
+&emsp;&emsp;通过以下图片我们可以看到对象的值的传递情况
 
 ![对象的值的传递](https://github.com/DM2N/personal-img/raw/master/blog/prototype-pattern/p1.png)
 
@@ -54,28 +54,30 @@ John 21
 
 ![对象的值的传递](https://github.com/DM2N/personal-img/raw/master/blog/prototype-pattern/p4.png)
 
-但它们是如何做到对象的值的传递？请学习原型模式！！！
+&emsp;&emsp;但它们是如何做到对象的值的传递？请学习原型模式！！！
 
-# 原型模式
+# **原型模式**
 
-## 原型模式介绍
+## **原型模式介绍**
 
-维基百科：原型模式（Prototype Pattern）是创建型模式的一种，其特点在于通过「复制」一个已经存在的实例来返回新的实例，而不是新建实例。被复制的实例就是我们所称的「原型」（Prototype），这个原型是可定制的。
+&emsp;&emsp;维基百科：原型模式（Prototype Pattern）是创建型模式的一种，其特点在于通过「复制」一个已经存在的实例来返回新的实例，而不是新建实例。被复制的实例就是我们所称的「原型」（Prototype），这个原型是可定制的。
 
-## 原型模式的UML类图
+## **原型模式的UML类图**
 
 ![原型模式的UML类图](https://github.com/DM2N/personal-img/raw/master/blog/prototype-pattern/p5.png)
 
-## 原型模式的简单实现
+## **型模式的简单实现**
 
-申明类：
+*申明类：*
 
-``` c#
+``` cs
+// 抽象原型类:声明克隆自身的接口
 public interface Prototype
 {
     Prototype Clone();
 }
 
+// 具体原型类:实现克隆的具体操作
 public class ConcretePrototype1 : Prototype
 {
     public Prototype Clone()
@@ -95,9 +97,10 @@ public class ConcretePrototype2 : Prototype
 }
 ```
 
-主程序调用：
+*主程序调用：*
 
-``` c#
+``` cs
+// 客户类:让一个原型克隆自身，从而获得一个新的对象
 public class Client
 {
     static void Main(string[] args)
@@ -111,41 +114,41 @@ public class Client
 }
 ```
 
-程序运行结果：
+*程序运行结果：*
 
 ```
 ConcreteProtype1 Cloned!
 ConcreteProtype2 Cloned!
 ```
 
-## 实现ICloneable接口
+## **实现ICloneable接口**
 
-.NET在System命名空间中提供了ICloneable接口，其中只包含一个Clone()方法，实现了这个接口就是完成了原型模式。
+&emsp;&emsp;.NET在System命名空间中提供了ICloneable接口，其中只包含一个Clone()方法，实现了这个接口就是完成了原型模式。
 
 ![实现ICloneable接口](https://github.com/DM2N/personal-img/raw/master/blog/prototype-pattern/p6.png)
 
-## 深拷贝与浅拷贝
+## **浅拷贝与深拷贝**
 
-### 浅拷贝（Shallow Copy）
+### **浅拷贝（Shallow Copy）**
 
 * 只复制对象的值类型字段，引用类型只复制引用不复制引用的对象（即复制地址）
 * MemberwiseClone() 是浅拷贝（MSDN）
 
 ![浅拷贝](https://github.com/DM2N/personal-img/raw/master/blog/prototype-pattern/p7.png)
 
-### 深拷贝（Deep Copy）
+### **深拷贝（Deep Copy）**
 
 * 不仅复制值类型字段，而且复制引用的对象
 
 ![深拷贝](https://github.com/DM2N/personal-img/raw/master/blog/prototype-pattern/p8.png)
 
-#### 实现深拷贝
+#### **实现深拷贝**
 
 ![实现深拷贝](https://github.com/DM2N/personal-img/raw/master/blog/prototype-pattern/p9.png)
 
-简历和工作经历类：
+*简历和工作经历类：*
 
-``` c#
+``` cs
 // 简历
 public class Resume : ICloneable
 {
@@ -191,9 +194,9 @@ public class WorkExperience : ICloneable
 }
 ```
 
-主程序调用：
+*主程序调用：*
 
-``` c#
+``` cs
 public class Program
     {
         static void Main(string[] args)
@@ -210,22 +213,22 @@ public class Program
     }
 ```
 
-程序运行结果：
+*程序运行结果：*
 
 ```
 Jack worked in XX公司 from 2012-2015
 Jack worked in YY公司 from 2015-2018
 ```
 
-## 原型模式的应用
+## **原型模式的应用**
 
-### JavaScript继承机制——原型链
+### **JavaScript继承机制——原型链**
 
 ![JavaScript继承机制——原型链](https://github.com/DM2N/personal-img/raw/master/blog/prototype-pattern/p10.png)
 
 参考文章：[阮一峰《Javascript 继承机制的设计思想》](http://www.ruanyifeng.com/blog/2011/06/designing_ideas_of_inheritance_mechanism_in_javascript.html)
 
-### 数据模型缓存
+### **数据模型缓存**
 
 ![数据模型缓存](https://github.com/DM2N/personal-img/raw/master/blog/prototype-pattern/p11.png)
 
@@ -233,9 +236,9 @@ Jack worked in YY公司 from 2015-2018
 
 ![数据模型缓存](https://github.com/DM2N/personal-img/raw/master/blog/prototype-pattern/p12.png)
 
-CloneableModel类定义及扩展：
+*CloneableModel类定义及扩展：*
 
-``` c#
+``` cs
 using System;
 
 // 可克隆模型
@@ -264,9 +267,9 @@ public class Product : CloneableModel
 }
 ```
 
-ModelICache类定义：
+*ModelICache类定义：*
 
-``` c#
+``` cs
 using System;
 using System.Collections;
 
@@ -305,9 +308,9 @@ public class ModelCache
 }
 ```
 
-主程序调用：
+*主程序调用：*
 
-``` c#
+``` cs
 class Program
 {
     static void Main(string[] args)
@@ -329,7 +332,7 @@ class Program
 }
 ```
 
-程序运行结果：
+*程序运行结果：*
 
 ``` c#
 Db Models Cache Loading ... Down!
