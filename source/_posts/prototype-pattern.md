@@ -30,19 +30,50 @@ tags:
 &emsp;&emsp;当运行以下代码时，会产生什么样的结果呢？
 
 ``` cs
+int a = 10;
+int b = a;
+b = 20;
+Console.WriteLine(a);
+```
+
+&emsp;&emsp;答案是：
+
+```
+10
+```
+
+&emsp;&emsp;再运行以下代码时，又会产生什么样的结果呢？
+
+``` cs
 Person a = new Person("Jack",20);
 Person b = a;
 b.SetInfo("John",21);
 a.Display();    // a显示的信息是什么？
 ```
 
-&emsp;&emsp;答案是：（看下面！！！）
+&emsp;&emsp;答案是：
 
 ```
 John 21
 ```
 
+&emsp;&emsp;以上两段代码结构相似，但为何会产生不同的结果呢？
+
 # **为什么**
+
+&emsp;&emsp;要明白这个问题，我们先得对栈和堆有一定的了解。
+
+&emsp;&emsp;C#的类型一共分为两类，一种是值类型（Value Type）,一类是引用类型（Reference）。
+
+&emsp;&emsp;每一种编程语言的值类型都有一些非常细小的不同，C#的内置值类型共有七种：int、long、float、char、bool、enum、struct。而string类型是一种具有值类型特性的特殊引用类型。值类型和引用类型的区别看下表：
+
+| | 值类型 | 引用类型 |
+| - | :-: | -: | 
+| 内存分配地点 | 分配在栈中 | 分配在堆中 | 
+| 效率 | 效率高，不需要地址转换 | 效率低，需要进行地址转换 | 
+| 内存回收 | 使用完后，立即回收 | 垃圾回收机制 | 
+| 赋值操作 | 进行复制，创建一个同值新对象 | 只是对原有对象的引用 | 
+| 函数参数和返回值 | 是对象的复制 | 是原有对象的引用 | 
 
 &emsp;&emsp;通过以下图片我们可以看到对象的值的传递情况
 
@@ -52,11 +83,13 @@ John 21
 
 &emsp;&emsp;Person b = a后，即将a的值赋值给了b，此时a和b都同时指向同一个堆里，b.SetInfo("John",21)即改变了堆里的值，而a的值仍然是从堆里获取，所以a.Display()的值为John 21。
 
+&emsp;&emsp;但它们是如何做到对象的值的传递？如何如下图所示让b复制a的值且改变b的值也会影响到a的值的呢？
+
 ![对象的值的传递](https://github.com/DM2N/personal-img/raw/master/blog/prototype-pattern/p3.png)
 
 ![对象的值的传递](https://github.com/DM2N/personal-img/raw/master/blog/prototype-pattern/p4.png)
 
-&emsp;&emsp;但它们是如何做到对象的值的传递？请学习原型模式！！！
+&emsp;&emsp;原型模式告诉你答案！！！
 
 # **原型模式**
 
@@ -123,6 +156,86 @@ ConcreteProtype1 Cloned!
 ConcreteProtype2 Cloned!
 ```
 
+## **简历的原型实现**
+
+*简历类：*
+
+``` cs
+// 简历
+class Resume : ICloneable
+{
+    private string name;
+    private string sex;
+    private string age;
+    private string timeArea;
+    private string company;
+
+    public Resume(string name)
+    {
+        this.name = name;
+    }
+
+    // 设置个人信息
+    public void SetPresonalInfo(string sex, string age)
+    {
+        this.sex = sex;
+        this.age = age;
+    }
+
+    // 设置工作经历
+    public void SetWorkExperience(string timeArea, string company)
+    {
+        this.timeArea = timeArea;
+        this.company = company;
+    }
+
+    // 显示
+    public void Display()
+    {
+        Console.WriteLine("{0} {1} {2}", name, sex, age);
+        Console.WriteLine("工作经历：{0} {1}", timeArea, company);
+    }
+
+    public Object Clone()
+    {
+        return (Object)this.MemberwiseClone();
+    }
+}
+```
+
+*客户端调用代码：*
+
+``` cs
+static void Main(string[] args)
+{
+    Resume a = new Resume("大鸟")；
+    a.SetPersonalInfo("男", "29");  
+    a.SetWorkExperience("1998-2000", "XX公司")  
+  
+    Resume b = （Resume）a.Clone();  
+    b.setWorkExperience("1998-2006", "YY企业")  
+  
+    Resume c = （Resume）a.Clone();  
+    c.SetPersonalInfo("男", "24");  
+  
+    a.Display();       
+    b.Display();  
+    c.Display();  
+   
+    Console.Read(); 
+}
+```
+
+*结果显示：*
+```
+大鸟 男 29
+工作经历  1998-2000  XX公司
+大鸟 男 29
+工作经历  1998-2006  YY公司
+大鸟 男 24
+工作经历  1998-2000  XX公司
+```
+
 ## **实现ICloneable接口**
 
 &emsp;&emsp;.NET在System命名空间中提供了ICloneable接口，其中只包含一个Clone()方法，实现了这个接口就是完成了原型模式。
@@ -131,16 +244,127 @@ ConcreteProtype2 Cloned!
 
 ## **浅拷贝与深拷贝**
 
+&emsp;&emsp;注：string 是一种拥有值类型特点的特殊引用类型！（例：上面简历的原型实现代码）
+
+* class string继承自object，而不是System.ValueType(Int32这样的则是继承于System.ValueType) 
+* string本质上是个char[]，而Array是引用类型，并且初始化时也是在托管堆分配内存的，但是这个特殊的类却表现出值类型的特点，微软设计这个类的时候为了方便操作，所以重写了操作符和Equals方法，它判断相等性时，是按照内容来判断的，而不是地址
+
 ### **浅拷贝（Shallow Copy）**
 
 * 只复制对象的值类型字段，引用类型只复制引用不复制引用的对象（即复制地址）
-* MemberwiseClone() 是浅拷贝（[MSDN关于MemberwiseClone()的介绍]()https://docs.microsoft.com/zh-cn/dotnet/api/system.object.memberwiseclone?view=netframework-4.7.1#System_Object_MemberwiseClone）
+* MemberwiseClone() 方法是浅拷贝（[MSDN关于MemberwiseClone()的介绍](https://docs.microsoft.com/zh-cn/dotnet/api/system.object.memberwiseclone?view=netframework-4.7.1#System_Object_MemberwiseClone)）
 
 ![浅拷贝](https://github.com/DM2N/personal-img/raw/master/blog/prototype-pattern/p7.png)
+
+#### **浅拷贝引用类型会出现的错误**
+
+*工作经历类*
+``` cs
+Class WorkExperience  
+{  
+    private string workDate;  
+    public string WorkDate  
+    {  
+        get { return workDate; }  
+        set { workDate = value; }  
+    }  
+    private string company;  
+    public string Company  
+    {  
+        get { return company; }  
+        set { company = value; }  
+    }  
+}
+```
+
+*简历类*
+
+``` cs
+// 简历
+class Resume:ICloneable  
+{  
+    private string name;  
+    private string sex;  
+    private string age;  
+     
+    private WorkExperience work;    // 引用"工作经历"对象  
+    public Resume(string name)  
+    {  
+        this.name = name;  
+        work = new WorkExperience();    // 在“简历”类实例化时同时实例化“工作经历”  
+    }  
+  
+    // 设置个人信息：  
+  
+    public void SetPersonalInfo(string sex,string age)   
+    {  
+        this.sex = sex;  
+        this.age = age;  
+    }  
+    // 设置工作经历  
+  
+    public void SetWorkExperience（string workDate，string company)  
+    {  
+        work.WorkDate = workDate;  
+        work.Company = company;    // 调用此方法时，给对象的两属性赋值
+    }  
+  
+    // 显示  
+  
+    public void Display()  
+    {  
+        Console.WriteLine("{0} {1} {2}", name, sex, age);  
+        Console.WriteLine("工作经历: {0} {1}", work.WorkDate, work.Company;  
+    }  
+  
+    public Object Clone()  
+    {  
+        return (Object)this.MemberwiseClone();  
+    }   
+}
+```
+
+*客户端调用代码*
+
+``` cs
+static void Main（string[] args）  
+{  
+    Resume a = new Resume("大鸟");  
+    a.SetPersonalInfo("男", "29");  
+    a.SetWorkExperience("1998-2000", "XX公司")  
+  
+    Resume b = （Resume）a.Clone();  
+    b.setWorkExperience("1998-2006", "YY企业")  
+  
+    Resume c = （Resume）a.Clone();  
+    c.SetPersonalInfo("男","24");  
+    c.SetWorkExperience("1998-2003", "ZZ企业");  
+  
+    a.Display();       
+    b.Display();  
+    c.Display();  
+   
+    Console.Read();  
+}
+```
+
+*结果显示*
+
+```
+大鸟 男 29
+工作经历  1998-2003  ZZ公司
+大鸟 男 29
+工作经历  1998-2003  ZZ公司
+大鸟 男 24
+工作经历  1998-2003  ZZ公司
+```
+
+&emsp;&emsp;从结果显示我们可以看到，由于浅复制是浅表复制，所以对于值类型，没什么问题（c.Display()）；对于引用类型，只是复制了引用，引用的对象还是指向原来的对象，所以给a, b, c 三个引用设置‘工作经历’，却同时看到三个引用都是最后一次设置，因为三个引用都指向了同一个对象。
 
 ### **深拷贝（Deep Copy）**
 
 * 不仅复制值类型字段，而且复制引用的对象
+* 把引用对象的变量指向复制过的新对象，而不是原有的被引用对象
 
 ![深拷贝](https://github.com/DM2N/personal-img/raw/master/blog/prototype-pattern/p8.png)
 

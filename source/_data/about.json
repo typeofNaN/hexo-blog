@@ -1,5 +1,5 @@
 {
-    "avatar": "avatar.jpg",
+    "avatar": "https://github.com/DM2N/personal-img/raw/master/blog/base/avatar.jpg",
     "name": "大明",
 	"tag": "Web前端/社会大佬/正直又善良/社会主义接班人",
     "desc": "想你所想，做你想做",
@@ -14,20 +14,20 @@
     },
     "projects": [{
 		"name": "NBNB",
-		"image": "https://d13yacurqjgara.cloudfront.net/users/138819/screenshots/2578899/dribbble_800x600_01_1x.png",
+		"image": "https://github.com/DM2N/personal-img/raw/master/blog/base/projects/NBNB-Web-Forms.png",
 		"tags": ["NBNB", "ASP.NET Web-Forms"],
 		"description": "NBNB在线篮球约战平台采用ASP.NET Web Forms技术进行开发，运用bootstrap等业界流行的前端库进行设计美化，基本实现响应式。",
 		"link_text": "Github地址",
 		"link": "https://github.com/DM2N/NBNB-Web-Forms.git"
 	}, {
 		"name": "NBNB",
-		"image": "https://d13yacurqjgara.cloudfront.net/users/4094/screenshots/2578885/time-lords-drib_1x.jpg",
+		"image": "https://github.com/DM2N/personal-img/raw/master/blog/base/projects/NBNB-Mvc.png",
 		"description": "NBNB在线篮球约战平台采用ASP.NET Mvc技术进行开发，运用bootstrap等业界流行的前端库进行设计美化，基本实现响应式。",
 		"tags": ["NBNB", "ASP.NET Mvc"],
 		"link_text": "Github地址",
 		"link": "https://github.com/DM2N/NBNB.git"
 	}],
 	"reward": [
-	    "../0.jpg"
+	    "https://github.com/DM2N/personal-img/raw/master/blog/base/reward.jpg"
 	]
 }

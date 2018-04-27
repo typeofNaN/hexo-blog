@@ -1,18 +1,18 @@
 
 [{
-    "image": "slider.jpg",
+    "image": "https://github.com/DM2N/personal-img/raw/master/blog/base/slider.jpg",
     "align": "center",
     "title": "DM",
     "subtitle": "像2的N次方一样成长",
 	"link": null
 }, {
-    "image": "slider1.jpg",
+    "image": "https://github.com/DM2N/personal-img/raw/master/blog/base/slider1.jpg",
     "align": "left",
     "title": "顺其自然",
     "subtitle": "一切如故",
 	"link": null
 }, {
-    "image": "slider2.jpg",
+    "image": "https://github.com/DM2N/personal-img/raw/master/blog/base/slider2.jpg",
     "align": "right",
     "title": "想你所想",
     "subtitle": "做你所做",
