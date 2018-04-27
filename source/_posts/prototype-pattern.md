@@ -7,11 +7,13 @@ tags:
     - C#
     - 设计模式
     - 原型模式
+    - 原型链
+    - Hashtable
 ---
 
 # **前言**
 
-&emsp;&emsp;最近在工作室课上在讲ASP.NET的设计模式，恰巧看到设计模式中的原型模式与JavaScript中的继承机制——原型链有异曲同工之妙，便深入研究了一下。
+&emsp;&emsp;最近在工作室课上在讲 .NET 程序开发应该掌握的各种设计模式，恰巧看到设计模式中的原型模式与 JavaScript 中的继承机制——原型链有异曲同工之妙，便深入研究了一下。
 
 &emsp;&emsp;在实际的程序开发中，使用一个最适合的设计模式往往能够起到事半功倍的效果。原型模式的使用场景为：
 
@@ -19,7 +21,7 @@ tags:
 * 性能和安全要求的场景：通过new产生一个对象需要非常繁琐的数据准备或访问权限，则可以使用原型模式。
 * 一个对象多个修改者的场景：一个对象需要提供给其他对象访问，而且各个调用者可能都需要修改其值时，可以考虑使用原型模式拷贝多个对象供调用者使用。
 
-&emsp;&emsp;在实际项目中，原型模式很少单独出现，一般是和工厂方法模式一起出现，通过clone的方法创建一个对象，然后由工厂方法提供给调用者。
+&emsp;&emsp;在实际项目中，原型模式很少单独出现，一般是和工厂方法模式一起出现，通过 clone 的方法创建一个对象，然后由工厂方法提供给调用者。
 
 &emsp;&emsp;现将本人学习心得分享与此以方便大家更好地学习掌握原型模式。
 
@@ -61,11 +63,11 @@ John 21
 
 # **为什么**
 
-&emsp;&emsp;要明白这个问题，我们先得对栈和堆有一定的了解。
+&emsp;&emsp;要明白这个问题，我们先得对 C# 的类型有一定的了解。
 
-&emsp;&emsp;C#的类型一共分为两类，一种是值类型（Value Type）,一类是引用类型（Reference）。
+&emsp;&emsp;C# 的类型一共分为两类，一种是值类型（Value Type）,一类是引用类型（Reference）。
 
-&emsp;&emsp;每一种编程语言的值类型都有一些非常细小的不同，C#的内置值类型共有七种：int、long、float、char、bool、enum、struct。而string类型是一种具有值类型特性的特殊引用类型。值类型和引用类型的区别看下表：
+&emsp;&emsp;每一种编程语言的值类型都有一些非常细小的不同，C#的内置值类型共有七种：int、long、float、char、bool、enum、struct。而 string 类型是一种具有值类型特性的特殊引用类型,并不是基本数据类型（底下有关于 string 的详细介绍）。值类型和引用类型的区别看下表：
 
 | | 值类型 | 引用类型 |
 | - | :-: | -: | 
@@ -81,9 +83,9 @@ John 21
 
 ![对象的值的传递](https://github.com/DM2N/personal-img/raw/master/blog/prototype-pattern/p2.png)
 
-&emsp;&emsp;Person b = a后，即将a的值赋值给了b，此时a和b都同时指向同一个堆里，b.SetInfo("John",21)即改变了堆里的值，而a的值仍然是从堆里获取，所以a.Display()的值为John 21。
+&emsp;&emsp;Person b = a 后，即将 a 的值赋值给了 b ，此时 a 和 b 都同时指向同一个堆里，b.SetInfo("John",21) 即改变了堆里的值，而 a 的值仍然是从堆里获取，所以 a.Display() 的值为 John 21。
 
-&emsp;&emsp;但它们是如何做到对象的值的传递？如何如下图所示让b复制a的值且改变b的值也会影响到a的值的呢？
+&emsp;&emsp;但如何实现如下面两张图一样的数据传递呢？
 
 ![对象的值的传递](https://github.com/DM2N/personal-img/raw/master/blog/prototype-pattern/p3.png)
 
@@ -103,7 +105,7 @@ John 21
 
 ## **原型模式的简单实现**
 
-*申明类：*
+*申明抽象原型类和具体原型类：*
 
 ``` cs
 // 抽象原型类:声明克隆自身的接口
@@ -238,7 +240,7 @@ static void Main(string[] args)
 
 ## **实现ICloneable接口**
 
-&emsp;&emsp;.NET在System命名空间中提供了ICloneable接口，其中只包含一个Clone()方法，实现了这个接口就是完成了原型模式。
+&emsp;&emsp;.NET 在 System 命名空间中提供了 ICloneable 接口，其中只包含一个 Clone() 方法，实现了这个接口就是完成了原型模式。
 
 ![实现ICloneable接口](https://github.com/DM2N/personal-img/raw/master/blog/prototype-pattern/p6.png)
 
@@ -246,13 +248,15 @@ static void Main(string[] args)
 
 &emsp;&emsp;注：string 是一种拥有值类型特点的特殊引用类型！（例：上面简历的原型实现代码）
 
-* class string继承自object，而不是System.ValueType(Int32这样的则是继承于System.ValueType) 
-* string本质上是个char[]，而Array是引用类型，并且初始化时也是在托管堆分配内存的，但是这个特殊的类却表现出值类型的特点，微软设计这个类的时候为了方便操作，所以重写了操作符和Equals方法，它判断相等性时，是按照内容来判断的，而不是地址
+* string 不是基本数据类型，而是一个类（class）
+* class string 继承自对象 （object） ，而不是 System.ValueType ( Int32 这样的则是继承于 System.ValueType) 
+* string 本质上是个 char[]，而 Array 是引用类型，并且初始化时也是在托管堆分配内存的，但是这个特殊的类却表现出值类型的特点，微软设计这个类的时候为了方便操作，所以重写了 == 和 != 操作符以及 Equals 方法，它判断相等性时，是按照内容来判断的，而不是地址
+* string 在栈上保持引用，在堆上保持数据
 
 ### **浅拷贝（Shallow Copy）**
 
 * 只复制对象的值类型字段，引用类型只复制引用不复制引用的对象（即复制地址）
-* MemberwiseClone() 方法是浅拷贝（[MSDN关于MemberwiseClone()的介绍](https://docs.microsoft.com/zh-cn/dotnet/api/system.object.memberwiseclone?view=netframework-4.7.1#System_Object_MemberwiseClone)）
+* MemberwiseClone() 方法是浅拷贝（[MSDN 关于 MemberwiseClone() 的介绍](https://docs.microsoft.com/zh-cn/dotnet/api/system.object.memberwiseclone?view=netframework-4.7.1#System_Object_MemberwiseClone)）
 
 ![浅拷贝](https://github.com/DM2N/personal-img/raw/master/blog/prototype-pattern/p7.png)
 
@@ -359,7 +363,7 @@ static void Main（string[] args）
 工作经历  1998-2003  ZZ公司
 ```
 
-&emsp;&emsp;从结果显示我们可以看到，由于浅复制是浅表复制，所以对于值类型，没什么问题（c.Display()）；对于引用类型，只是复制了引用，引用的对象还是指向原来的对象，所以给a, b, c 三个引用设置‘工作经历’，却同时看到三个引用都是最后一次设置，因为三个引用都指向了同一个对象。
+&emsp;&emsp;从结果显示我们可以看到，由于浅复制是浅表复制，所以对于值类型，没什么问题（如 c.Display()）；对于引用类型，只是复制了引用，引用的对象还是指向原来的对象，所以给 a, b, c 三个引用设置‘工作经历’，却同时看到三个引用都是最后一次设置，因为三个引用都指向了同一个对象。
 
 ### **深拷贝（Deep Copy）**
 
@@ -399,6 +403,7 @@ public class Resume : ICloneable
         work = new WorkExperience();
     }
 
+    // 调用私有的构造方法，让“工作经历”克隆完成，最终返回一个深复制的简历对象
     public object Clone()
     {
         Resume cloned = new Resume(this.Name);
@@ -408,12 +413,12 @@ public class Resume : ICloneable
 }
 
 // 工作经历
-public class WorkExperience : ICloneable
+public class WorkExperience : ICloneable    // 让“工作经历”实现 ICloneable 接口
 {
     public String WorkDate { get; set; }
     public String Company { get; set; }
 
-    public object Clone()
+    public object Clone()    // 让“工作经历”类实现克隆方法
     {
         return this.MemberwiseClone();
     }
@@ -424,19 +429,19 @@ public class WorkExperience : ICloneable
 
 ``` cs
 public class Program
+{
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-            Resume resume = new Resume("Jack");
-            resume.SetWorkExperience("2012-2015", "XX公司");
+        Resume resume = new Resume("Jack");
+        resume.SetWorkExperience("2012-2015", "XX公司");
 
-            Resume cloned = (Resume)resume.Clone();
-            cloned.SetWorkExperience("2015-2018", "YY公司");
+        Resume cloned = (Resume)resume.Clone();
+        cloned.SetWorkExperience("2015-2018", "YY公司");
 
-            resume.Display();
-            cloned.Display();
-        }
+        resume.Display();
+        cloned.Display();
     }
+}
 ```
 
 *程序运行结果：*
@@ -448,19 +453,19 @@ Jack worked in YY公司 from 2015-2018
 
 ## **原型模式的应用**
 
-### **JavaScript继承机制——原型链**
+### **JavaScript 继承机制——原型链**
 
 参考文章：[阮一峰《Javascript 继承机制的设计思想》](http://www.ruanyifeng.com/blog/2011/06/designing_ideas_of_inheritance_mechanism_in_javascript.html)
 
-![JavaScript继承机制——原型链](https://github.com/DM2N/personal-img/raw/master/blog/prototype-pattern/p10.png)
+![JavaScript 继承机制——原型链](https://github.com/DM2N/personal-img/raw/master/blog/prototype-pattern/p10.png)
 
-&emsp;&emsp;JavaScript的创始人Brendan Eich在开发JavaScript这个使得浏览器可以与网页互动的脚本易语言时，正是面向对象编程（object-oriented programming）最兴盛的时期，C++是当时最流行的语言，而Java语言的1.0版即将于第二年推出，Sun公司正在大肆造势。
+&emsp;&emsp;JavaScript 的创始人 Brendan Eich 在开发 JavaScript 这个使得浏览器可以与网页互动的脚本易语言时，正是面向对象编程（object-oriented programming）最兴盛的时期，C++ 是当时最流行的语言，而 Java 语言的1.0版即将于第二年推出，Sun公司正在大肆造势。
 
-&emsp;&emsp;Brendan Eich无疑受到了影响，Javascript里面所有的数据类型都是对象（object），这一点与Java非常相似。但是，他随即就遇到了一个难题，到底要不要设计"继承"机制呢？如果真的是一种简易的脚本语言，其实不需要有"继承"机制。但是，Javascript里面都是对象，必须有一种机制，将所有对象联系起来。所以，Brendan Eich最后还是设计了"继承"。但是，他不打算引入"类"（class）的概念，因为一旦有了"类"，Javascript就是一种完整的面向对象编程语言了，这好像有点太正式了，而且增加了初学者的入门难度。他考虑到，C++和Java语言都使用new命令，生成实例。因此，他就把new命令引入了Javascript，用来从原型对象生成一个实例对象。但是，Javascript没有"类"，怎么来表示原型对象呢？
+&emsp;&emsp;Brendan Eich 无疑受到了影响，Javascript 里面所有的数据类型都是对象（object），这一点与 Java 非常相似。但是，他随即就遇到了一个难题，到底要不要设计"继承"机制呢？如果真的是一种简易的脚本语言，其实不需要有"继承"机制。但是，Javascript 里面都是对象，必须有一种机制，将所有对象联系起来。所以，Brendan Eich 最后还是设计了"继承"。但是，他不打算引入"类"（class）的概念，因为一旦有了"类"，Javascript 就是一种完整的面向对象编程语言了，这好像有点太正式了，而且增加了初学者的入门难度。他考虑到，C++ 和 Java 语言都使用 new 命令，生成实例。因此，他就把new命令引入了 Javascript，用来从原型对象生成一个实例对象。但是，Javascript 没有"类"，怎么来表示原型对象呢？
 
-&emsp;&emsp;这时，他想到C++和Java使用new命令时，都会调用"类"的构造函数（constructor）。他就做了一个简化的设计，在Javascript语言中，new命令后面跟的不是类，而是构造函数。
+&emsp;&emsp;这时，他想到 C++ 和 Java 使用 new 命令时，都会调用"类"的构造函数（constructor）。他就做了一个简化的设计，在 Javascript 语言中，new 命令后面跟的不是类，而是构造函数。
 
-&emsp;&emsp;举例来说，现在有一个叫做DOG的构造函数，表示狗对象的原型。
+&emsp;&emsp;举例来说，现在有一个叫做 DOG 的构造函数，表示狗对象的原型。
 
 ``` js
 function DOG(name){
@@ -468,16 +473,16 @@ function DOG(name){
 }
 ```
 
-&emsp;&emsp;对这个构造函数使用new，就会生成一个狗对象的实例。
+&emsp;&emsp;对这个构造函数使用 new，就会生成一个狗对象的实例。
 
 ``` js
 var dogA = new DOG('大毛');
 alert(dogA.name);   // 大毛
 ```
 
-&emsp;&emsp;注意构造函数中的this关键字，它就代表了新创建的实例对象。
+&emsp;&emsp;注意构造函数中的 this 关键字，它就代表了新创建的实例对象。
 
-&emsp;&emsp;但是用构造函数生成实例对象，有一个缺点，那就是无法共享属性和方法。比如，在DOG对象的构造函数中，设置一个实例对象的共有属性species。然后，生成两个实例对象：
+&emsp;&emsp;但是用构造函数生成实例对象，有一个缺点，那就是无法共享属性和方法。比如，在 DOG 对象的构造函数中，设置一个实例对象的共有属性 species。然后，生成两个实例对象：
 
 ``` js
 function DOG(name){
@@ -489,20 +494,20 @@ var dogA = new DOG('大毛');
 var dogB = new DOG('二毛');
 ```
 
-&emsp;&emsp;这两个对象的species属性是独立的，修改其中一个，不会影响到另一个。
+&emsp;&emsp;这两个对象的 species 属性是独立的，修改其中一个，不会影响到另一个。
 
 ``` js
 dogA.species = '猫科';
 alert(dogB.species);   // 显示"犬科"，不受dogA的影响
 ```
 
-&emsp;&emsp;考虑到这一点，Brendan Eich决定为构造函数设置一个prototype属性。
+&emsp;&emsp;考虑到这一点，Brendan Eich 决定为构造函数设置一个 prototype 属性。
 
-&emsp;&emsp;这个属性包含一个对象（以下简称"prototype对象"），所有实例对象需要共享的属性和方法，都放在这个对象里面；那些不需要共享的属性和方法，就放在构造函数里面。
+&emsp;&emsp;这个属性包含一个对象（以下简称"prototype 对象"），所有实例对象需要共享的属性和方法，都放在这个对象里面；那些不需要共享的属性和方法，就放在构造函数里面。
 
-&emsp;&emsp;实例对象一旦创建，将自动引用prototype对象的属性和方法。也就是说，实例对象的属性和方法，分成两种，一种是本地的，另一种是引用的。
+&emsp;&emsp;实例对象一旦创建，将自动引用 prototype 对象的属性和方法。也就是说，实例对象的属性和方法，分成两种，一种是本地的，另一种是引用的。
 
-&emsp;&emsp;还是以DOG构造函数为例，现在用prototype属性进行改写：
+&emsp;&emsp;还是以 DOG 构造函数为例，现在用 prototype 属性进行改写：
 
 ``` js
 function DOG(name){
@@ -518,7 +523,7 @@ alert(dogA.species);   // 犬科
 alert(dogB.species);   // 犬科
 ```
 
-&emsp;&emsp;现在，species属性放在prototype对象里，是两个实例对象共享的。只要修改了prototype对象，就会同时影响到两个实例对象。
+&emsp;&emsp;现在，species 属性放在 prototype 对象里，是两个实例对象共享的。只要修改了 prototype 对象，就会同时影响到两个实例对象。
 
 ``` js
 DOG.prototype.species = '猫科';
@@ -541,7 +546,7 @@ alert(dogB.species);   // 猫科
 using System;
 
 // 可克隆模型
-// 实现ICloneable接口
+// 实现 ICloneable 接口
 public abstract class CloneableModel : ICloneable
 {
     public object Clone()
@@ -576,7 +581,7 @@ public class ModelCache
 {
     static Hashtable modelMap = new Hashtable();
 
-    // 将模型类对象存储到Hashtable中
+    // 将模型类对象存储到 Hashtable 中
     // 实际开发中，模型对象从数据库中取出
     public static void Load()
     {
@@ -601,7 +606,7 @@ public class ModelCache
         CloneableModel cache = (CloneableModel)modelMap[id];
 
         return cache != null
-            ? (T)cache.Clone()    // clone model from cache
+            ? (T)cache.Clone()    // 从 cache 中克隆 model
             : null;
     }
 }
