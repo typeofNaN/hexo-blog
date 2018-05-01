@@ -57,15 +57,15 @@ John 21
 
 # **为什么**
 
-&emsp;&emsp;要明白这个问题，我们先得对 C# 的数据类型类型有一定的了解。
+&emsp;&emsp;要明白这个问题，我们先得对 C# 的数据类型有一定的了解。
 
-&emsp;&emsp;C# 的数据类型一共分为以下几种：
+&emsp;&emsp;C# 的数据项类型一共分为以下几种：
 
 * 值类型（Value types）
 * 引用类型（Reference types）
-* 指针类型（Pointer types）
+<!-- * 指针类型（Pointer types） -->
 
-&emsp;&emsp;每一种编程语言的值类型都有一些非常细小的不同，C#的内置值类型共有七种：int、long、float、char、bool、enum、struct。而 string 类型是一种具有值类型特性的特殊引用类型,并不是基本数据类型（底下有关于 string 的详细介绍）。值类型和引用类型的区别看下表：
+&emsp;&emsp;而 string 类型是一种具有值类型特性的特殊引用类型,并不是基本数据类型（底下有关于 string 的详细介绍）。值类型和引用类型的区别看下表：
 
 | | 值类型 | 引用类型 |
 | - | :-: | -: | 
@@ -254,7 +254,7 @@ static void Main(string[] args)
 ## **浅拷贝（Shallow Copy）**
 
 * 只复制对象的值类型字段，引用类型只复制引用不复制引用的对象（即复制地址）
-* MemberwiseClone() 方法是浅拷贝（[MSDN 关于 MemberwiseClone() 的介绍](https://docs.microsoft.com/zh-cn/dotnet/api/system.object.memberwiseclone?view=netframework-4.7.1#System_Object_MemberwiseClone)）
+* MemberwiseClone() 方法是浅拷贝（[微软关于 MemberwiseClone() 的介绍](https://docs.microsoft.com/zh-cn/dotnet/api/system.object.memberwiseclone?view=netframework-4.7.1#System_Object_MemberwiseClone)）
 
 ![浅拷贝](https://github.com/DM2N/personal-img/raw/master/blog/prototype-pattern/p7.png)
 
