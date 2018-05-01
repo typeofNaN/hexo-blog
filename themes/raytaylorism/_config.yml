@@ -57,7 +57,7 @@ archive_yearly: true
 copyright: © DM, All rights reserved.
 
 # Disqus评论shortname，若为空则不启用
-disqus_shortname:
+disqus_shortname: sixnoodle
 # 多说shortname，若为空则不启用
 duoshuo_shortname:
 # 网易云跟帖productKey，从通用代码中获取，若为空则不启用

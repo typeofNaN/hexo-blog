@@ -15,12 +15,6 @@ tags:
 
 &emsp;&emsp;最近在工作室课上在讲 .NET 程序开发应该掌握的各种设计模式，恰巧看到设计模式中的原型模式与 JavaScript 中的继承机制——原型链有异曲同工之妙，便深入研究了一下。
 
-&emsp;&emsp;在实际的程序开发中，使用一个最适合的设计模式往往能够起到事半功倍的效果。原型模式的使用场景为：
-
-* 资源优化场景：类初始化需要消化非常多的资源，这个资源包括数据、硬件资源等。
-* 性能和安全要求的场景：通过new产生一个对象需要非常繁琐的数据准备或访问权限，则可以使用原型模式。
-* 一个对象多个修改者的场景：一个对象需要提供给其他对象访问，而且各个调用者可能都需要修改其值时，可以考虑使用原型模式拷贝多个对象供调用者使用。
-
 &emsp;&emsp;在实际项目中，原型模式很少单独出现，一般是和工厂方法模式一起出现，通过 clone 的方法创建一个对象，然后由工厂方法提供给调用者。
 
 &emsp;&emsp;现将本人学习心得分享与此以方便大家更好地学习掌握原型模式。
@@ -63,9 +57,13 @@ John 21
 
 # **为什么**
 
-&emsp;&emsp;要明白这个问题，我们先得对 C# 的类型有一定的了解。
+&emsp;&emsp;要明白这个问题，我们先得对 C# 的数据类型类型有一定的了解。
 
-&emsp;&emsp;C# 的类型一共分为两类，一种是值类型（Value Type）,一类是引用类型（Reference）。
+&emsp;&emsp;C# 的数据类型一共分为以下几种：
+
+* 值类型（Value types）
+* 引用类型（Reference types）
+* 指针类型（Pointer types）
 
 &emsp;&emsp;每一种编程语言的值类型都有一些非常细小的不同，C#的内置值类型共有七种：int、long、float、char、bool、enum、struct。而 string 类型是一种具有值类型特性的特殊引用类型,并不是基本数据类型（底下有关于 string 的详细介绍）。值类型和引用类型的区别看下表：
 
@@ -244,7 +242,7 @@ static void Main(string[] args)
 
 ![实现ICloneable接口](https://github.com/DM2N/personal-img/raw/master/blog/prototype-pattern/p6.png)
 
-## **浅拷贝与深拷贝**
+# **浅拷贝与深拷贝**
 
 &emsp;&emsp;注：string 是一种拥有值类型特点的特殊引用类型！（例：上面简历的原型实现代码）
 
@@ -253,14 +251,14 @@ static void Main(string[] args)
 * string 本质上是个 char[]，而 Array 是引用类型，并且初始化时也是在托管堆分配内存的，但是这个特殊的类却表现出值类型的特点，微软设计这个类的时候为了方便操作，所以重写了 == 和 != 操作符以及 Equals 方法，它判断相等性时，是按照内容来判断的，而不是地址
 * string 在栈上保持引用，在堆上保持数据
 
-### **浅拷贝（Shallow Copy）**
+## **浅拷贝（Shallow Copy）**
 
 * 只复制对象的值类型字段，引用类型只复制引用不复制引用的对象（即复制地址）
 * MemberwiseClone() 方法是浅拷贝（[MSDN 关于 MemberwiseClone() 的介绍](https://docs.microsoft.com/zh-cn/dotnet/api/system.object.memberwiseclone?view=netframework-4.7.1#System_Object_MemberwiseClone)）
 
 ![浅拷贝](https://github.com/DM2N/personal-img/raw/master/blog/prototype-pattern/p7.png)
 
-#### **浅拷贝引用类型会出现的错误**
+### **浅拷贝引用类型会出现的错误**
 
 *工作经历类*
 ``` cs
@@ -365,14 +363,14 @@ static void Main（string[] args）
 
 &emsp;&emsp;从结果显示我们可以看到，由于浅复制是浅表复制，所以对于值类型，没什么问题（如 c.Display()）；对于引用类型，只是复制了引用，引用的对象还是指向原来的对象，所以给 a, b, c 三个引用设置‘工作经历’，却同时看到三个引用都是最后一次设置，因为三个引用都指向了同一个对象。
 
-### **深拷贝（Deep Copy）**
+## **深拷贝（Deep Copy）**
 
 * 不仅复制值类型字段，而且复制引用的对象
 * 把引用对象的变量指向复制过的新对象，而不是原有的被引用对象
 
 ![深拷贝](https://github.com/DM2N/personal-img/raw/master/blog/prototype-pattern/p8.png)
 
-#### **实现深拷贝**
+### **实现深拷贝**
 
 ![实现深拷贝](https://github.com/DM2N/personal-img/raw/master/blog/prototype-pattern/p9.png)
 
@@ -451,9 +449,9 @@ Jack worked in XX公司 from 2012-2015
 Jack worked in YY公司 from 2015-2018
 ```
 
-## **原型模式的应用**
+# **原型模式的应用**
 
-### **JavaScript 继承机制——原型链**
+## **JavaScript 继承机制——原型链**
 
 参考文章：[阮一峰《Javascript 继承机制的设计思想》](http://www.ruanyifeng.com/blog/2011/06/designing_ideas_of_inheritance_mechanism_in_javascript.html)
 
@@ -532,7 +530,7 @@ alert(dogA.species);   // 猫科
 alert(dogB.species);   // 猫科
 ```
 
-### **数据模型缓存**
+## **数据模型缓存**
 
 ![数据模型缓存](https://github.com/DM2N/personal-img/raw/master/blog/prototype-pattern/p11.png)
 
@@ -643,3 +641,20 @@ Db Models Cache Loading ... Down!
 ID: #1001 Name: John Doe
 ID: #2001 Name: Illustrated C# 2012 Price: ￥89.00
 ```
+
+# **模式总结**
+
+## **优点**
+
+* 隐藏了对象的创建细节，对有些初始化需要占用很多资源的类来说，对性能也有很大提高。
+* 在需要新对象时，可以使用Clone来快速创建创建一个，而不用使用new来构建。
+
+## **缺点**
+
+* 每一个类都需要一个Clone方法，而且必须通盘考虑。对于深拷贝来说，每个关联到的类型都不许实现IClonable接口，并且每增加或修改一个字段是都需要更新Clone方法。
+
+## **适用场景**
+
+* 资源优化场景：类初始化需要消化非常多的资源，这个资源包括数据、硬件资源等。
+* 性能和安全要求的场景：通过new产生一个对象需要非常繁琐的数据准备或访问权限，则可以使用原型模式。
+* 一个对象多个修改者的场景：一个对象需要提供给其他对象访问，而且各个调用者可能都需要修改其值时，可以考虑使用原型模式拷贝多个对象供调用者使用。
