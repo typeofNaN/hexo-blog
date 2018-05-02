@@ -10,7 +10,7 @@ tags:
 
 # **前言**
 
-&emsp;&emsp;因为作者准备往前端方向发展，便想搭建一个属于自己的博客网站，用来发布一些文章以及交流学习。发现利用hexo来搭建个人博客挺方便的，于是便自己试着搭建了一个。特写下此文，一防忘记，二供大家参考。
+因为作者准备往前端方向发展，便想搭建一个属于自己的博客网站，用来发布一些文章以及交流学习。发现利用hexo来搭建个人博客挺方便的，于是便自己试着搭建了一个。特写下此文，一防忘记，二供大家参考。
 
 <!-- more -->
 
@@ -38,34 +38,34 @@ tags:
 
 ## **安装NodeJs**
 
-&emsp;&emsp;Hexo是基于nodeJS环境的静态博客，里面的npm工具很有用啊，所以还是老老实实把这玩意儿装了吧！
+Hexo是基于nodeJS环境的静态博客，里面的npm工具很有用啊，所以还是老老实实把这玩意儿装了吧！
 
-&emsp;&emsp;安装步骤：反正下载好msi文件后，双击打开安装，也是一路next，不过在Custom Setup这一步记得选 Add to PATH ,这样你就不用自己去配置电脑上环境变量了，装完在按 win + r 快捷键调出运行，然后输入cmd确定，在cmd中输入path可以看到你的node是否配置在里面（环境变量），没有的话你就自由发挥吧！
+安装步骤：反正下载好msi文件后，双击打开安装，也是一路next，不过在Custom Setup这一步记得选 Add to PATH ,这样你就不用自己去配置电脑上环境变量了，装完在按 win + r 快捷键调出运行，然后输入cmd确定，在cmd中输入path可以看到你的node是否配置在里面（环境变量），没有的话你就自由发挥吧！
 
 * NodeJs[下载地址](https://nodejs.org/en/)(说明：LTS为长期支持版，Current为当前最新版)
 * 参考文章:[《W3Cschool上Node.js教程之Node.js安装配置》](https://www.w3cschool.cn/nodejs/nodejs-install-setup.html)
 
 ## **安装hexo**
 
-&emsp;&emsp;先创建一个文件夹（用来存放所有blog的东西），然后cd到该文件夹下。
+先创建一个文件夹（用来存放所有blog的东西），然后cd到该文件夹下。
 
-&emsp;&emsp;安装hexo命令：（在新建的文件夹里右键Git Bash Here）
+安装hexo命令：（在新建的文件夹里右键Git Bash Here）
 
 ```
 $ npm i -g hexo
 ```
 
-&emsp;&emsp;接着初始化命令：hexo init ：
+接着初始化命令：hexo init ：
 
 ```
 $ hexo init
 ```
 
-&emsp;&emsp;初始化完成之后打开所在的文件夹可以看到以下文件：
+初始化完成之后打开所在的文件夹可以看到以下文件：
 
 ![生成的文件](https://github.com/DM2N/personal-img/raw/master/blog/build-hexo-blog/b1.png)
 
-&emsp;&emsp;解释一下：
+解释一下：
 
 * node_modules：是依赖包
 * public：存放的是生成的页面
@@ -76,21 +76,21 @@ $ hexo init
 * db.json：source解析所得到的
 * package.json：项目所需模块项目的配置信息
 
-&emsp;&emsp;做好这些前置工作之后接下来的就是各种配置了。
+做好这些前置工作之后接下来的就是各种配置了。
 
 # **配置工作**
 
 ## **生成SSH并添加到github**
 
-&emsp;&emsp;没账号的先创建一个github账号，有账号的看下面。[注册传送门](https://github.com)
+没账号的先创建一个github账号，有账号的看下面。[注册传送门](https://github.com)
 
-&emsp;&emsp;创建一个repo，名称为yourname.github.io, 其中yourname是你的github名称，按照这个规则创建才有用，如下：
+创建一个repo，名称为yourname.github.io, 其中yourname是你的github名称，按照这个规则创建才有用，如下：
 
 ![创建仓库](https://github.com/DM2N/personal-img/raw/master/blog/build-hexo-blog/b2.jpg)
 
 ![为仓库取名](https://github.com/DM2N/personal-img/raw/master/blog/build-hexo-blog/b3.jpg)
 
-&emsp;&emsp;回到gitbash中，配置github账户信息（YourName和YourEail都替换成你自己的）：
+回到gitbash中，配置github账户信息（YourName和YourEail都替换成你自己的）：
 
 ```
 $ git config global user.name "YourName"
@@ -100,33 +100,33 @@ $ git config global user.name "YourName"
 $ git config global user.email "YourEail"
 ```
 
-&emsp;&emsp;配置ssh，Git bash中输入命令：
+配置ssh，Git bash中输入命令：
 
 ```
 $ ssh-keygen -t rsa -C "youremail@example.com
 ```
 
-&emsp;&emsp;一路回车，就能在你的电脑中产生ssh，ssh文件默认在:C:User/Administrator/.ssh文件夹下，打开.ssh文件夹下的id_rsa.pub文件，将里面的内容复制；再打开github的setting：
+一路回车，就能在你的电脑中产生ssh，ssh文件默认在:C:User/Administrator/.ssh文件夹下，打开.ssh文件夹下的id_rsa.pub文件，将里面的内容复制；再打开github的setting：
 
 ![打开setting](https://github.com/DM2N/personal-img/raw/master/blog/build-hexo-blog/b4.png)
 
-&emsp;&emsp;将.ssh文件夹下的id_rsa.pub文件里一经复制好了的内容添加到ssh keys:
+将.ssh文件夹下的id_rsa.pub文件里一经复制好了的内容添加到ssh keys:
 
 ![创建key](https://github.com/DM2N/personal-img/raw/master/blog/build-hexo-blog/b5.png)
 
-&emsp;&emsp;添加一个 New SSH key ，title随便取，key就填刚刚复制好了的那一段。
+添加一个 New SSH key ，title随便取，key就填刚刚复制好了的那一段。
 
-&emsp;&emsp;在Git bash中验证是否添加成功：
+在Git bash中验证是否添加成功：
 
 ```
 $ ssh -T git@github.com
 ```
 
-&emsp;&emsp;完成下一步你就成功了！
+完成下一步你就成功了！
 
 ## **部署项目**
 
-&emsp;&emsp;用编辑器打开你的blog项目，修改_config.yml文件的一些配置：
+用编辑器打开你的blog项目，修改_config.yml文件的一些配置：
 
 ```
 deploy:
@@ -135,7 +135,7 @@ deploy:
     branch: master
 ```
 
-&emsp;&emsp;在Git bash中，依次输入以下命令：
+在Git bash中，依次输入以下命令：
 
 ```
 $ hexo clean
@@ -149,25 +149,25 @@ $ hexo g
 $ hexo s
 ```
 
-&emsp;&emsp;注：hexo 3.0把服务器独立成个别模块，需要单独安装：
+注：hexo 3.0把服务器独立成个别模块，需要单独安装：
 
 ```
 $ npm i hexo-server
 ```
 
-&emsp;&emsp;打开浏览器输入：http://localhost:4000 
+打开浏览器输入：http://localhost:4000 
 
-&emsp;&emsp;你就可以看到你的项目在本地能够预览了。
+你就可以看到你的项目在本地能够预览了。
 
 ## **部署到github上**
 
-&emsp;&emsp;先安装一波，这样才能将你写好的文章部署到github服务器上并让别人浏览到,输入命令：
+先安装一波，这样才能将你写好的文章部署到github服务器上并让别人浏览到,输入命令：
 
 ```
 $ npm install hexo-deployer-git --save
 ```
 
-&emsp;&emsp;再依次执行以下命令：
+再依次执行以下命令：
 
 ```
 $ hexo clean
@@ -181,43 +181,43 @@ $ hexo g
 $ hexo d
 ```
 
-&emsp;&emsp;注意deploy的过程中(即hexo d)可能要输入你的github上的username及passward
+注意deploy的过程中(即hexo d)可能要输入你的github上的username及passward
 
-&emsp;&emsp;一切都ok之后，在浏览器中输入[http://yourgithubname.github.io](#)就可以看到你的个人博客，飞起来！！！
+一切都ok之后，在浏览器中输入[http://yourgithubname.github.io](#)就可以看到你的个人博客，飞起来！！！
 
 ## **绑定个人域名**
 
-&emsp;&emsp;虽然，使用[http://yourgithubname.github.io](#)也可以让别人看到你写的博客。
+虽然，使用[http://yourgithubname.github.io](#)也可以让别人看到你写的博客。
 
-&emsp;&emsp;但是，写博客写博客，还是要有点装逼的嘛。搭配一个属于自己的域名显然会让自己的博客变得高大上起来。
+但是，写博客写博客，还是要有点装逼的嘛。搭配一个属于自己的域名显然会让自己的博客变得高大上起来。
 
-&emsp;&emsp;可以去各大域名销售平台买自己喜欢的域名。（不想绑定的可以跳过这一个环节直接看下一节）
+可以去各大域名销售平台买自己喜欢的域名。（不想绑定的可以跳过这一个环节直接看下一节）
 
-&emsp;&emsp;第一步购买域名：随便在哪个网站买一个就行；
+第一步购买域名：随便在哪个网站买一个就行；
 
-&emsp;&emsp;第二步添加CNAME：在项目的source文件夹下新建一个名为CNAME的文件，在里面添加你购买的域名：
+第二步添加CNAME：在项目的source文件夹下新建一个名为CNAME的文件，在里面添加你购买的域名：
 
 ![配置域名](https://github.com/DM2N/personal-img/raw/master/blog/build-hexo-blog/b6.png)
 
-&emsp;&emsp;其中ip地址为你的github的地址，可在cmd中ping一下就能看到(ping yourname.github.io)：
+其中ip地址为你的github的地址，可在cmd中ping一下就能看到(ping yourname.github.io)：
 
 ![ping](https://github.com/DM2N/personal-img/raw/master/blog/build-hexo-blog/b7.png)
 
-&emsp;&emsp;接着再次部署（hexo d）一下，用你购买的域名打开，就可以看到你的博客了了了了了！！！
+接着再次部署（hexo d）一下，用你购买的域名打开，就可以看到你的博客了了了了了！！！
 
 ## **修改及配置主题**
 
-&emsp;&emsp;hexo初始化之后默认的主题是landscape , 然后你可以去[这个地址](https://hexo.io/themes/)里面找到你想要的主题。在github中搜索你要的主题名称，里面都会有该主题的如何使用的介绍，按着来就好了。本人采用的是raytaylorism主题，集体配置方法，看[这里](https://github.com/DM2N/DM2N.github.io/blob/hexo/themes/raytaylorism/README.md)。
+hexo初始化之后默认的主题是landscape , 然后你可以去[这个地址](https://hexo.io/themes/)里面找到你想要的主题。在github中搜索你要的主题名称，里面都会有该主题的如何使用的介绍，按着来就好了。本人采用的是raytaylorism主题，集体配置方法，看[这里](https://github.com/DM2N/DM2N.github.io/blob/hexo/themes/raytaylorism/README.md)。
 
 ## **添加RSS**
 
-&emsp;&emsp;先安装rss相关插件，Git bash命令：
+先安装rss相关插件，Git bash命令：
 
 ```
 $ npm i hexo-generator-feed
 ```
 
-&emsp;&emsp;在你的项目的_config.yml配置文件下找到Extensions添加如下内容：
+在你的项目的_config.yml配置文件下找到Extensions添加如下内容：
 
 ```
 # Extensions  #插件和主题
@@ -233,37 +233,37 @@ feed:
   limit: 20
 ```
 
-&emsp;&emsp;进入到你的主题的配置文件下，找到你的放rss的位置，添加/atom.xml即可。重新部署再打开就能看到效果了。
+进入到你的主题的配置文件下，找到你的放rss的位置，添加/atom.xml即可。重新部署再打开就能看到效果了。
 
 ## **添加评论**
 
-&emsp;&emsp;评论功能为第三方评论系统，但，多说、网易云跟帖等都已关闭服务。来必力等也能用，所以，骚年，翻墙吧，具体做法，聪明的你肯定是知道百度的。
+评论功能为第三方评论系统，但，多说、网易云跟帖等都已关闭服务。来必力等也能用，所以，骚年，翻墙吧，具体做法，聪明的你肯定是知道百度的。
 
 ## **写博客文章**
 
-&emsp;&emsp;新建文章，输入命令：
+新建文章，输入命令：
 
 ```
 $ hexo new '文章名'
 ```
 
-&emsp;&emsp;然后你就可以在source/_posts路径下看到你创建的文章，编辑完成之后按照前面说的方式部署，在浏览器刷新就能看到你的文章了。
+然后你就可以在source/_posts路径下看到你创建的文章，编辑完成之后按照前面说的方式部署，在浏览器刷新就能看到你的文章了。
 
-&emsp;&emsp;博客文章采用markdown格式编写，至于markdown，骚年，学习吧！！！-->[前往教室](https://www.appinn.com/markdown/index.html)
+博客文章采用markdown格式编写，至于markdown，骚年，学习吧！！！-->[前往教室](https://www.appinn.com/markdown/index.html)
 
 ## **站点管理文件**
 
-&emsp;&emsp;如果本地站点文件丢失了或换了电脑怎么办？为解决这个问题，我们利用了Github的多分支来管理站点文件：
+如果本地站点文件丢失了或换了电脑怎么办？为解决这个问题，我们利用了Github的多分支来管理站点文件：
 
 1. 用master分支来管理发布的文件，即public文件夹下的文件；
 2. 用hexo分支来管理主站点文件，即除public下和.gitignore忽视的其他文件；
 3. 将hexo设为默认分支。
 
-&emsp;&emsp;为此，我们要：
+为此，我们要：
 
 ### **建立远程仓库**
 
-&emsp;&emsp;先将远程仓库关联到本地。进入站点文件夹，输入命令：
+先将远程仓库关联到本地。进入站点文件夹，输入命令：
 
 ```
 $ git init
@@ -286,13 +286,13 @@ $ git checkout -b hexo  #创建并切换到hexo分支
 
 ### **将hexo设为默认分支**
 
-&emsp;&emsp;在Github上的站点仓库上，点击Settings=>Branches，将Default branch切换成hexo，然后点击Update即可。
+在Github上的站点仓库上，点击Settings=>Branches，将Default branch切换成hexo，然后点击Update即可。
 
 ![change branch](https://github.com/DM2N/personal-img/raw/master/blog/build-hexo-blog/b8.png)
 
 ### **将主站点文件push到hexo分支**
 
-&emsp;&emsp;在hexo分支（使用git branch命令查看当前所在分支）下，输入命令：
+在hexo分支（使用git branch命令查看当前所在分支）下，输入命令：
 
 ```
 $ git add .
@@ -324,6 +324,6 @@ $ npm install hexo-cli
 $ npm install
 ```
 
-&emsp;&emsp;注意，此时不需要执行hexo init这条命令。
+注意，此时不需要执行hexo init这条命令。
 
-&emsp;&emsp;到此，便完成了对站点的一些简单管理。
+到此，便完成了对站点的一些简单管理。
