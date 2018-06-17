@@ -1,15 +1,15 @@
 {
     "avatar": "https://github.com/DM2N/personal-img/raw/master/blog/base/avatar.jpg",
     "name": "大明",
-	"tag": "Web前端/社会大佬/正直又善良/社会主义接班人",
-    "desc": "想你所想，做你想做",
+	"tag": "Web前端/正直又善良/社会主义接班人",
+    "desc": "历尽千帆后 归来仍少年",
     "skills": {
         "Javascript": 8,
 		"C#": 6,
 		"Node.js": 4,
 		"jQuery": 8,
-		"AngularJS": 4,
-		"React": 6,
+		"AngularJS": 2,
+		"React": 4,
 		"Vuejs": 6
     },
     "projects": [{

@@ -3,9 +3,9 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 六碗面的学习笔记
+title: DmDefine
 subtitle: DM's notes
-description: 想你所想，做你想做。
+description: 历尽千帆后 归来仍少年
 keywords:
 author: 大明
 language: zh-CN
@@ -81,6 +81,7 @@ category_generator:
 ## Themes: https://hexo.io/themes/
 ## theme: landscape
 theme: raytaylorism
+## theme: next
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
