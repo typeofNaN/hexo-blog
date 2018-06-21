@@ -8,13 +8,13 @@ tags:
     - raytaylorism
 ---
 
-# **前言**
+# 前言
 
 因为作者准备往前端方向发展，便想搭建一个属于自己的博客网站，用来发布一些文章以及交流学习。发现利用hexo来搭建个人博客挺方便的，于是便自己试着搭建了一个。特写下此文，一防忘记，二供大家参考。
 
 <!-- more -->
 
-# **步骤**
+# 步骤
 
 1. 安装Git
 2. 安装NodeJs
@@ -29,14 +29,14 @@ tags:
 11. 写博客文章
 12. 站点管理文件
 
-# **准备工作**
+# 准备工作
 
-## **安装Git**
+## 安装Git
 
 * Git:[下载地址](https://gitforwindows.org/)
 * 参考文章:[《W3Cschool上Git教程之Git安装配置》](https://www.w3cschool.cn/git/git-install-setup.html)
 
-## **安装NodeJs**
+## 安装NodeJs
 
 Hexo是基于nodeJS环境的静态博客，里面的npm工具很有用啊，所以还是老老实实把这玩意儿装了吧！
 
@@ -45,7 +45,7 @@ Hexo是基于nodeJS环境的静态博客，里面的npm工具很有用啊，所�
 * NodeJs[下载地址](https://nodejs.org/en/)(说明：LTS为长期支持版，Current为当前最新版)
 * 参考文章:[《W3Cschool上Node.js教程之Node.js安装配置》](https://www.w3cschool.cn/nodejs/nodejs-install-setup.html)
 
-## **安装hexo**
+## 安装hexo
 
 先创建一个文件夹（用来存放所有blog的东西），然后cd到该文件夹下。
 
@@ -78,9 +78,9 @@ $ hexo init
 
 做好这些前置工作之后接下来的就是各种配置了。
 
-# **配置工作**
+# 配置工作
 
-## **生成SSH并添加到github**
+## 生成SSH并添加到github
 
 没账号的先创建一个github账号，有账号的看下面。[注册传送门](https://github.com)
 
@@ -124,7 +124,7 @@ $ ssh -T git@github.com
 
 完成下一步你就成功了！
 
-## **部署项目**
+## 部署项目
 
 用编辑器打开你的blog项目，修改_config.yml文件的一些配置：
 
@@ -155,11 +155,11 @@ $ hexo s
 $ npm i hexo-server
 ```
 
-打开浏览器输入：http://localhost:4000 
+打开浏览器输入：http://localhost:4000
 
 你就可以看到你的项目在本地能够预览了。
 
-## **部署到github上**
+## 部署到github上
 
 先安装一波，这样才能将你写好的文章部署到github服务器上并让别人浏览到,输入命令：
 
@@ -185,7 +185,7 @@ $ hexo d
 
 一切都ok之后，在浏览器中输入[http://yourgithubname.github.io](#)就可以看到你的个人博客，飞起来！！！
 
-## **绑定个人域名**
+## 绑定个人域名
 
 虽然，使用[http://yourgithubname.github.io](#)也可以让别人看到你写的博客。
 
@@ -205,11 +205,11 @@ $ hexo d
 
 接着再次部署（hexo d）一下，用你购买的域名打开，就可以看到你的博客了了了了了！！！
 
-## **修改及配置主题**
+## 修改及配置主题
 
 hexo初始化之后默认的主题是landscape , 然后你可以去[这个地址](https://hexo.io/themes/)里面找到你想要的主题。在github中搜索你要的主题名称，里面都会有该主题的如何使用的介绍，按着来就好了。本人采用的是raytaylorism主题，集体配置方法，看[这里](https://github.com/DM2N/DM2N.github.io/blob/hexo/themes/raytaylorism/README.md)。
 
-## **添加RSS**
+## 添加RSS
 
 先安装rss相关插件，Git bash命令：
 
@@ -235,11 +235,11 @@ feed:
 
 进入到你的主题的配置文件下，找到你的放rss的位置，添加/atom.xml即可。重新部署再打开就能看到效果了。
 
-## **添加评论**
+## 添加评论
 
 评论功能为第三方评论系统，但，多说、网易云跟帖等都已关闭服务。来必力等也能用，所以，骚年，翻墙吧，具体做法，聪明的你肯定是知道百度的。
 
-## **写博客文章**
+## 写博客文章
 
 新建文章，输入命令：
 
@@ -251,7 +251,7 @@ $ hexo new '文章名'
 
 博客文章采用markdown格式编写，至于markdown，骚年，学习吧！！！-->[前往教室](https://www.appinn.com/markdown/index.html)
 
-## **站点管理文件**
+## 站点管理文件
 
 如果本地站点文件丢失了或换了电脑怎么办？为解决这个问题，我们利用了Github的多分支来管理站点文件：
 
@@ -261,7 +261,7 @@ $ hexo new '文章名'
 
 为此，我们要：
 
-### **建立远程仓库**
+### 建立远程仓库
 
 先将远程仓库关联到本地。进入站点文件夹，输入命令：
 
@@ -277,20 +277,20 @@ $ git remote add origin git@github.com:username/username.github.io.git #使用�
 $ git pull
 ```
 
-### **创建hexo分支**
+### 创建hexo分支
 
 ```
 $ git checkout -b hexo  #创建并切换到hexo分支
 
 ```
 
-### **将hexo设为默认分支**
+### 将hexo设为默认分支
 
 在Github上的站点仓库上，点击Settings=>Branches，将Default branch切换成hexo，然后点击Update即可。
 
 ![change branch](https://github.com/DM2N/personal-img/raw/master/blog/build-hexo-blog/b8.png)
 
-### **将主站点文件push到hexo分支**
+### 将主站点文件push到hexo分支
 
 在hexo分支（使用git branch命令查看当前所在分支）下，输入命令：
 
@@ -306,7 +306,7 @@ $ git commit -m "提交记录"
 $ git push -u origin hexo  #初次push要加-u，此后可省
 ```
 
-### **本地站点恢复**
+### 本地站点恢复
 
 1. 使用git clone命令克隆站点仓库（默认分支为hexo）：
 
