@@ -5,6 +5,7 @@ categories: 技术文章
 tags:
     - jquery
     - web
+    - js
 ---
 
 # 前言
