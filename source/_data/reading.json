@@ -13,21 +13,21 @@
             "doubanLink": null
         }, {
             "title": "JavaScript模式",
-            "cover": "https://github.com/DM2N/personal-img/raw/master/blog/base/reading/js1.jpg",
+            "cover": "https://github.com/typeofNaN/personal-img/raw/master/blog/base/reading/js1.jpg",
             "review": "书很薄，但内容相当实用。",
             "score": "8.5",
-            "doubanLink": null        
+            "doubanLink": null
         }],
 		
 		"reading": [{
             "title": "JavaScript语言精粹",
-            "cover": "https://github.com/DM2N/personal-img/raw/master/blog/base/reading/js2.jpg",
+            "cover": "https://github.com/typeofNaN/personal-img/raw/master/blog/base/reading/js2.jpg",
             "review": "这是一本前端人员的基础书，强烈推荐阅读，而且越早看受益越多！",
             "score": "9.5",
             "doubanLink": null
         },{
             "title": "数据结构与算法分析——C语言描述",
-            "cover": "https://github.com/DM2N/personal-img/raw/master/blog/base/reading/sjjg.jpg",
+            "cover": "https://github.com/typeofNaN/personal-img/raw/master/blog/base/reading/sjjg.jpg",
             "review": "这是一本能够帮你深入了解数据结构的一本好书，强烈推荐阅读！",
             "score": "9.5",
             "doubanLink": null
@@ -35,7 +35,7 @@
 
         "wanted": [{
             "title": "计算机程序的构造和解释",
-            "cover": "https://github.com/DM2N/personal-img/raw/master/blog/base/reading/jsj.jpg",
+            "cover": "https://github.com/typeofNaN/personal-img/raw/master/blog/base/reading/jsj.jpg",
             "review": "",
             "score": null,
             "doubanLink": null

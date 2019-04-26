@@ -1,6 +1,6 @@
 ---
-title: es6[转载]
-date: 2019-04-15 11:28:08
+title: es6
+date: 2018-12-15 11:28:08
 categories: 技术文章
 tags:
     - es6
