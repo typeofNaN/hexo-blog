@@ -63,7 +63,7 @@ $ hexo init
 
 初始化完成之后打开所在的文件夹可以看到以下文件：
 
-![生成的文件](https://github.com/DM2N/personal-img/raw/master/blog/build-hexo-blog/b1.png)
+{% asset_img b1.png 生成的文件 %}
 
 解释一下：
 
@@ -86,9 +86,9 @@ $ hexo init
 
 创建一个repo，名称为yourname.github.io, 其中yourname是你的github名称，按照这个规则创建才有用，如下：
 
-![创建仓库](https://github.com/DM2N/personal-img/raw/master/blog/build-hexo-blog/b2.jpg)
+{% asset_img b2.jpg 创建仓库 %}
 
-![为仓库取名](https://github.com/DM2N/personal-img/raw/master/blog/build-hexo-blog/b3.jpg)
+{% asset_img b3.jpg 为仓库取名 %}
 
 回到gitbash中，配置github账户信息（YourName和YourEail都替换成你自己的）：
 
@@ -108,11 +108,11 @@ $ ssh-keygen -t rsa -C "youremail@example.com
 
 一路回车，就能在你的电脑中产生ssh，ssh文件默认在:C:User/Administrator/.ssh文件夹下，打开.ssh文件夹下的id_rsa.pub文件，将里面的内容复制；再打开github的setting：
 
-![打开setting](https://github.com/DM2N/personal-img/raw/master/blog/build-hexo-blog/b4.png)
+{% asset_img b4.png 打开setting %}
 
 将.ssh文件夹下的id_rsa.pub文件里一经复制好了的内容添加到ssh keys:
 
-![创建key](https://github.com/DM2N/personal-img/raw/master/blog/build-hexo-blog/b5.png)
+{% asset_img b5.png 创建key %}
 
 添加一个 New SSH key ，title随便取，key就填刚刚复制好了的那一段。
 
@@ -197,11 +197,11 @@ $ hexo d
 
 第二步添加CNAME：在项目的source文件夹下新建一个名为CNAME的文件，在里面添加你购买的域名：
 
-![配置域名](https://github.com/DM2N/personal-img/raw/master/blog/build-hexo-blog/b6.png)
+{% asset_img b6.png 配置域名 %}
 
 其中ip地址为你的github的地址，可在cmd中ping一下就能看到(ping yourname.github.io)：
 
-![ping](https://github.com/DM2N/personal-img/raw/master/blog/build-hexo-blog/b7.png)
+{% asset_img b7.png ping %}
 
 接着再次部署（hexo d）一下，用你购买的域名打开，就可以看到你的博客了了了了了！！！
 
@@ -288,7 +288,7 @@ $ git checkout -b hexo  #创建并切换到hexo分支
 
 在Github上的站点仓库上，点击Settings=>Branches，将Default branch切换成hexo，然后点击Update即可。
 
-![change branch](https://github.com/DM2N/personal-img/raw/master/blog/build-hexo-blog/b8.png)
+{% asset_img b8.png change-branch %}
 
 ### 将主站点文件push到hexo分支
 

@@ -77,17 +77,17 @@ C# 的数据项类型一共分为以下几种：
 
 通过以下图片我们可以看到对象的值的传递情况
 
-![对象的值的传递](https://github.com/DM2N/personal-img/raw/master/blog/prototype-pattern/p1.png)
+{% asset_img p1.png 对象的值的传递 %}
 
-![对象的值的传递](https://github.com/DM2N/personal-img/raw/master/blog/prototype-pattern/p2.png)
+{% asset_img p2.png 对象的值的传递 %}
 
 Person b = a 后，即将 a 的值赋值给了 b ，此时 a 和 b 都同时指向同一个堆里，b.SetInfo("John",21) 即改变了堆里的值，而 a 的值仍然是从堆里获取，所以 a.Display() 的值为 John 21。
 
 但如何实现如下面两张图一样的数据传递呢？
 
-![对象的值的传递](https://github.com/DM2N/personal-img/raw/master/blog/prototype-pattern/p3.png)
+{% asset_img p3.png 对象的值的传递 %}
 
-![对象的值的传递](https://github.com/DM2N/personal-img/raw/master/blog/prototype-pattern/p4.png)
+{% asset_img p4.png 对象的值的传递 %}
 
 原型模式告诉你答案！！！
 
@@ -99,7 +99,7 @@ Person b = a 后，即将 a 的值赋值给了 b ，此时 a 和 b 都同时指�
 
 ## 原型模式的UML类图
 
-![原型模式的UML类图](https://github.com/DM2N/personal-img/raw/master/blog/prototype-pattern/p5.png)
+{% asset_img p5.png 原型模式的UML类图 %}
 
 ## 原型模式的简单实现
 
@@ -241,7 +241,7 @@ static void Main(string[] args)
 
 .NET 在 System 命名空间中提供了 ICloneable 接口，其中只包含一个 Clone() 方法，实现了这个接口就是完成了原型模式。
 
-![实现ICloneable接口](https://github.com/DM2N/personal-img/raw/master/blog/prototype-pattern/p6.png)
+{% asset_img p6.png 实现ICloneable接口 %}
 
 # 浅拷贝与深拷贝
 
@@ -257,7 +257,7 @@ static void Main(string[] args)
 * 只复制对象的值类型字段，引用类型只复制引用不复制引用的对象（即复制地址）
 * MemberwiseClone() 方法是浅拷贝（[微软关于 MemberwiseClone() 的介绍](https://docs.microsoft.com/zh-cn/dotnet/api/system.object.memberwiseclone?view=netframework-4.7.1#System_Object_MemberwiseClone)）
 
-![浅拷贝](https://github.com/DM2N/personal-img/raw/master/blog/prototype-pattern/p7.png)
+{% asset_img p7.png 浅拷贝 %}
 
 ### 浅拷贝引用类型会出现的错误
 
@@ -370,11 +370,11 @@ static void Main（string[] args）
 * 不仅复制值类型字段，而且复制引用的对象
 * 把引用对象的变量指向复制过的新对象，而不是原有的被引用对象
 
-![深拷贝](https://github.com/DM2N/personal-img/raw/master/blog/prototype-pattern/p8.png)
+{% asset_img p8.png 深拷贝 %}
 
 ### 实现深拷贝
 
-![实现深拷贝](https://github.com/DM2N/personal-img/raw/master/blog/prototype-pattern/p9.png)
+{% asset_img p9.png 实现深拷贝 %}
 
 简历和工作经历类：
 
@@ -457,7 +457,7 @@ Jack worked in YY公司 from 2015-2018
 
 参考文章：[阮一峰《Javascript 继承机制的设计思想》](http://www.ruanyifeng.com/blog/2011/06/designing_ideas_of_inheritance_mechanism_in_javascript.html)
 
-![JavaScript 继承机制——原型链](https://github.com/DM2N/personal-img/raw/master/blog/prototype-pattern/p10.png)
+{% asset_img p10.png JavaScript继承机制——原型链 %}
 
 JavaScript 的创始人 Brendan Eich 在开发 JavaScript 这个使得浏览器可以与网页互动的脚本易语言时，正是面向对象编程（object-oriented programming）最兴盛的时期，C++ 是当时最流行的语言，而 Java 语言的1.0版即将于第二年推出，Sun公司正在大肆造势。
 
@@ -534,11 +534,11 @@ alert(dogB.species);   // 猫科
 
 ## 数据模型缓存
 
-![数据模型缓存](https://github.com/DM2N/personal-img/raw/master/blog/prototype-pattern/p11.png)
+{% asset_img p11.png 数据模型缓存 %}
 
 实现示例：创建一个抽象类 CloneableModel，并让类 User、Product 来扩展它；然后定义 ModelCache 类，该类把 CloneableModel 对象存储在 HashTable 中，并在请求的时候返回对应类型的克隆对象。
 
-![数据模型缓存](https://github.com/DM2N/personal-img/raw/master/blog/prototype-pattern/p12.png)
+{% asset_img p12.png 数据模型缓存 %}
 
 CloneableModel类定义及扩展：
 
