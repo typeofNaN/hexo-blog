@@ -8,7 +8,7 @@
     "build": "hexo clean & hexo g & gulp & hexo d"
   },
   "hexo": {
-    "version": "3.8.0"
+    "version": "3.9.0"
   },
   "dependencies": {
     "hexo": "^3.7.1",
