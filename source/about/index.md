@@ -1,5 +1,6 @@
 title: 关于
 layout: about
+comments: false
 ---
 
 社会主义接班人，正直又善良，一般优秀。

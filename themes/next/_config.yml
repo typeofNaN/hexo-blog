@@ -40,12 +40,12 @@ keywords: "Hexo, NexT"
 # Set rss to false to disable feed link.
 # Leave rss as empty to use site's feed link.
 # Set rss to specific value if you have burned your feed already.
-rss:
+rss: false
 
 footer:
   # Specify the date when the site was setup.
   # If not defined, current year will be used.
-  #since: 2015
+  since: 2017
 
   # Icon between year and copyright info.
   icon: user
@@ -126,9 +126,9 @@ scheme: Mist
 # Key is the link label showing to end users.
 # Value before `||` delimeter is the target permalink.
 # Value after `||` delimeter is the name of FontAwesome icon. If icon (with or without delimeter) is not specified, globe icon will be loaded.
-#social:
-  # GitHub: https://github.com/typeofNaN || github
-  # E-Mail: mailto:dmdefine6@gmail.com || envelope
+social:
+  GitHub: https://github.com/typeofNaN
+  E-Mail: mailto:dmdefine6@gmail.com
   #Google: https://plus.google.com/yourname || google
   #Twitter: https://twitter.com/yourname || twitter
   #FB Page: https://www.facebook.com/yourname || facebook
@@ -139,9 +139,11 @@ scheme: Mist
   #Skype: skype:yourname?call|chat || skype
 
 social_icons:
-  enable: true
+  enable: false
   icons_only: false
   transition: false
+  GitHub: github
+  E-Mail: gmail
 
 # Blog rolls
 links_icon: link
@@ -194,7 +196,7 @@ sidebar:
   b2t: false
 
   # Scroll percent label in b2t button.
-  scrollpercent: false
+  scrollpercent: true
 
   # Enable sidebar on narrow view (only for Muse | Mist).
   onmobile: false
@@ -418,7 +420,7 @@ gitment:
 # Available value:
 #    button | slide
 # Warning: Baidu Share does not support https.
-#baidushare:
+baidushare: true
 ##  type: button
 
 # Share
@@ -549,7 +551,7 @@ firestore:
 # Get more information on http://ibruce.info/2015/04/04/busuanzi/
 busuanzi_count:
   # count values only if the other configs are false
-  enable: false
+  enable: true
   # custom uv span for the whole site
   site_uv: true
   site_uv_header: <i class="fa fa-user"></i>
@@ -675,7 +677,7 @@ motion:
 fancybox: true
 
 # Progress bar in the top during page loading.
-pace: false
+pace: true
 # Themes list:
 #pace-theme-big-counter
 #pace-theme-bounce
@@ -802,6 +804,25 @@ vendors:
   # needMoreShare2
   # https://github.com/revir/need-more-share2
   needMoreShare2:
+    enable: true
+    postbottom:
+      enable: true
+      options:
+        iconStyle: default
+        boxForm: horizontal
+        #位置
+        position: bottomCenter
+        #可分享网站
+        networks: Weibo,Wechat,Douban,QQZone,Twitter,Facebook
+    float:
+      enable: true
+      options:
+        iconStyle: default
+        boxForm: vertical
+        #位置
+        position: topRight
+        #可分享网站
+        networks: Weibo,Wechat,Douban,QQZone,Twitter,Facebook
 
 
 # Assets
