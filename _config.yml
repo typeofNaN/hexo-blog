@@ -4,7 +4,7 @@
 
 # Site
 title: typeofNaN
-subtitle: DM's notes
+subtitle: typeofNaN's blog
 description: 万丈高楼平地起，勿在浮沙筑高台。
 keywords:
 author: typeofNaN
@@ -87,7 +87,7 @@ theme: next
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repository: git@github.com:typeofNaN/typeofNaN.github.io.git
+  repository: git@github.com:typeofNaN/blog.git
   branch: master
 
 #Search
