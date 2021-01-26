@@ -5,7 +5,6 @@ categories: 技术文章
 tags:
     - hexo
     - blog
-    - raytaylorism
 ---
 
 # 前言
