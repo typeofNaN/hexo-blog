@@ -1,4 +1,7 @@
-# typeofNaN.github.io
+# blog
+
 个人博客-typeofNaN
 
-#### 记录生活，记录成长
+:cowboy_hat_face: Blog-typeofNaN. My blog website, power by hexo.
+
+[线上地址](https://blog.typeofnan.com)
