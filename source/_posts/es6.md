@@ -190,7 +190,7 @@ myFunction() //'test'
 需要注意的一种情况，当返回一个对象时，记得将大括号括在括号中以避免产生歧义，误将其（大括号）解析为函数体的大括号。
 
 ``` js
-const myFunction = () => ({ value:'test' })
+const myFunction = () => ({ value: 'test' })
 myFunction() //{value: 'test'}
 ```
 
@@ -204,8 +204,8 @@ this 可能是一个很难掌握的概念，因为它会根据上下文而进行
 
 ``` js
 const car = {
-  model:'Fiesta',
-  manufacturer:'Ford',
+  model: 'Fiesta',
+  manufacturer: 'Ford',
   fullName:function() {
     return `${this.manufacturer} ${this.model}`
   }
@@ -218,9 +218,9 @@ const car = {
 
 ``` js
 const car = {
-  model:'Fiesta',
-  manufacturer:'Ford',
-  fullName:() => {
+  model: 'Fiesta',
+  manufacturer: 'Ford',
+  fullName: () => {
     return `${this.manufacturer} ${this.model}`
   }
 }
@@ -239,6 +239,7 @@ const link = document.querySelector('#link')
 link.addEventListener('click', () => {
   // this === window
 })
+
 const link = document.querySelector('#link')
 link.addEventListener('click', function() {
   // this === link
@@ -262,6 +263,7 @@ class Person {
   constructor(name) {
     this.name = name
   }
+
   hello() {
     return 'Hello, I am ' + this.name + '.'
   }
@@ -276,6 +278,7 @@ class 具有一个标识符，我们可以使用 new ClassIdentifier() 来创建
 
 ``` js
 const flavio = new Person('Flavio')
+
 flavio.hello()
 ```
 
@@ -291,7 +294,9 @@ class Programmer extends Person {
     return super.hello() + ' I am a programmer.'
   }
 }
+
 const flavio = new Programmer('Flavio')
+
 flavio.hello()
 ```
 
@@ -313,7 +318,8 @@ class Person {
     return 'Hello'
   }
 }
-Person.genericHello() //Hello
+
+Person.genericHello() // Hello
 ```
 
 # 私有方法
@@ -331,9 +337,11 @@ class Person {
   constructor(name) {
     this._name = name
   }
+
   set name(value) {
     this._name = value
   }
+
   get name() {
     return this._name
   }
@@ -347,6 +355,7 @@ class Person {
   constructor(name) {
     this._name = name
   }
+
   get name() {
     return this._name
   }
@@ -360,6 +369,7 @@ class Person {
   constructor(name) {
     this._name = name
   }
+
   set name(value) {
     this._name = value
   }
@@ -622,11 +632,12 @@ function interpolate(literals, ...expressions) {
 
 ``` js
 const person = {
-  firstName:'Tom',
-  lastName:'Cruise',
-  actor:true,
-  age:54, //made up
+  firstName: 'Tom',
+  lastName: 'Cruise',
+  actor: true,
+  age: 54, //made up
 }
+
 const {firstName: name, age} = person
 ```
 
@@ -635,7 +646,7 @@ name和age就包含了对应的值。
 这个语法同样可以用到数组当中：
 
 ``` js
-const a = [1,2,3,4,5]
+const a = [1, 2, 3, 4, 5]
 const [first, second] = a
 ```
 
@@ -692,9 +703,10 @@ x.test() //zoox
 
 ``` js
 const x = {
-  ['a' + '_' + 'b']:'z'
+  ['a' + '_' + 'b']: 'z'
 }
-x.a_b //z
+
+x.a_b // z
 ```
 
 # For-of循环
@@ -706,7 +718,7 @@ ES2015引入了for-of 循环，就是在forEach的基础上加上了break的功�
 ``` js
 //iterate over the value
 for (const v of ['a', 'b', 'c']) {
-  console.log(v);
+  console.log(v)
 }
 //get the index as well, using `entries()`
 for (const [i, v] of ['a', 'b', 'c'].entries()) {
@@ -719,8 +731,8 @@ for (const [i, v] of ['a', 'b', 'c'].entries()) {
 
 它跟for…in的区别在于：
 
-for…of遍历属性值
-for…in遍历属性名
+* for…of遍历属性值
+* for…in遍历属性名
 
 # Promises
 
@@ -752,6 +764,7 @@ Promise API暴露了一个Promise构造函数，可以通过new Promise()来初�
 
 ``` js
 let done = true
+
 const isItDoneYet = new Promise((resolve, reject) => {
   if (done) {
     const workDone = 'Here is the thing I built'
@@ -802,9 +815,11 @@ const status = response => {
   if (response.status >= 200 && response.status < 300) {
     return Promise.resolve(response)
   }
+
   return Promise.reject(new Error(response.statusText))
 }
 const json = response => response.json()
+
 fetch('/todos.json')
   .then(status)
   .then(json)
@@ -852,6 +867,7 @@ new Promise((resolve, reject) => {
 }).catch(err => {
   console.error(err)
 })
+
 // or
 new Promise((resolve, reject) => {
   reject('Error')
@@ -889,6 +905,7 @@ Promise.all()
 ``` js
 const f1 = fetch('/something.json')
 const f2 = fetch('/something2.json')
+
 Promise.all([f1, f2])
   .then(res => {
     console.log('Array of results', res)
@@ -920,9 +937,11 @@ Promise.race()运行所有传递进去的promise，但是只要有其中一个re
 const promiseOne = new Promise((resolve, reject) => {
   setTimeout(resolve, 500, 'one')
 })
+
 const promiseTwo = new Promise((resolve, reject) => {
   setTimeout(resolve, 100, 'two')
 })
+
 Promise.race([promiseOne, promiseTwo]).then(result => {
   console.log(result) // 'two'
 })
@@ -1019,6 +1038,7 @@ export default str => str.toUpperCase()
 const a = 1
 const b = 2
 const c = 3
+
 export { a, b, c }
 ```
 
@@ -1158,9 +1178,9 @@ const copied = Object.assign({}, original)
 
 ``` js
 const original = {
-  name:'Fiesta',
-  car:{
-    color:'blue'
+  name: 'Fiesta',
+  car: {
+    color: 'blue'
   }
 }
 const copied = Object.assign({}, original)
@@ -1363,6 +1383,7 @@ s.clear()
 for (const k of s.keys()) {
   console.log(k)
 }
+
 for (const k of s.values()) {
   console.log(k)
 }
@@ -1403,6 +1424,7 @@ const s = new Set([1, 2, 3, 4])
 
 ``` js
 const a = [...s.keys()]
+
 // or
 const a = [...s.values()]
 ```
@@ -1620,6 +1642,7 @@ Generators支持JavaScript中全新的编程范式，包括：
 function *calculator(input) {
   var doubleThat = 2 * (yield (input / 2))
   var another = yield (doubleThat)
+
   return (input * doubleThat * another)
 }
 ```
@@ -1676,8 +1699,8 @@ calc.next(100)
 
 ``` js
 {
-  done:true
-  value:14000
+  done: true
+  value: 14000
 }
 ```
 
@@ -1692,7 +1715,7 @@ calc.next(100)
 对于ES6及更低版本，想要检查数组中是否包含指定元素，你不得不使用indexOf方法，它检查数组中的索引，如果元素不存在，它返回-1，由于-1被计算为true，你需对其进行取反操作，例子如下：
 
 ``` js
-if (![1,2].indexOf(3)) {
+if (![1, 2].indexOf(3)) {
   console.log('Not found')
 }
 ```
@@ -1700,7 +1723,7 @@ if (![1,2].indexOf(3)) {
 通过ES7引入的新特性，我们可以如此做：
 
 ``` js
-if (![1,2].includes(3)) {
+if (![1, 2].includes(3)) {
   console.log('Not found')
 }
 ```
@@ -1785,9 +1808,9 @@ ES6给我们提供了Object.assign()方法，它从一个一个或多个对象�
 
 ``` js
 const person1 = {
-    set name(newName) {
-        console.log(newName)
-    }
+  set name(newName) {
+    console.log(newName)
+  }
 }
 ```
 
@@ -2013,7 +2036,7 @@ ES2018 为对象引入了同样的功能。
 解构:
 
 ``` js
-const { first, second, ...others } = { first:1, second:2, third:3, fourth:4, fifth:5 }
+const { first, second, ...others } = { first: 1, second: 2, third: 3, fourth: 4, fifth: 5 }
 first // 1
 second // 2
 others // { third: 3, fourth: 4, fifth: 5 }
@@ -2144,9 +2167,10 @@ In ES2018 a capturing group can be assigned to a name, rather than just being as
 ``` js
 const re = /(?<year>d{4})-(?<month>d{2})-(?<day>d{2})/
 const result = re.exec('2015-01-02')
-// result.groups.year === '2015';
-// result.groups.month === '01';
-// result.groups.day === '02';
+
+// result.groups.year === '2015'
+// result.groups.month === '01'
+// result.groups.day === '02'
 ```
 
 The s flag for regular expressions

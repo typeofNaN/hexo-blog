@@ -18,14 +18,23 @@ ECMAScript是一种由Ecma国际（前身为欧洲计算机制造商协会）在
 至发稿日为止有九个ECMA-262版本发表。其历史版本如下：
 
 1.1997年6月：第一版
+
 2.1998年6月：修改格式，使其与ISO/IEC16262国际标准一样
+
 3.1999年12月：强大的正则表达式，更好的词法作用域链处理，新的控制指令，异常处理，错误定义更加明确，数据输出的格式化及其它改变
+
 4.2009年12月：添加严格模式("use strict")。修改了前面版本模糊不清的概念。增加了getters，setters，JSON以及在对象属性上更完整的反射。
+
 5.2011年6月：ECMAScript标5.1版形式上完全一致于国际标准ISO/IEC 16262:2011。
+
 6.2015年6月：ECMAScript 2015（ES2015），第 6 版，最早被称作是 ECMAScript 6（ES6），添加了类和模块的语法，其他特性包括迭代器，Python风格的生成器和生成器表达式，箭头函数，二进制数据，静态类型数组，集合（maps，sets 和 weak maps），promise，reflection 和 proxies。作为最早的 ECMAScript Harmony 版本，也被叫做ES6 Harmony。
+
 7.2016年6月：ECMAScript 2016（ES2016），第 7 版，多个新的概念和语言特性。
+
 8.2017年6月：ECMAScript 2017（ES2017），第 8 版，多个新的概念和语言特性。
+
 9.2018年6月：ECMAScript 2018 （ES2018），第 9 版，包含了异步循环，生成器，新的正则表达式特性和 rest/spread 语法。
+
 10.2019年6月：ECMAScript 2019 （ES2019），第 10 版。
 
 # 发展标准
@@ -74,11 +83,14 @@ ES6是一次重大的革新，比起过去的版本，改动比较大，本文�
   let b = 20
   const c = 30
 }
+
 a // 10
 b // Uncaught ReferenceError: b is not defined
 c // c is not defined
+
 let d = 40
 const e = 50
+
 d = 60
 d // 60
 e = 70 // VM231:1 Uncaught TypeError: Assignment to constant variable.
@@ -116,6 +128,7 @@ class Person {
     this.name = name
     this.age = age
   }
+
   information() {
     return 'My name is ' + this.name + ', I am ' + this.age
   }
@@ -195,6 +208,7 @@ const info = `My name is ${name}, I am ${age}`
 var a = 10
 var b = 20
 var temp = a
+
 a = b
 b = temp
 ```
@@ -204,6 +218,7 @@ b = temp
 ``` js
 let a = 10
 let b = 20
+
 [a, b] = [b, a]
 ```
 
@@ -215,12 +230,14 @@ let b = 20
 // circle.js
 // 输出
 const { PI } = Math
+
 exports.area = (r) => PI * r ** 2
 exports.circumference = (r) => 2 * PI * r
 
 // index.js
 // 输入
 const circle = require('./circle.js')
+
 console.log(`半径为 4 的圆的面积是 ${circle.area(4)}`)
 ```
 
@@ -230,12 +247,14 @@ console.log(`半径为 4 的圆的面积是 ${circle.area(4)}`)
 // circle.js
 // 输出
 const { PI } = Math
+
 export const area = (r) => PI * r ** 2
 export const circumference = (r) => 2 * PI * r
 
 // index.js
 // 输入
 import { area } = './circle.js'
+
 console.log(`半径为 4 的圆的面积是: ${area(4)}`)
 ```
 
@@ -249,6 +268,7 @@ console.log(`半径为 4 的圆的面积是: ${area(4)}`)
 function sum(x, y, z) {
   return x + y + z;
 }
+
 var list = [5, 6, 7]
 var total = sum.apply(null, list)
 ```
@@ -257,6 +277,7 @@ var total = sum.apply(null, list)
 
 ``` js
 const sum = (x, y, z) => x + y + z
+
 const list = [5, 6, 7]
 const total = sum(...list)
 ```
@@ -337,6 +358,7 @@ new Promise((resolve, reject) => {
   console.log('new Promise')
   resolve('success')
 })
+
 console.log('finifsh')
 // new Promise -> finifsh
 ```
@@ -373,11 +395,11 @@ ajax(url, () => {
 ``` js
 ajax(url)
   .then(res => {
-      console.log(res)
-      return ajax(url1)
+    console.log(res)
+    return ajax(url1)
   }).then(res => {
-      console.log(res)
-      return ajax(url2)
+    console.log(res)
+    return ajax(url2)
   }).then(res => console.log(res))
 ```
 
@@ -391,7 +413,7 @@ for...of语句在可迭代对象（包括 Array，Map，Set，String，TypedArra
 const array1 = ['a', 'b', 'c'];
 
 for (const element of array1) {
-      console.log(element)
+  console.log(element)
 }
 
 // "a"
@@ -435,7 +457,9 @@ function* makeRangeIterator(start = 0, end = Infinity, step = 1) {
     yield i;
   }
 }
-var a = makeRangeIterator(1,10,2)
+
+var a = makeRangeIterator(1, 10, 2)
+
 a.next() // {value: 1, done: false}
 a.next() // {value: 3, done: false}
 a.next() // {value: 5, done: false}
@@ -452,6 +476,7 @@ Set 对象允许你存储任何类型的唯一值，无论是原始值或者是�
 
 ``` js
 const numbers = [2, 3, 4, 4, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 5, 32, 3, 4, 5]
+
 console.log([...new Set(numbers)])
 // [2, 3, 4, 5, 6, 7, 32]
 ```
@@ -487,13 +512,13 @@ Map 对象保存键值对。任何值(对象或者原始值) 都可以作为一�
 例子如下，我们甚至可以使用NaN来作为键值：
 
 ``` js
-var myMap = new Map();
-myMap.set(NaN, "not a number");
+var myMap = new Map()
+myMap.set(NaN, 'not a number')
 
-myMap.get(NaN); // "not a number"
+myMap.get(NaN) // 'not a number'
 
-var otherNaN = Number("foo");
-myMap.get(otherNaN); // "not a number"
+var otherNaN = Number('foo')
+myMap.get(otherNaN) // 'not a number'
 ```
 
 WeakMap 对象是一组键/值对的集合，其中的键是弱引用的。其键必须是对象，而值可以是任意的。
@@ -508,26 +533,26 @@ var o1 = {}
 var o2 = function() {}
 var o3 = window
 
-wm1.set(o1, 37);
-wm1.set(o2, "azerty");
-wm2.set(o1, o2); // value可以是任意值,包括一个对象
-wm2.set(o3, undefined);
-wm2.set(wm1, wm2); // 键和值可以是任意对象,甚至另外一个WeakMap对象
-wm1.get(o2); // "azerty"
-wm2.get(o2); // undefined,wm2中没有o2这个键
-wm2.get(o3); // undefined,值就是undefined
+wm1.set(o1, 37)
+wm1.set(o2, "azerty")
+wm2.set(o1, o2) // value可以是任意值,包括一个对象
+wm2.set(o3, undefined)
+wm2.set(wm1, wm2) // 键和值可以是任意对象,甚至另外一个WeakMap对象
+wm1.get(o2) // "azerty"
+wm2.get(o2) // undefined,wm2中没有o2这个键
+wm2.get(o3) // undefined,值就是undefined
 
-wm1.has(o2); // true
-wm2.has(o2); // false
-wm2.has(o3); // true (即使值是undefined)
+wm1.has(o2) // true
+wm2.has(o2) // false
+wm2.has(o3) // true (即使值是undefined)
 
-wm3.set(o1, 37);
-wm3.get(o1); // 37
-wm3.clear();
-wm3.get(o1); // undefined,wm3已被清空
-wm1.has(o1);   // true
-wm1.delete(o1);
-wm1.has(o1);   // false
+wm3.set(o1, 37)
+wm3.get(o1) // 37
+wm3.clear()
+wm3.get(o1) // undefined,wm3已被清空
+wm1.has(o1)   // true
+wm1.delete(o1)
+wm1.has(o1)   // false
 ```
 
 ## Proxy/Reflect
@@ -545,14 +570,14 @@ const observe = (data, callback) => {
       return Reflect.get(target, key)
     },
     set(target, key, value, proxy) {
-      callback(key, value);
-      target[key] = value;
+      callback(key, value)
+      target[key] = value
       return Reflect.set(target, key, value, proxy)
     }
   })
 }
 
-const FooBar = { open: false };
+const FooBar = { open: false }
 const FooBarObserver = observe(FooBar, (property, value) => {
   property === 'open' && value ? console.log('FooBar is open!!!') : console.log('keep waiting');
 });
@@ -578,9 +603,9 @@ FooBarObserver.open = true // FooBar is open!!!
 
 ``` js
 // y修饰符
-var s = 'aaa_aa_a';
-var r1 = /a+/g;
-var r2 = /a+/y;
+var s = 'aaa_aa_a'
+var r1 = /a+/g
+var r2 = /a+/y
 
 r1.exec(s) // ["aaa"]
 r2.exec(s) // ["aaa"]
@@ -616,11 +641,11 @@ var s = '𠮷'
 * 引用
 
 ``` js
-const RE_TWICE = /^(?<word>[a-z]+)!\k<word>$/;
+const RE_TWICE = /^(?<word>[a-z]+)!\k<word>$/
 RE_TWICE.test('abc!abc') // true
 RE_TWICE.test('abc!ab') // false
 
-const RE_TWICE = /^(?<word>[a-z]+)!\1$/;
+const RE_TWICE = /^(?<word>[a-z]+)!\1$/
 RE_TWICE.test('abc!abc') // true
 RE_TWICE.test('abc!ab') // false
 ```
@@ -649,61 +674,33 @@ RE_TWICE.test('abc!ab') // false
 ## Math对象的扩展
 
 * 二进制表示法 : 0b或0B开头表示二进制(0bXX或0BXX)
-
 * 二进制表示法 : 0b或0B开头表示二进制(0bXX或0BXX)
-
 * 八进制表示法 : 0o或0O开头表示二进制(0oXX或0OXX)
-
 * Number.EPSILON : 数值最小精度
-
 * Number.MIN_SAFE_INTEGER : 最小安全数值(-2^53)
-
 * Number.MAX_SAFE_INTEGER : 最大安全数值(2^53)
-
 * Number.parseInt() : 返回转换值的整数部分
-
 * Number.parseFloat() : 返回转换值的浮点数部分
-
 * Number.isFinite() : 是否为有限数值
-
 * Number.isNaN() : 是否为NaN
-
 * Number.isInteger() : 是否为整数
-
 * Number.isSafeInteger() : 是否在数值安全范围内
-
 * Math.trunc() : 返回数值整数部分
-
 * Math.sign() : 返回数值类型(正数1、负数-1、零0)
-
 * Math.cbrt() : 返回数值立方根
-
 * Math.clz32() : 返回数值的32位无符号整数形式
-
 * Math.imul() : 返回两个数值相乘
-
 * Math.fround() : 返回数值的32位单精度浮点数形式
-
 * Math.hypot() : 返回所有数值平方和的平方根
-
 * Math.expm1() : 返回e^n - 1
-
 * Math.log1p() : 返回1 + n的自然对数(Math.log(1 + n))
-
 * Math.log10() : 返回以10为底的n的对数
-
 * Math.log2() : 返回以2为底的n的对数
-
 * Math.sinh() : 返回n的双曲正弦
-
 * Math.cosh() : 返回n的双曲余弦
-
 * Math.tanh() : 返回n的双曲正切
-
 * Math.asinh() : 返回n的反双曲正弦
-
 * Math.acosh() : 返回n的反双曲余弦
-
 * Math.atanh() : 返回n的反双曲正切
 
 ## Array对象的扩展
@@ -970,9 +967,10 @@ padEnd() 方法会用一个字符串填充当前字符串（如果需要的话�
 
 ``` js
 const str1 = 'Breaded Mushrooms'
-console.log(str1.padEnd(25, '.')) // "Breaded Mushrooms........"
+console.log(str1.padEnd(25, '.')) // 'Breaded Mushrooms........'
+
 const str2 = '200'
-console.log(str2.padEnd(5)) // "200  "
+console.log(str2.padEnd(5)) // '200  '
 ```
 
 ## 函数参数结尾逗号（Function parameter lists and calls trailing commas）
@@ -988,14 +986,14 @@ function f(p,) {}
 (p,) => {}
 
 class C {
-  one(a,) {},
-  two(a, b,) {},
+  one(a,) {}
+  two(a, b,) {}
 }
 
 var obj = {
   one(a,) {},
-  two(a, b,) {},
-};
+  two(a, b,) {}
+}
 
 // 函数调用
 f(p)
@@ -1056,27 +1054,16 @@ Atomics对象 提供了一组静态方法用来对 SharedArrayBuffer[3] 对象�
 方法如下：
 
 * Atomics.add() ：将指定位置上的数组元素与给定的值相加，并返回相加前该元素的值。
-
 * Atomics.and()：将指定位置上的数组元素与给定的值相与，并返回与操作前该元素的值。
-
 * Atomics.compareExchange()：如果数组中指定的元素与给定的值相等，则将其更新为新的值，并返回该元素原先的值。
-
 * Atomics.exchange()：将数组中指定的元素更新为给定的值，并返回该元素更新前的值。
-
 * Atomics.load()：返回数组中指定元素的值。
-
 * Atomics.or()：将指定位置上的数组元素与给定的值相或，并返回或操作前该元素的值。
-
 * Atomics.store()：将数组中指定的元素设置为给定的值，并返回该值。
-
 * Atomics.sub()：将指定位置上的数组元素与给定的值相减，并返回相减前该元素的值。
-
 * Atomics.xor()：将指定位置上的数组元素与给定的值相异或，并返回异或操作前该元素的值。
-
 * Atomics.wait()：检测数组中某个指定位置上的值是否仍然是给定值，是则保持挂起直到被唤醒或超时。返回值为 "ok"、"not-equal" 或 "time-out"。调用时，如果当前线程不允许阻塞，则会抛出异常（大多数浏览器都不允许在主线程中调用 wait()）。
-
 * Atomics.wake()：唤醒等待队列中正在数组指定位置的元素上等待的线程。返回值为成功唤醒的线程数量。
-
 * Atomics.isLockFree(size)：可以用来检测当前系统是否支持硬件级的原子操作。对于指定大小的数组，如果当前系统支持硬件级的原子操作，则返回 true；否则就意味着对于该数组，Atomics 对象中的各原子操作都只能用锁来实现。此函数面向的是技术专家。
 
 ## Object.getOwnPropertyDescriptors()
@@ -1122,6 +1109,7 @@ for await...of 语句会在异步或者同步可迭代对象上创建一个迭�
 ``` js
 async function* asyncGenerator() {
   var i = 0
+
   while (i < 3) {
     yield i++
   }
@@ -1184,7 +1172,7 @@ latex`\unicode` // { cooked: undefined, raw: "\\unicode" }
 
 ``` js
 // 匹配所有数字
-const regex = /^\p{Number}+$/u;
+const regex = /^\p{Number}+$/u
 regex.test('²³¹¼½¾') // true
 regex.test('㉛㉜㉝') // true
 regex.test('ⅠⅡⅢⅣⅤⅥⅦⅧⅨⅩⅪⅫ') // true
@@ -1202,7 +1190,7 @@ regex.test('ⅠⅡⅢⅣⅤⅥⅦⅧⅨⅩⅪⅫ') // true
 /\p{Emoji_Modifier_Base}\p{Emoji_Modifier}?|\p{Emoji_Presentation}|\p{Emoji}\uFE0F/gu
 
 // 匹配所有的箭头字符
-const regexArrows = /^\p{Block=Arrows}+$/u;
+const regexArrows = /^\p{Block=Arrows}+$/u
 regexArrows.test('←↑→↓↔↕↖↗↘↙⇏⇐⇑⇒⇓⇔⇕⇖⇗⇘⇙⇧⇩') // true
 ```
 
@@ -1213,33 +1201,33 @@ regexArrows.test('←↑→↓↔↕↖↗↘↙⇏⇐⇑⇒⇓⇔⇕⇖⇗⇘�
 在以往的版本里，JS的正则的.只能匹配emoji跟行终结符以外的所有文本，例如：
 
 ``` js
-let regex = /./;
+let regex = /./
 
-regex.test('\n');       // false
-regex.test('\r');       // false
-regex.test('\u{2028}'); // false
-regex.test('\u{2029}'); // false
+regex.test('\n')       // false
+regex.test('\r')       // false
+regex.test('\u{2028}') // false
+regex.test('\u{2029}') // false
 
-regex.test('\v');       // true
-regex.test('\f');       // true
-regex.test('\u{0085}'); // true
+regex.test('\v')       // true
+regex.test('\f')       // true
+regex.test('\u{0085}') // true
 
-/foo.bar/.test('foo\nbar');     // false
-/foo[^]bar/.test('foo\nbar');   // true
+/foo.bar/.test('foo\nbar')     // false
+/foo[^]bar/.test('foo\nbar')   // true
 
-/foo.bar/.test('foo\nbar');     // false
-/foo[\s]bar/.test('foo\nbar');   // true
+/foo.bar/.test('foo\nbar')     // false
+/foo[\s]bar/.test('foo\nbar')   // true
 ```
 
 但是在ES9之后，JS正则增加了一个新的标志 s 用来表示 dotAll，这可以匹配任意字符。代码如下：
 
 ``` js
-/foo.bar/s.test('foo\nbar');    // true
+/foo.bar/s.test('foo\nbar')    // true
 
-const re = /foo.bar/s;  //  等价于 const re = new RegExp('foo.bar', 's');
-re.test('foo\nbar');    // true
-re.dotAll;      // true
-re.flags;       // "s"
+const re = /foo.bar/s  //  等价于 const re = new RegExp('foo.bar', 's')
+re.test('foo\nbar')    // true
+re.dotAll      // true
+re.flags       // "s"
 ```
 
 ## 正则表达式命名捕获组
@@ -1248,24 +1236,25 @@ re.flags;       // "s"
 
 ``` js
 const matched = /(\d{4})-(\d{2})-(\d{2})/.exec('2019-01-01')
-console.log(matched[0]);    // 2019-01-01
-console.log(matched[1]);    // 2019
-console.log(matched[2]);    // 01
-console.log(matched[3]);    // 01
+
+console.log(matched[0])    // 2019-01-01
+console.log(matched[1])    // 2019
+console.log(matched[2])    // 01
+console.log(matched[3])    // 01
 ```
 
 ES9引入了命名捕获组，允许为每一个组匹配指定一个名字，既便于阅读代码，又便于引用。代码如下：
 
 ``` js
-const RE_DATE = /(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})/;
+const RE_DATE = /(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})/
 
-const matchObj = RE_DATE.exec('1999-12-31');
-const year = matchObj.groups.year; // 1999
-const month = matchObj.groups.month; // 12
-const day = matchObj.groups.day; // 31
+const matchObj = RE_DATE.exec('1999-12-31')
+const year = matchObj.groups.year // 1999
+const month = matchObj.groups.month // 12
+const day = matchObj.groups.day // 31
 
-const RE_OPT_A = /^(?<as>a+)?$/;
-const matchObj = RE_OPT_A.exec('');
+const RE_OPT_A = /^(?<as>a+)?$/
+const matchObj = RE_OPT_A.exec('')
 
 matchObj.groups.as // undefined
 'as' in matchObj.groups // true
@@ -1276,13 +1265,13 @@ matchObj.groups.as // undefined
 ES6中添加了数组的扩展操作符，让我们在操作数组时更加简便，美中不足的是并不支持对象扩展操作符，但是在ES9开始，这一功能也得到了支持，例如：
 
 ``` js
-var obj1 = { foo: 'bar', x: 42 };
-var obj2 = { foo: 'baz', y: 13 };
+var obj1 = { foo: 'bar', x: 42 }
+var obj2 = { foo: 'baz', y: 13 }
 
-var clonedObj = { ...obj1 };
+var clonedObj = { ...obj1 }
 // 克隆后的对象: { foo: "bar", x: 42 }
 
-var mergedObj = { ...obj1, ...obj2 };
+var mergedObj = { ...obj1, ...obj2 }
 // 合并后的对象: { foo: "baz", x: 42, y: 13 }
 ```
 
@@ -1350,6 +1339,7 @@ arr.reduce((acc, x) => acc.concat([x, x * 2]), []) // [1, 2, 2, 4, 3, 6, 4, 8]
 
 ``` js
 const Str = '   Hello world!  '
+
 console.log(Str) // '   Hello world!  '
 console.log(Str.trimStart()) // 'Hello world!  '
 console.log(Str.trimLeft()) // 'Hello world!  '
@@ -1389,18 +1379,18 @@ console.log(obj) // Object { foo: "bar", baz: 42 }
 description 是一个只读属性，它会返回Symbol对象的可选描述的字符串。与 Symbol.prototype.toString() 不同的是它不会包含Symbol()的字符串。例子如下：
 
 ``` js
-Symbol('desc').toString();   // "Symbol(desc)"
-Symbol('desc').description;  // "desc"
-Symbol('').description;      // ""
-Symbol().description;        // undefined
+Symbol('desc').toString()   // "Symbol(desc)"
+Symbol('desc').description  // "desc"
+Symbol('').description      // ""
+Symbol().description        // undefined
 
 // 具名 symbols
-Symbol.iterator.toString();  // "Symbol(Symbol.iterator)"
-Symbol.iterator.description; // "Symbol.iterator"
+Symbol.iterator.toString()  // "Symbol(Symbol.iterator)"
+Symbol.iterator.description // "Symbol.iterator"
 
 //全局 symbols
-Symbol.for('foo').toString();  // "Symbol(foo)"
-Symbol.for('foo').description; // "foo"
+Symbol.for('foo').toString()  // "Symbol(foo)"
+Symbol.for('foo').description // "foo"
 ```
 
 ## String.prototype.matchAll
@@ -1422,12 +1412,12 @@ str.matchAll(regexp) // RegExpStringIterator {}
 
 ``` js
 function sum(a, b) {
-  return a + b;
+  return a + b
 }
 
 console.log(sum.toString())
 // "function sum(a, b) {
-//    return a + b;
+//    return a + b
 //  }"
 
 console.log(Math.abs.toString()) // "function abs() { [native code] }"
@@ -1513,10 +1503,10 @@ for (const link of document.querySelectorAll("nav > a")) {
 
     import('/modules/my-module.js')
       .then(module => {
-            module.loadPageInto(main);
+        module.loadPageInto(main)
       })
       .catch(err => {
-            main.textContent = err.message;
+        main.textContent = err.message
       })
   })
 }
@@ -1532,6 +1522,7 @@ class Counter extends HTMLElement {
   get x() {
     return this.xValue
   }
+
   set x(value) {
     this.xValue = value
     window.requestAnimationFrame(this.render.bind(this))
@@ -1567,6 +1558,7 @@ class Counter extends HTMLElement {
   get #x() {
     return #xValue
   }
+
   set #x(value) {
     this.#xValue = value
     window.requestAnimationFrame(this.#render.bind(this))
@@ -1589,5 +1581,6 @@ class Counter extends HTMLElement {
     this.textContent = this.#x.toString()
   }
 }
+
 window.customElements.define('num-counter', Counter)
 ```
