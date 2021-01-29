@@ -337,7 +337,7 @@ const emoji = {
     var regRule = /[^u4E00-u9FA5|d|a-zA-Z|rns,.?!，。？！…—&$=()-+/*{}[]]|s/g
     let $inp = findEle(el, 'input')
     el.$inp = $inp
-    $inp.handle = function() {
+    $inp.handle = function () {
       let val = $inp.value
       $inp.value = val.replace(regRule, '')
 
@@ -450,7 +450,7 @@ const LazyLoad = {
   throttle(fn, delay) {
     let timer
     let prevTime
-    return function(...args) {
+    return function (...args) {
       const currTime = Date.now()
       const context = this
       if (!prevTime) prevTime = currTime
@@ -463,7 +463,7 @@ const LazyLoad = {
         return
       }
 
-      timer = setTimeout(function() {
+      timer = setTimeout(function () {
         prevTime = Date.now()
         timer = null
         fn.apply(context, args)
@@ -608,10 +608,10 @@ export default waterMarker
 const draggable = {
   inserted: function (el) {
     el.style.cursor = 'move'
-    el.onmousedown = function(e) {
+    el.onmousedown = function (e) {
       let disx = e.pageX - el.offsetLeft
       let disy = e.pageY - el.offsetTop
-      document.onmousemove = function(e) {
+      document.onmousemove = function (e) {
         let x = e.pageX - disx
         let y = e.pageY - disy
         let maxX = document.body.clientWidth - parseInt(window.getComputedStyle(el).width)
@@ -631,7 +631,7 @@ const draggable = {
         el.style.left = x + 'px'
         el.style.top = y + 'px'
       }
-      document.onmouseup = function() {
+      document.onmouseup = function () {
         document.onmousemove = document.onmouseup = null
       }
     }

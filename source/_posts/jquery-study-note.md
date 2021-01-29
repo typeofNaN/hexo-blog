@@ -16,7 +16,7 @@ tags:
 jQuery大部分功能需要根据文档的DOM模型来工作，首先需要正确地解析到整个文档的DOM模型结构。使用jQuery需要在整个文档被浏览器完全加载后才开始进行。
 
 ``` js
-$(document).ready(function() {
+$(document).ready(function () {
   alert('Hello World!')
   $('p').click(function (event) {
     alert('Thanks for visiting!')
@@ -53,17 +53,17 @@ $(function () {
 
 ## 常规选择器
 
-* $("*") 选择所有节点
-* $("#id") ID选择器，注意其中的一些特殊字符，如 .
-* $(".class") 类选择器
-* $("tag") 标签选择器
-* $("子元素")
-* $("直接子元素")
+* $('*') 选择所有节点
+* $('#id') ID选择器，注意其中的一些特殊字符，如 .
+* $('.class') 类选择器
+* $('tag') 标签选择器
+* $('子元素')
+* $('直接子元素')
 * :focus 获取焦点元素
 * :first-child/:last-child 选择第一个/最后一个元素
 * :first/:last 截取第一个/最后一个符合条件的元素
-* ("pre+next") 直接兄弟元素
-* ("pre~siblings") 兄弟元素
+* ('pre+next') 直接兄弟元素
+* ('pre~siblings') 兄弟元素
 * :nth-child() 索引选择，索引从1开始
 * :nth-child(odd)
 * :nth-child(even)
@@ -172,12 +172,12 @@ $('img').toggleClass(isTrue) //根据`isTrue`判断所有类的开关
 $('img').toggleClass('test', isTrue) //根据`isTrue`判断指定类的开关
 
 //同 `$('img').toggleClass('test')` 只是类名由函数返回
-$('img').toggleClass(function(index, className, isTrue) {
+$('img').toggleClass(function (index, className, isTrue) {
   return 'name'
 })
 
 // `isTrue`作为函数的第三个参数传入
-$('img').toggleClass(function(index, className, isTrue) {
+$('img').toggleClass(function (index, className, isTrue) {
   return 'name'
 }, isTrue)
 ```
@@ -185,8 +185,8 @@ $('img').toggleClass(function(index, className, isTrue) {
 * .attr() 获取或设置一个属性值
 
 ``` js
-// $("#greatphoto").attr('alt') //获取属性`
-$("#greatphoto").attr('alt', 'Shenzhen Brush Seller') //设置属性`
+// $('#greatphoto').attr('alt') //获取属性`
+$('#greatphoto').attr('alt', 'Shenzhen Brush Seller') //设置属性`
 
 // 同时设置多个属性
 $('#greatphoto').attr({alt: 'Shen Brush Seller',title: 'photo by Kelly Clark'})
@@ -211,7 +211,7 @@ $('input').val('other')
 ``` js
 $('div').html()
 $('div').html('<div>测试</div>')
-$('div').html(function(index, old) {
+$('div').html(function (index, old) {
   return old + '<span>另外的内容</span>'
 })
 ```
@@ -222,7 +222,7 @@ $('div').html(function(index, old) {
 
 ``` js
 $('body').css('background-color', 'red')
-$('body').css('background-color', function(index, value) {
+$('body').css('background-color', function (index, value) {
   return value + '1'
 })
 $('body').css({color: 'green', 'background-color': 'red'})
@@ -233,7 +233,7 @@ $('body').css({color: 'green', 'background-color': 'red'})
 ``` js
 $('body').width()
 $('body').width(50)
-$('body').width(function(index, value) {
+$('body').width(function (index, value) {
   return value += 10
 })
 ```
@@ -298,10 +298,10 @@ $('.inner').wrapInner('<div class="new"></div>')
 * .map() 遍历所有成员
 
 ``` js
-$(':checkbox').map(function() {
+$(':checkbox').map(function () {
   return this.id
 }).get().join(',')
-$(':checkbox').map(function(index, node) {
+$(':checkbox').map(function (index, node) {
   return node.id
 }).get().join(',')
 ```
@@ -319,16 +319,16 @@ $('li').slice(-2, -1).css('background-color', 'blue')
 * $.each()$.map() 遍历列表， $.map()可以用于对象
 
 ``` js
-$.each([52, 97], function(index, value) {
+$.each([52, 97], function (index, value) {
   console.log((index + ' : ' + value))
 })
-$.map([0, 1, 2], function(index, n) {
+$.map([0, 1, 2], function (index, n) {
   return n + 4
 })
-$.map([0, 1, 2], function(n) {
+$.map([0, 1, 2], function (n) {
   return n > 0 ? n + 1 : null
 })
-$.map([0, 1, 2], function(n) {
+$.map([0, 1, 2], function (n) {
   return [n, n + 1]
 })
 
@@ -337,7 +337,7 @@ var dimensions = {
   height: 15,
   length: 20
 }
-$.map(dimensions, function(value, key) {
+$.map(dimensions, function (value, key) {
   return value * 2
 })
 
@@ -347,7 +347,7 @@ var dimensions = {
   length: 20
 }
 
-$.map(dimensions, function(value, key) {
+$.map(dimensions, function (value, key) {
   return key
 })
 ```
@@ -368,17 +368,17 @@ $.merge([0, 1, 22, 3, 4])
 * .grep() 过滤列表，第三个参数表示是否为取反
 
 ``` js
-$.grep([0, 1, ], function(array, index) {
+$.grep([0, 1, ], function (array, index) {
     return n > 0
 }) // [1, 2]
-$.grep([0, 1, 2], function(array, index) {
+$.grep([0, 1, 2], function (array, index) {
     return n > 0
 }, true) // [0]
 ```
 
 * $.inArray() 存在判断
 * $.inArray(value, array [, fromIndex])
-* $.isArray()$.isEmptyObject()$.isFunction()$.iSNumeric()$.isPainObject()$.isWindow $.isXMLDoc() 类型判断
+* $.isArray()$.isEmptyObject()$.isFunction ()$.iSNumeric()$.isPainObject()$.isWindow $.isXMLDoc() 类型判断
 * $.noop() 空函数
 * $.now() 当前时间戳，值为 (newDate).getTime()
 * $.parseJson()$.parseXML() 把字符串解析为对象
@@ -387,7 +387,7 @@ $.grep([0, 1, 2], function(array, index) {
 var xml = "<rss version='2.0'><channel><title>RSS Title</title></channel></rss>",
   xmlDoc = $.parseXML(xml),
   $xml = $(xmlDoc),
-  $title = $xml.find("title")
+  $title = $xml.find('title')
 ```
 
 * $.trim() 去头去尾 $.trim(str)
@@ -403,12 +403,12 @@ var xml = "<rss version='2.0'><channel><title>RSS Title</title></channel></rss>"
 ``` js
 var o = {
   x: '123',
-  f: function() {
+  f: function () {
     console.log(this.x)
   }
 }
 
-var go = function(f) {
+var go = function (f) {
   f()
 }
 
@@ -450,7 +450,7 @@ $('#data').data('test', '456')
 * .one() 绑定单次事件
 
 ``` js
-$('#btn').on('click', function(eventObj) {
+$('#btn').on('click', function (eventObj) {
   console.log('Hello')
 })
 ```
@@ -458,7 +458,7 @@ $('#btn').on('click', function(eventObj) {
 对于 handler，它默认的上下文是触发事件的节点：
 
 ``` js
-$('#btn').on('click', function(eventObj) {
+$('#btn').on('click', function (eventObj) {
   console.log(this)
 })
 ```
@@ -466,7 +466,7 @@ $('#btn').on('click', function(eventObj) {
 使用 $.proxy()可以随意控制上下文：
 
 ``` js
-$('#btn').on('click', $.proxy(function(eventObj) {
+$('#btn').on('click', $.proxy(function (eventObj) {
   console.log(this.a)
   }, {
     a: 123
@@ -480,11 +480,11 @@ event参数还支持通过：
 * 以空格分割的多个事件
 
 ``` js
-$('#btn').on('click.my', (function(eventObj) {
+$('#btn').on('click.my', (function (eventObj) {
   console.log('123')
 }))
 
-var f = function() {
+var f = function () {
   $('#btn').off('click.my')
 }
 ```
@@ -492,11 +492,11 @@ var f = function() {
 多个事件：
 
 ``` js
-$('#btn').on('click.my click.other', (function(eventObj) {
+$('#btn').on('click.my click.other', (function (eventObj) {
   console.log('123')
 }))
 
-var f = function() {
+var f = function () {
   $('#btn').off('click.my')
 }
 ```
@@ -504,9 +504,9 @@ var f = function() {
 on()的另一种调用形式：
 
 ``` js
-$('#btn').on({'click': function(eventObj) {
+$('#btn').on({'click': function (eventObj) {
   console.log('click')
-  },'mousemove': function(eventObj) {
+  },'mousemove': function (eventObj) {
   console.log('move')
   }
 })
@@ -515,7 +515,7 @@ $('#btn').on({'click': function(eventObj) {
 off()的使用方式与 on()完全类似：
 
 ``` js
-var f = function(eventObj) {
+var f = function (eventObj) {
   console.log('Hello')
 }
 $('#btn').on('click', f)
@@ -527,8 +527,8 @@ $('#btn').off('click')
 事件的触发有两种方式，一是使用预定的“事件函数”（ .click()， .focus()），二是使用 trigger()或 triggerHandler()。
 
 ``` js
-$('#btn').on('click', function(eventObj) {
-  console.log("hello")
+$('#btn').on('click', function (eventObj) {
+  console.log('hello')
 })
 $('#btn').click()
 $('#btn').trigger('click')
@@ -537,8 +537,8 @@ $('#btn').trigger('click')
 trigger()与 triggerHandler()不同之处在于前面是触发事件，而后者是执行绑定函数。
 
 ``` js
-$('#btn').on('focus', function(event) {
-  console.log("Hello")
+$('#btn').on('focus', function (event) {
+  console.log('Hello')
 })
 $('#btn').triggerHandler('focus')
 ```
@@ -546,8 +546,8 @@ $('#btn').triggerHandler('focus')
 trigger()和 triggerHandler()也用于触发自定义事件。
 
 ``` js
-$('#btn').on('my', function(event) {
-  console.log("Hello")
+$('#btn').on('my', function (event) {
+  console.log('Hello')
 })
 $('#btn').triggerHandler('my')
 ```
@@ -555,7 +555,7 @@ $('#btn').triggerHandler('my')
 trigger()和 triggerHandler()触发事件时，可以带上参数：
 
 ``` js
-$('#btn').on('my', function(event) {
+$('#btn').on('my', function (event) {
   console.log(obj)
 })
 $('#btn').trigger('my', {a: 123})
@@ -648,7 +648,7 @@ jQuey.ajax(settings) settings是一个对象，里面包含了所有的配置项
 对于全局的所有AJAX请求而言，可以在任意节点上绑定到全局任意AJAX请求的每一个事件：
 
 ``` js
-$('#loading').ajaxStart(function() {
+$('#loading').ajaxStart(function () {
   $(this).show()
 })
 ```
@@ -689,12 +689,12 @@ $('form').submit(function () {
 Deferred对象是在jQuery1.5中引入的回调管理对象。其作用是把一堆函数按顺序放入一个调用链，然后根据状态来依次调用这些函数。AJAX的所有操作都是使用它来进行封装的。
 
 ``` js
-var obj = $.Deferred(function(a) {})
+var obj = $.Deferred(function (a) {})
 
 obj.done(function () {
   console.log('1')
 })
-obj.done(function() {
+obj.done(function () {
   console.log('2')
 })
 
@@ -727,7 +727,7 @@ var defer = $.ajax({
   dataType: 'json'
 })
 
-defer.done(function(data) {
+defer.done(function (data) {
   console.log(data)
 })
 ```
@@ -747,8 +747,8 @@ var defer_2 = $.ajax({
 })
   
 var new_defer = $.when(defer_1, defer_2)
-new_defer.done(function() {
-  console.log("hello")
+new_defer.done(function () {
+  console.log('hello')
 })
 ```
 
@@ -761,16 +761,16 @@ Deferred的回调函数的执行顺序与它们的添加顺序一致。
 then返回新的 defer这种形式，可以用于方便地实现异步函数的链式调用。
 
 ``` js
-defer.done(function() {
+defer.done(function () {
   return $.ajax({
     url: '/json',
     dataType: 'json',
-    success: function() {
-      console.log("inner");
+    success: function () {
+      console.log('inner');
     }
   })
 }).done(function () {
-  console.log("hello");
+  console.log('hello');
 })
 ```
 
@@ -778,7 +778,7 @@ defer.done(function() {
 
 这是两次 defer.done 的结果，第一个回调函数返回了一个新的 defer 没任何作用。
 
-如果换成 then 方法： defer.then(function(){...});
+如果换成 then 方法： defer.then(function (){...});
 
 它跟两次 defer.done 是不同的。 new_defer 会在 inner 那里的 defer 被触发时再被触发，所以输出结果是： inner， hello。
 
@@ -789,13 +789,13 @@ var defer = $.ajax({
   url: '/json',
   dataType: 'json'
 })
-defer.then(function(res) {
+defer.then(function (res) {
   console.log(res)
   return 1
-}).then(function(res) {
+}).then(function (res) {
   console.log(res)
   return 2
-}).then(function(res) {
+}).then(function (res) {
   console.log(res)
 })
 ```
@@ -808,11 +808,11 @@ defer.then(function(res) {
 
 ``` js
 var obj = $.Callbacks()
-obj.add(function() {
-  console.log("1")
+obj.add(function () {
+  console.log('1')
 })
-obj.add(function() {
-  console.log("2")
+obj.add(function () {
+  console.log('2')
 })
 obj.fire()
 ```

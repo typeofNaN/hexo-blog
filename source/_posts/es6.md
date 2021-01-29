@@ -143,7 +143,7 @@ const 并不意味着具有不可变性，只是保证用 const 声明的变量�
 箭头函数看起来会更加的简洁，因为它允许你使用更短的语法来书写函数：
 
 ``` js
-const myFunction = function() {
+const myFunction = function () {
   //...
 }
 ```
@@ -206,7 +206,7 @@ this 可能是一个很难掌握的概念，因为它会根据上下文而进行
 const car = {
   model: 'Fiesta',
   manufacturer: 'Ford',
-  fullName:function() {
+  fullName: function () {
     return `${this.manufacturer} ${this.model}`
   }
 }
@@ -241,7 +241,7 @@ link.addEventListener('click', () => {
 })
 
 const link = document.querySelector('#link')
-link.addEventListener('click', function() {
+link.addEventListener('click', function () {
   // this === link
 })
 ```

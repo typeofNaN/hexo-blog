@@ -25,7 +25,7 @@ const arr = [1, 1, 'true', 'true', true, true, 15, 15, false, false, undefined, 
 
 console.log(unique(arr))
 
-// [1, "true", true, 15, false, undefined, null, NaN, "NaN", 0, "a", {}, {}]
+// [1, 'true', true, 15, false, undefined, null, NaN, 'NaN', 0, 'a', {}, {}]
 // 不考虑兼容性，这种去重的方法代码最少。这种方法还无法去掉“{}”空对象，后面的高阶方法会添加去掉重复“{}”的方法。
 ```
 
@@ -48,7 +48,7 @@ const arr = [1, 1, 'true', 'true', true, true, 15, 15, false, false, undefined, 
 
 console.log(unique(arr))
 
-// [1, "true", 15, false, undefined, NaN, NaN, "NaN", "a", {…}, {…}]
+// [1, 'true', 15, false, undefined, NaN, NaN, 'NaN', 'a', {…}, {…}]
 // NaN和{}没有去重，两个null直接消失了
 // 双层循环，外层循环元素，内层循环时比较值。值相同时，则删去这个值。
 ```
@@ -77,7 +77,7 @@ const arr = [1, 1, 'true', 'true', true, true, 15, 15, false, false, undefined, 
 
 console.log(unique(arr))
 
-// [1, "true", true, 15, false, undefined, null, NaN, NaN, "NaN", 0, "a", {…}, {…}]
+// [1, 'true', true, 15, false, undefined, null, NaN, NaN, 'NaN', 0, 'a', {…}, {…}]
 // NaN、{}没有去重
 // 新建一个空的结果数组，for 循环原数组，判断结果数组是否存在当前元素，如果有相同的值则跳过，不相同则push进数组。
 ```
@@ -107,7 +107,7 @@ const arr = [1, 1, 'true', 'true', true, true, 15, 15, false, false, undefined, 
 
 console.log(unique(arr))
 
-// [0, 1, 15, "NaN", NaN, NaN, {…}, {…}, "a", false, null, true, "true", undefined]
+// [0, 1, 15, 'NaN', NaN, NaN, {…}, {…}, 'a', false, null, true, 'true', undefined]
 // NaN、{}没有去重
 // 利用sort()排序方法，然后根据排序后的结果进行遍历及相邻元素比对。
 ```
@@ -140,7 +140,7 @@ const arr = [1, 1, 'true', 'true', true, true, 15, 15, false, false, undefined, 
 
 console.log(unique(arr))
 
-// [1, "true", 15, false, undefined, null, NaN, 0, "a", {…}]
+// [1, 'true', 15, false, undefined, null, NaN, 0, 'a', {…}]
 // 两个true直接去掉了，NaN和{}去重
 ```
 
@@ -168,7 +168,7 @@ const arr = [1, 1, 'true', 'true', true, true, 15, 15, false, false, undefined, 
 
 console.log(unique(arr))
 
-// [1, "true", true, 15, false, undefined, null, NaN, "NaN", 0, "a", {…}, {…}]
+// [1, 'true', true, 15, false, undefined, null, NaN, 'NaN', 0, 'a', {…}, {…}]
 // {}没有去重
 ```
 
@@ -177,7 +177,7 @@ console.log(unique(arr))
 ``` js
 function unique(arr) {
   const obj = {}
-  return arr.filter(function(item, index, arr) {
+  return arr.filter(function (item, index, arr) {
     return obj.hasOwnProperty(typeof item + item) ? false : (obj[typeof item + item] = true)
   })
 }
@@ -186,7 +186,7 @@ const arr = [1, 1, 'true', 'true', true, true, 15, 15, false, false, undefined, 
 
 console.log(unique(arr))
 
-// [1, "true", true, 15, false, undefined, null, NaN, "NaN", 0, "a", {…}]
+// [1, 'true', true, 15, false, undefined, null, NaN, 'NaN', 0, 'a', {…}]
 // 所有的都去重了
 // 利用hasOwnProperty 判断是否存在对象属性
 ```
@@ -195,7 +195,7 @@ console.log(unique(arr))
 
 ``` js
 function unique(arr) {
-  return arr.filter(function(item, index, arr) {
+  return arr.filter(function (item, index, arr) {
     // 当前元素，在原始数组中的第一个索引 == 当前索引值，否则返回当前元素
     return arr.indexOf(item, 0) === index
   })
@@ -205,7 +205,7 @@ const arr = [1, 1, 'true', 'true', true, true, 15, 15, false, false, undefined, 
 
 console.log(unique(arr))
 
-// [1, "true", true, 15, false, undefined, null, "NaN", 0, "a", {…}, {…}]
+// [1, 'true', true, 15, false, undefined, null, 'NaN', 0, 'a', {…}, {…}]
 ```
 
 # 九、利用递归去重
@@ -215,7 +215,7 @@ function unique(arr) {
   const array = arr
   const len = array.length
 
-  array.sort(function(a, b) {    // 排序后更加方便去重
+  array.sort(function (a, b) {    // 排序后更加方便去重
     return a - b
   })
 
@@ -235,7 +235,7 @@ function unique(arr) {
 }
 const arr = [1, 1, 'true', 'true', true, true, 15, 15, false, false, undefined, undefined, null, null, NaN, NaN, 'NaN', 0, 0, 'a', 'a', {}, {}]
 console.log(unique(arr))
-// [1, "a", "true", true, 15, false, 1, {…}, null, NaN, NaN, "NaN", 0, "a", {…}, undefined]
+// [1, 'a', 'true', true, 15, false, 1, {…}, null, NaN, NaN, 'NaN', 0, 'a', {…}, undefined]
 ```
 
 # 十、利用Map数据结构去重
@@ -260,7 +260,7 @@ const arr = [1, 1, 'true', 'true', true, true, 15, 15, false, false, undefined, 
 
 console.log(unique(arr))
 
-// [1, "a", "true", true, 15, false, 1, {…}, null, NaN, NaN, "NaN", 0, "a", {…}, undefined]
+// [1, 'a', 'true', true, 15, false, 1, {…}, null, NaN, NaN, 'NaN', 0, 'a', {…}, undefined]
 // 创建一个空Map数据结构，遍历需要去重的数组，把数组的每一个元素作为key存到Map中。由于Map中不会出现相同的key值，所以最终得到的就是去重后的结果。
 ```
 
@@ -275,7 +275,7 @@ const arr = [1, 1, 'true', 'true', true, true, 15, 15, false, false, undefined, 
 
 console.log(unique(arr))
 
-// [1, "true", true, 15, false, undefined, null, NaN, "NaN", 0, "a", {…}, {…}]
+// [1, 'true', true, 15, false, undefined, null, NaN, 'NaN', 0, 'a', {…}, {…}]
 ```
 
 # 十二、[…new Set(arr)]

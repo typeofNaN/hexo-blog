@@ -323,9 +323,9 @@ let someObject = {
 console.log(someObject)
 
 //{
-//  cat: "Miaow",
-//  dog: "Woof",
-//  bird: "Peet peet"
+//  cat: 'Miaow',
+//  dog: 'Woof',
+//  bird: 'Peet peet'
 //}
 ```
 
@@ -416,9 +416,9 @@ for (const element of array1) {
   console.log(element)
 }
 
-// "a"
-// "b"
-// "c"
+// 'a'
+// 'b'
+// 'c'
 ```
 
 ## Symbol
@@ -434,8 +434,8 @@ const symbol1 = Symbol();
 const symbol2 = Symbol(42);
 const symbol3 = Symbol('foo');
 
-console.log(typeof symbol1); // "symbol"
-console.log(symbol3.toString()); // "Symbol(foo)"
+console.log(typeof symbol1); // 'symbol'
+console.log(symbol3.toString()); // 'Symbol(foo)'
 console.log(Symbol('foo') === Symbol('foo')); // false
 ```
 
@@ -530,15 +530,15 @@ var wm1 = new WeakMap()
 var wm2 = new WeakMap()
 var wm3 = new WeakMap()
 var o1 = {}
-var o2 = function() {}
+var o2 = function () {}
 var o3 = window
 
 wm1.set(o1, 37)
-wm1.set(o2, "azerty")
+wm1.set(o2, 'azerty')
 wm2.set(o1, o2) // value可以是任意值,包括一个对象
 wm2.set(o3, undefined)
 wm2.set(wm1, wm2) // 键和值可以是任意对象,甚至另外一个WeakMap对象
-wm1.get(o2) // "azerty"
+wm1.get(o2) // 'azerty'
 wm2.get(o2) // undefined,wm2中没有o2这个键
 wm2.get(o3) // undefined,值就是undefined
 
@@ -607,10 +607,10 @@ var s = 'aaa_aa_a'
 var r1 = /a+/g
 var r2 = /a+/y
 
-r1.exec(s) // ["aaa"]
-r2.exec(s) // ["aaa"]
+r1.exec(s) // ['aaa']
+r2.exec(s) // ['aaa']
 
-r1.exec(s) // ["aa"]
+r1.exec(s) // ['aa']
 r2.exec(s) // null
 ```
 
@@ -708,7 +708,7 @@ RE_TWICE.test('abc!ab') // false
 * Array.prototype.from：转换具有Iterator接口的数据结构为真正数组，返回新数组。
 
 ``` js
-console.log(Array.from('foo')) // ["f", "o", "o"]
+console.log(Array.from('foo')) // ['f', 'o', 'o']
 console.log(Array.from([1, 2, 3], x => x + x)) // [2, 4, 6]
 ```
 
@@ -727,9 +727,9 @@ Array(1, 2, 3)    // [1, 2, 3]
 ``` js
 const array1 = ['a', 'b', 'c', 'd', 'e']
 
-console.log(array1.copyWithin(0, 3, 4)) // ["d", "b", "c", "d", "e"]
+console.log(array1.copyWithin(0, 3, 4)) // ['d', 'b', 'c', 'd', 'e']
 
-console.log(array1.copyWithin(1, 3)) // ["d", "d", "e", "d", "e"]
+console.log(array1.copyWithin(1, 3)) // ['d', 'd', 'e', 'd', 'e']
 ```
 
 * Array.prototype.find()：返回第一个符合条件的成员
@@ -800,17 +800,17 @@ for (const key of iterator) {
 const array1 = ['a', 'b', 'c']
 const iterator = array1.entries()
 
-console.log(iterator.next().value) // [0, "a"]
-console.log(iterator.next().value) // [1, "b"]
+console.log(iterator.next().value) // [0, 'a']
+console.log(iterator.next().value) // [1, 'b']
 ```
 
 * 数组空位：ES6明确将数组空位转为undefined或者empty
 
 ``` js
-Array.from(['a',,'b']) // [ "a", undefined, "b" ]
-[...['a',,'b']] // [ "a", undefined, "b" ]
+Array.from(['a',,'b']) // [ 'a', undefined, 'b' ]
+[...['a',,'b']] // [ 'a', undefined, 'b' ]
 Array(3) //  [empty × 3]
-[,'a'] // [empty, "a"]
+[,'a'] // [empty, 'a']
 ```
 
 # ES7(ES2016)
@@ -922,7 +922,7 @@ const object1 = {
   b: 42,
   c: false
 }
-console.log(Object.values(object1)) // ["somestring", 42, false]
+console.log(Object.values(object1)) // ['somestring', 42, false]
 ```
 
 ## Object.entries()
@@ -941,8 +941,8 @@ for (let [key, value] of Object.entries(object1)) {
   console.log(`${key}: ${value}`)
 }
 
-// "a: somestring"
-// "b: 42"
+// 'a: somestring'
+// 'b: 42'
 ```
 
 ## padStart()
@@ -953,12 +953,12 @@ padStart() 方法用另一个字符串填充当前字符串(重复，如果需�
 
 ``` js
 const str1 = '5'
-console.log(str1.padStart(2, '0')) // "05"
+console.log(str1.padStart(2, '0')) // '05'
 
 const fullNumber = '2034399002125581'
 const last4Digits = fullNumber.slice(-4)
 const maskedNumber = last4Digits.padStart(fullNumber.length, '*')
-console.log(maskedNumber) // "************5581"
+console.log(maskedNumber) // '************5581'
 ```
 
 ## padEnd()
@@ -1115,7 +1115,7 @@ async function* asyncGenerator() {
   }
 }
 
-(async function() {
+(async function () {
   for await (num of asyncGenerator()) {
     console.log(num)
   }
@@ -1133,10 +1133,10 @@ ES9开始，模板字符串允许嵌套支持常见转义序列，移除对ECMAS
 
 ``` js
 function latex(str) {
- return { "cooked": str[0], "raw": str.raw[0] }
+ return { 'cooked': str[0], 'raw': str.raw[0] }
 }
 
-latex`\unicode` // { cooked: undefined, raw: "\\unicode" }
+latex`\unicode` // { cooked: undefined, raw: '\\unicode' }
 ```
 
 ## 正则表达式反向(lookbehind)断言
@@ -1155,13 +1155,13 @@ latex`\unicode` // { cooked: undefined, raw: "\\unicode" }
 在ES9之前，JavaScript 正则表达式，只支持正向断言。正向断言的意思是：当前位置后面的字符串应该满足断言，但是并不捕获。例子如下：
 
 ``` js
-'fishHeadfishTail'.match(/fish(?=Head)/g) // ["fish"]
+'fishHeadfishTail'.match(/fish(?=Head)/g) // ['fish']
 ```
 
 反向断言和正向断言的行为一样，只是方向相反。例子如下：
 
 ``` js
-'abc123'.match(/(?<=(\d+)(\d+))$/) //  ["", "1", "23", index: 6, input: "abc123", groups: undefined]
+'abc123'.match(/(?<=(\d+)(\d+))$/) //  ['', '1', '23', index: 6, input: 'abc123', groups: undefined]
 ```
 
 ## 正则表达式 Unicode 转义
@@ -1227,7 +1227,7 @@ regex.test('\u{0085}') // true
 const re = /foo.bar/s  //  等价于 const re = new RegExp('foo.bar', 's')
 re.test('foo\nbar')    // true
 re.dotAll      // true
-re.flags       // "s"
+re.flags       // 's'
 ```
 
 ## 正则表达式命名捕获组
@@ -1269,10 +1269,10 @@ var obj1 = { foo: 'bar', x: 42 }
 var obj2 = { foo: 'baz', y: 13 }
 
 var clonedObj = { ...obj1 }
-// 克隆后的对象: { foo: "bar", x: 42 }
+// 克隆后的对象: { foo: 'bar', x: 42 }
 
 var mergedObj = { ...obj1, ...obj2 }
-// 合并后的对象: { foo: "baz", x: 42, y: 13 }
+// 合并后的对象: { foo: 'baz', x: 42, y: 13 }
 ```
 
 上面便是一个简便的浅拷贝。这里有一点小提示，就是Object.assign() 函数会触发 setters，而展开语法则不会。所以不能替换也不能模拟Object.assign() 。
@@ -1352,9 +1352,9 @@ console.log(Str.trimRight()) // '   Hello world!'
 在某些引擎里（例如Chrome），有以下的等式：
 
 ``` js
-String.prototype.trimLeft.name === "trimStart"
+String.prototype.trimLeft.name === 'trimStart'
 
-String.prototype.trimRight.name === "trimEnd"
+String.prototype.trimRight.name === 'trimEnd'
 ```
 
 ## Object.fromEntries()
@@ -1371,7 +1371,7 @@ const entries = new Map([
 
 const obj = Object.fromEntries(entries)
 
-console.log(obj) // Object { foo: "bar", baz: 42 }
+console.log(obj) // Object { foo: 'bar', baz: 42 }
 ```
 
 ## Symbol.prototype.description
@@ -1379,18 +1379,18 @@ console.log(obj) // Object { foo: "bar", baz: 42 }
 description 是一个只读属性，它会返回Symbol对象的可选描述的字符串。与 Symbol.prototype.toString() 不同的是它不会包含Symbol()的字符串。例子如下：
 
 ``` js
-Symbol('desc').toString()   // "Symbol(desc)"
-Symbol('desc').description  // "desc"
-Symbol('').description      // ""
+Symbol('desc').toString()   // 'Symbol(desc)'
+Symbol('desc').description  // 'desc'
+Symbol('').description      // ''
 Symbol().description        // undefined
 
 // 具名 symbols
-Symbol.iterator.toString()  // "Symbol(Symbol.iterator)"
-Symbol.iterator.description // "Symbol.iterator"
+Symbol.iterator.toString()  // 'Symbol(Symbol.iterator)'
+Symbol.iterator.description // 'Symbol.iterator'
 
 //全局 symbols
-Symbol.for('foo').toString()  // "Symbol(foo)"
-Symbol.for('foo').description // "foo"
+Symbol.for('foo').toString()  // 'Symbol(foo)'
+Symbol.for('foo').description // 'foo'
 ```
 
 ## String.prototype.matchAll
@@ -1416,11 +1416,11 @@ function sum(a, b) {
 }
 
 console.log(sum.toString())
-// "function sum(a, b) {
+// 'function sum(a, b) {
 //    return a + b
-//  }"
+//  }'
 
-console.log(Math.abs.toString()) // "function abs() { [native code] }"
+console.log(Math.abs.toString()) // 'function abs() { [native code] }'
 ```
 
 ## try-catch
@@ -1496,9 +1496,9 @@ globalThis === this // true
 所以我们有以下例子：
 
 ``` js
-const main = document.querySelector("main")
-for (const link of document.querySelectorAll("nav > a")) {
-  link.addEventListener("click", e => {
+const main = document.querySelector('main')
+for (const link of document.querySelectorAll('nav > a')) {
+  link.addEventListener('click', e => {
     e.preventDefault()
 
     import('/modules/my-module.js')

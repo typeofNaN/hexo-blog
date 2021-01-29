@@ -102,7 +102,7 @@ $ git config global user.email "YourEail"
 配置ssh，Git bash中输入命令：
 
 ```
-$ ssh-keygen -t rsa -C "youremail@example.com
+$ ssh-keygen -t rsa -C "youremail@example.com"
 ```
 
 一路回车，就能在你的电脑中产生ssh，ssh文件默认在:C:User/Administrator/.ssh文件夹下，打开.ssh文件夹下的id_rsa.pub文件，将里面的内容复制；再打开github的setting：
