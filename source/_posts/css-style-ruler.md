@@ -64,7 +64,7 @@ position: absolute;
 
 ## 状态类
 
-* display: block | none | inline | compact | marker | inline-table | list-item | run-in | table | table-caption | table-cell | table-column | table-column-group | table-footer-group | table-header-group | table-row | table-row-grou
+* display: block | none | inline | compact | marker | inline-table | list-item | run-in | table | table-caption | table-cell | table-column | table-column-group | table-footer-group | table-header-group | table-row | table-row-group
 * visibility: inherit | visible | collapse | hidden  
 * float: none | left | right  
 * clear: none | left | right | both
@@ -95,7 +95,7 @@ position: absolute;
 
 ## 边框类
 
-### maigin
+### margin
 
 * margin: auto | length
 * margin-top: auto | length
@@ -165,7 +165,7 @@ position: absolute;
 ## 字体类
 
 * font: caption | icon | menu | message-box | small-caption | status-bar
-* font-family: ncursive | fantasy | monospace | serif | sans-serif
+* font-family: fantasy | serif | sans-serif
 * font-size: xx-small | x-small | small | medium | large | x-large | xx-large | larger | smaller | length
 * line-height: normal | length
 * font-weight: normal | bold | bolder | lighter | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900  

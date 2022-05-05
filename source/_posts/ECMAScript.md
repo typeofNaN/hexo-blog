@@ -298,7 +298,7 @@ var array = [...obj] // TypeError: obj is not iterable
 ``` js
 var cat = 'Miaow'
 var dog = 'Woof'
-var bird = 'Peet peet'
+var bird = 'Pet pet'
 
 var someObject = {
   cat: cat,
@@ -312,7 +312,7 @@ var someObject = {
 ``` js
 let cat = 'Miaow'
 let dog = 'Woof'
-let bird = 'Peet peet'
+let bird = 'Pet pet'
 
 let someObject = {
   cat,
@@ -325,7 +325,7 @@ console.log(someObject)
 //{
 //  cat: 'Miaow',
 //  dog: 'Woof',
-//  bird: 'Peet peet'
+//  bird: 'Pet pet'
 //}
 ```
 
@@ -359,8 +359,8 @@ new Promise((resolve, reject) => {
   resolve('success')
 })
 
-console.log('finifsh')
-// new Promise -> finifsh
+console.log('finish')
+// new Promise -> finish
 ```
 
 Promise 实现了链式调用，也就是说每次调用 then 之后返回的都是一个 Promise，并且是一个全新的 Promise，原因也是因为状态不可变。如果你在 then 中 使用了 return，那么 return 的值会被 Promise.resolve() 包装
@@ -918,11 +918,11 @@ Object.values()方法返回一个给定对象自身的所有可枚举属性值�
 
 ``` js
 const object1 = {
-  a: 'somestring',
+  a: 'str',
   b: 42,
   c: false
 }
-console.log(Object.values(object1)) // ['somestring', 42, false]
+console.log(Object.values(object1)) // ['str', 42, false]
 ```
 
 ## Object.entries()
@@ -933,7 +933,7 @@ Object.entries()方法返回一个给定对象自身可枚举属性的键值对�
 
 ``` js
 const object1 = {
-  a: 'somestring',
+  a: 'str',
   b: 42
 }
 
@@ -941,7 +941,7 @@ for (let [key, value] of Object.entries(object1)) {
   console.log(`${key}: ${value}`)
 }
 
-// 'a: somestring'
+// 'a: str'
 // 'b: 42'
 ```
 
@@ -1155,7 +1155,7 @@ latex`\unicode` // { cooked: undefined, raw: '\\unicode' }
 在ES9之前，JavaScript 正则表达式，只支持正向断言。正向断言的意思是：当前位置后面的字符串应该满足断言，但是并不捕获。例子如下：
 
 ``` js
-'fishHeadfishTail'.match(/fish(?=Head)/g) // ['fish']
+'fishHeadFishTail'.match(/fish(?=Head)/g) // ['fish']
 ```
 
 反向断言和正向断言的行为一样，只是方向相反。例子如下：

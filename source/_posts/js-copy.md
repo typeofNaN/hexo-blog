@@ -17,19 +17,19 @@ tags:
 
 ``` html
 <script type="text/javascript">
-function copyUrl2() {
-  var Url2 = document.getElementById('biao1')
-  Url2.select()  // 选择对象
+function copy() {
+  var dom = document.getElementById('id')
+  dom.select()  // 选择对象
   document.execCommand('Copy')  // 执行浏览器复制命令
   alert('已复制好，可贴粘。')
 }
 </script>
 
-<textarea cols="20" rows="10" id="biao1">用户定义的代码区域</textarea>
-<input type="button" onClick="copyUrl2()" value="点击复制代码" />
+<textarea cols="20" rows="10" id="id">用户定义的代码区域</textarea>
+<input type="button" onClick="copy()" value="点击复制代码" />
 ```
 
-原理：点击按钮的时候触发copyUrl2函数，根据biao1 ID选中对象，然后在根据execCommand复制选中内容，所以此时选择的内容必须是可视的，也就是说不能是隐藏的文本域。
+原理：点击按钮的时候触发copy函数，根据id ID选中对象，然后在根据execCommand复制选中内容，所以此时选择的内容必须是可视的，也就是说不能是隐藏的文本域。
 
 # 2、复制专题地址和 url 地址，传给 QQ/MSN 上的好友
 
@@ -41,7 +41,7 @@ function copyUrl2() {
   <title>Js复制代码</title>
 </head>
 <body>
-  <input type="button" name="anniu1" onClick='copyToClipBoard()' value="复制专题地址和url地址，传给QQ/MSN上的好友">
+  <input type="button" name="btn" onClick='copyToClipBoard()' value="复制专题地址和url地址，传给QQ/MSN上的好友">
   <script language="javascript">
   function copyToClipBoard() {
     var clipBoardContent = ''
@@ -57,7 +57,7 @@ function copyUrl2() {
 # 3、直接复制 url
 
 ``` html
-<input type="button" name="anniu2" onClick='copyUrl()' value="复制URL地址">
+<input type="button" name="btn" onClick='copyUrl()' value="复制URL地址">
 
 <script language="javascript">
 function copyUrl() {
@@ -87,15 +87,15 @@ function oCopy(obj) {
 ``` html
 <script language="javascript">
 function CopyUrl(target) {
-  target.value = myimg.value
+  target.value = myImg.value
   target.select() 
-  js = myimg.createTextRange() 
+  js = myImg.createTextRange() 
   js.execCommand('Copy')
   alert('复制成功!')
 }
 
 function AddImg(target) {
-  target.value = '[IMG]' + myimg.value + '[/ img]'
+  target.value = '[IMG]' + myImg.value + '[/ img]'
   target.select()
   js = target.createTextRange() 
   js.execCommand('Copy')
@@ -148,14 +148,14 @@ function copyToClipboard(txt) {
     var str = new Object()
     var len = new Object()
     var str = Components.classes['@mozilla.org/supports-string;1'].createInstance(Components.interfaces.nsISupportsString)
-    var copytext = txt
-    str.data = copytext
-    trans.setTransferData('text/unicode', str, copytext.length * 2)
-    var clipid = Components.interfaces.nsIClipboard
+    var copyText = txt
+    str.data = copyText
+    trans.setTransferData('text/unicode', str, copyText.length * 2)
+    var clipId = Components.interfaces.nsIClipboard
     if (!clip) {
       return false
     }
-    clip.setData(trans, null, clipid.kGlobalClipboard)
+    clip.setData(trans, null, clipId.kGlobalClipboard)
     alert('复制成功！')
   }
 }

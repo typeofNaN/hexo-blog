@@ -33,7 +33,7 @@ tags:
 ## 安装Git
 
 * Git:[下载地址](https://gitforwindows.org/)
-* 参考文章:[《W3Cschool上Git教程之Git安装配置》](https://www.w3cschool.cn/git/git-install-setup.html)
+* 参考文章:[《W3C school上Git教程之Git安装配置》](https://www.w3cschool.cn/git/git-install-setup.html)
 
 ## 安装NodeJs
 
@@ -42,7 +42,7 @@ Hexo是基于Node.js环境的静态博客，里面的npm工具很有用啊，所
 安装步骤：反正下载好msi文件后，双击打开安装，也是一路next，不过在Custom Setup这一步记得选 Add to PATH ,这样你就不用自己去配置电脑上环境变量了，装完在按 win + r 快捷键调出运行，然后输入cmd确定，在cmd中输入path可以看到你的node是否配置在里面（环境变量），没有的话你就自由发挥吧！
 
 * NodeJs[下载地址](https://nodejs.org/en/)(说明：LTS为长期支持版，Current为当前最新版)
-* 参考文章:[《W3Cschool上Node.js教程之Node.js安装配置》](https://www.w3cschool.cn/nodejs/nodejs-install-setup.html)
+* 参考文章:[《W3C school上Node.js教程之Node.js安装配置》](https://www.w3cschool.cn/nodejs/nodejs-install-setup.html)
 
 ## 安装hexo
 
@@ -83,20 +83,20 @@ $ hexo init
 
 没账号的先创建一个github账号，有账号的看下面。[注册传送门](https://github.com)
 
-创建一个repo，名称为yourname.github.io, 其中yourname是你的github名称，按照这个规则创建才有用，如下：
+创建一个repo，名称为YourName.github.io, 其中YourName是你的github名称，按照这个规则创建才有用，如下：
 
 {% asset_img b2.jpg 创建仓库 %}
 
 {% asset_img b3.jpg 为仓库取名 %}
 
-回到gitbash中，配置github账户信息（YourName和YourEail都替换成你自己的）：
+回到git bash中，配置github账户信息（YourName和YourEmail都替换成你自己的）：
 
 ```
 $ git config global user.name "YourName"
 ```
 
 ```
-$ git config global user.email "YourEail"
+$ git config global user.email "YourEmail"
 ```
 
 配置ssh，Git bash中输入命令：
@@ -180,7 +180,7 @@ $ hexo g
 $ hexo d
 ```
 
-注意deploy的过程中(即hexo d)可能要输入你的github上的username及passward
+注意deploy的过程中(即hexo d)可能要输入你的github上的userName及password
 
 一切都ok之后，在浏览器中输入[http://yourgithubname.github.io](#)就可以看到你的个人博客，飞起来！！！
 
@@ -198,7 +198,7 @@ $ hexo d
 
 {% asset_img b6.png 配置域名 %}
 
-其中ip地址为你的github的地址，可在cmd中ping一下就能看到(ping yourname.github.io)：
+其中ip地址为你的github的地址，可在cmd中ping一下就能看到(ping yourName.github.io)：
 
 {% asset_img b7.png ping %}
 

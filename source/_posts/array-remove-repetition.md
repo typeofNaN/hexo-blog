@@ -92,15 +92,15 @@ function unique(arr) {
   }
 
   arr = arr.sort()
-  const arrry = [arr[0]]
+  const array = [arr[0]]
 
   for (let i = 1; i < arr.length; i++) {
     if (arr[i] !== arr[i - 1]) {
-      arrry.push(arr[i])
+      array.push(arr[i])
     }
   }
 
-  return arrry
+  return array
 }
 
 const arr = [1, 1, 'true', 'true', true, true, 15, 15, false, false, undefined, undefined, null, null, NaN, NaN, 'NaN', 0, 0, 'a', 'a', {}, {}]
@@ -121,19 +121,19 @@ function unique(arr) {
     return
   }
 
-  const arrry = []
+  const array = []
   const obj = {}
 
   for (let i = 0; i < arr.length; i++) {
     if (!obj[arr[i]]) {
-      arrry.push(arr[i])
+      array.push(arr[i])
       obj[arr[i]] = 1
     } else {
       obj[arr[i]]++
     }
   }
 
-  return arrry
+  return array
 }
 
 const arr = [1, 1, 'true', 'true', true, true, 15, 15, false, false, undefined, undefined, null, null, NaN, NaN, 'NaN', 0, 0, 'a', 'a', {}, {}]
@@ -241,7 +241,7 @@ console.log(unique(arr))
 # 十、利用Map数据结构去重
 
 ``` js
-function arrayNonRepeatfy(arr) {
+function unique(arr) {
   const map = new Map()
   const array = []    // 数组用于返回结果
 

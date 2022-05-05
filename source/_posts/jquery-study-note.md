@@ -81,7 +81,7 @@ $(function () {
 * :checked 选择所有被选中的元素
 * :selected 被选择的元素
 * :disabled/:enabled 选择被禁用/未禁用的元素
-* :hidden 隐藏元素，不仅是 [type="hidden"]，还有 displa:none
+* :hidden 隐藏元素，不仅是 [type="hidden"]，还有 display:none
 * :visible 可见控件， visibility:hidden和 opacity:0同样被认为是可见
 * :input:button:checkbox:file:image:password:radio:reset:submit:text 具体控件，图像控件是 [type="image"]
 
@@ -185,14 +185,14 @@ $('img').toggleClass(function (index, className, isTrue) {
 * .attr() 获取或设置一个属性值
 
 ``` js
-// $('#greatphoto').attr('alt') //获取属性`
-$('#greatphoto').attr('alt', 'Shenzhen Brush Seller') //设置属性`
+// $('#greatPhoto').attr('alt') //获取属性`
+$('#greatPhoto').attr('alt', 'ShenZhen Brush Seller') //设置属性`
 
 // 同时设置多个属性
-$('#greatphoto').attr({alt: 'Shen Brush Seller',title: 'photo by Kelly Clark'})
+$('#greatPhoto').attr({alt: 'Shen Brush Seller',title: 'photo by Kelly Clark'})
 
 //设置属性为函数返回值，函数的上下文为当前元素
-$('#greatphoto').attr('title', function (i, val) {
+$('#greatPhoto').attr('title', function (i, val) {
   return val + ' - photo by Kelly Clark'
 })
 ```
@@ -259,10 +259,10 @@ $('.inner').append('<p>Test</p>')
 参数可以有多种形式：
 
 ``` js
-var $newdiv1 = $('<div id="object1"/>'),
-  newdiv2 = document.createElement('div'),
-  existingdiv1 = document.getElementById('foo')
-$('body').append($newdiv1, [newdiv2, existingdiv1])
+var $newDiv1 = $('<div id="object1"/>'),
+  newDiv2 = document.createElement('div'),
+  existingDiv1 = document.getElementById('foo')
+$('body').append($newDiv1, [newDiv2, existingDiv1])
 ```
 
 ### 兄弟节点
@@ -355,7 +355,7 @@ $.map(dimensions, function (value, key) {
 * $.extend() 合并对象，第一个参数表示是否进行递归深入
 
 ``` js
-varobject = $.extend({}, object1, object2)
+var object = $.extend({}, object1, object2)
 var object = $.extend(true, {}, object1, object2)
 ```
 
@@ -392,7 +392,7 @@ var xml = "<rss version='2.0'><channel><title>RSS Title</title></channel></rss>"
 
 * $.trim() 去头去尾 $.trim(str)
 * $.type() 判断参数的类型
-* $.unique() 遍历后去重。 $.unique(arraty)
+* $.unique() 遍历后去重。 $.unique(array)
 
 # 上下文绑定
 

@@ -55,7 +55,7 @@ Vue.use(Directives)
 * 输入框防抖指令 **v-debounce**
 * 禁止表情及特殊字符 **v-emoji**
 * 图片懒加载 **v-LazyLoad**
-* 权限校验指令 **v-premission**
+* 权限校验指令 **v-permission**
 * 实现页面水印 **v-waterMarker**
 * 拖拽指令 **v-draggable**
 
