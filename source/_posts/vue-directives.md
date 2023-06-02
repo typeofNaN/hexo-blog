@@ -54,7 +54,7 @@ Vue.use(Directives)
 * 长按指令 **v-longpress**
 * 输入框防抖指令 **v-debounce**
 * 禁止表情及特殊字符 **v-emoji**
-* 图片懒加载 **v-LazyLoad**
+* 图片懒加载 **v-lazyload**
 * 权限校验指令 **v-permission**
 * 实现页面水印 **v-waterMarker**
 * 拖拽指令 **v-draggable**
@@ -367,7 +367,7 @@ export default emoji
 </template>
 ```
 
-# v-LazyLoad
+# v-lazyload
 
 ## 背景
 
@@ -390,19 +390,19 @@ export default emoji
 下面封装一个懒加载指令兼容两种方法，判断浏览器是否支持 IntersectionObserver API，如果支持就使用 IntersectionObserver 实现懒加载，否则则使用 srcoll 事件监听 + 节流的方法实现。
 
 ``` js
-const LazyLoad = {
+const lazyload = {
   // install方法
   install(Vue, options) {
     const defaultSrc = options.default
-    Vue.directive('lazy', {
+    Vue.directive('lazyload', {
       bind(el, binding) {
-        LazyLoad.init(el, binding.value, defaultSrc)
+        lazyload.init(el, binding.value, defaultSrc)
       },
       inserted(el) {
         if (IntersectionObserver) {
-          LazyLoad.observe(el)
+          lazyload.observe(el)
         } else {
-          LazyLoad.listenerScroll(el)
+          lazyload.listenerScroll(el)
         }
       },
     })
@@ -427,8 +427,8 @@ const LazyLoad = {
   },
   // 监听scroll事件
   listenerScroll(el) {
-    const handler = LazyLoad.throttle(LazyLoad.load, 300)
-    LazyLoad.load(el)
+    const handler = lazyload.throttle(lazyload.load, 300)
+    lazyload.load(el)
     window.addEventListener('scroll', () => {
       handler(el)
     })
@@ -472,15 +472,15 @@ const LazyLoad = {
   }
 }
 
-export default LazyLoad
+export default lazyload
 ```
 
 ## 使用
 
-将组件内 标签的 src 换成 v-LazyLoad
+将组件内 标签的 src 换成 v-lazyload
 
 ``` html
-<img v-LazyLoad="xxx.jpg" />
+<img v-lazyload="xxx.jpg" />
 ```
 
 # v-permission
@@ -541,7 +541,7 @@ export default permission
 </div>
 ```
 
-# vue-waterMarker
+# v-waterMarker
 
 ## 需求
 
