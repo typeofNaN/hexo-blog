@@ -337,6 +337,13 @@ font:
     family:
     size:
 
+# Add copy button on codeblock
+codeblock:
+  border_radius:
+  copy_button:
+    enable: true
+    # Show text copy result
+    show_result: true
 
 # ---------------------------------------------------------------
 # Third Party Services Settings
