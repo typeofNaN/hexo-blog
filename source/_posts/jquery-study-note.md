@@ -24,7 +24,7 @@ $(document).ready(function () {
 })
 ```
 
-$是在jQuery中使用的变量名，可以使用 jQuery.noConflict()避免冲突，它的返回值就是jQuery对象。
+'$'是在jQuery中使用的变量名，可以使用 jQuery.noConflict()避免冲突，它的返回值就是jQuery对象。
 
 ``` js
   jQuery.noConflict()
@@ -186,10 +186,10 @@ $('img').toggleClass(function (index, className, isTrue) {
 
 ``` js
 // $('#greatPhoto').attr('alt') //获取属性`
-$('#greatPhoto').attr('alt', 'ShenZhen Brush Seller') //设置属性`
+$('#greatPhoto').attr('alt', 'Brush Seller') //设置属性`
 
 // 同时设置多个属性
-$('#greatPhoto').attr({alt: 'Shen Brush Seller',title: 'photo by Kelly Clark'})
+$('#greatPhoto').attr({alt: 'Brush Seller',title: 'photo by Kelly Clark'})
 
 //设置属性为函数返回值，函数的上下文为当前元素
 $('#greatPhoto').attr('title', function (i, val) {
@@ -239,7 +239,7 @@ $('body').width(function (index, value) {
 ```
 
 * .innerWidth().innerHeight().outerHeight().outerWidth() 元素的其他尺寸值
-* .scrollLefgt().scrollTop() 获取或设置滚动条的位置
+* .scrollLeft().scrollTop() 获取或设置滚动条的位置
 * .offset().position() 获取元素的坐标。 offset是相对于 document， position是相对于父级元素
 
 ## 结构控制
@@ -504,12 +504,16 @@ var f = function () {
 on()的另一种调用形式：
 
 ``` js
-$('#btn').on({'click': function (eventObj) {
-  console.log('click')
-  },'mousemove': function (eventObj) {
-  console.log('move')
+$('#btn').on(
+  {
+    'click': function (eventObj) {
+      console.log('click')
+    },
+    'mousemove': function (eventObj) {
+      console.log('move')
+    }
   }
-})
+)
 ```
 
 off()的使用方式与 on()完全类似：
@@ -605,7 +609,7 @@ $('#btn').trigger('my', {a: 123})
 * event.relatedTarget 相关的节点，主要用于一些转换式的事件。比如鼠标移入，表示它从哪个节点来的
 * event.which 标明哪个按钮触发了事件，鼠标和键盘的键标识统一在这个属性中
 * event.preventDefault()event.isDefaultPrevented() 禁止默认行为
-* event.stopImmediateProgation()event.isImmediateProgationStopped() 不仅禁止冒泡。还终止绑定函数链的继续进行
+* event.stopImmediatePropagation()event.isImmediatePropagationStopped() 不仅禁止冒泡。还终止绑定函数链的继续进行
 * event.stopPropagation()，event.isPropagationStopped() 禁止冒泡
 * event.pageX，event.pageY 事件触发时相对于 document的鼠标位置
 * event.namespace 事件触发时的名字空间，比如 trigger('click.namespace')
@@ -622,7 +626,7 @@ $('#btn').trigger('my', {a: 123})
 
 jQuery的AJAX，核心的请求处理函数只有一个，就是 $.ajax()，然后就是一个简单的上层函数。
 
-$.ajax() 的基本使用形式是：
+jQuey.ajax() 的基本使用形式是：
 
 jQuey.ajax(settings) settings是一个对象，里面包含了所有的配置项。
 
@@ -819,7 +823,7 @@ obj.fire()
 
 `Callbacks`对象的初始化支持一组控制参数：
 
-$.Callbacks(flags) 初始化一个回调管理对象。 flags是空格分割的多个字符串，以定义此回调对象的行为：
+jQuey.Callbacks(flags) 初始化一个回调管理对象。 flags是空格分割的多个字符串，以定义此回调对象的行为：
 
 * once 回调链只能被激发一次
 * memory 回调链被激发后，新添加的函数被立即执行

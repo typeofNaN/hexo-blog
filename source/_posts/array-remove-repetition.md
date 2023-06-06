@@ -5,7 +5,7 @@ categories: 技术文章
 tags:
     - js
     - array
-    - repetition
+    - unique
 ---
 
 # 前言

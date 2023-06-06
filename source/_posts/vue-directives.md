@@ -298,14 +298,14 @@ export default {
   <input
     v-model="note"
     type="text"
-    @change="vaidateEmoji"
+    @change="validateEmoji"
   />
 </template>
 
 <script>
 export default {
   methods: {
-    vaidateEmoji() {
+    validateEmoji() {
       const reg = /[^u4E00-u9FA5|d|a-zA-Z|rns,.?!，。？！…—&$=()-+/*{}[]]|s/g
       this.note = this.note.replace(reg, '')
     }
@@ -332,7 +332,7 @@ const trigger = (el, type) => {
 }
 
 const emoji = {
-  bind(el, binding, vnode) {
+  bind(el, binding, vNode) {
     // 正则规则可根据需求自定义
     var regRule = /[^u4E00-u9FA5|d|a-zA-Z|rns,.?!，。？！…—&$=()-+/*{}[]]|s/g
     let $inp = findEle(el, 'input')
@@ -385,7 +385,7 @@ export default emoji
 
 如果到了就设置图片的 src 属性，否则显示默认图片
 
-图片懒加载有两种方式可以实现，一是绑定 srcoll 事件进行监听，二是使用 IntersectionObserver 判断图片是否到了可视区域，但是有浏览器兼容性问题。
+图片懒加载有两种方式可以实现，一是绑定 scroll 事件进行监听，二是使用 IntersectionObserver 判断图片是否到了可视区域，但是有浏览器兼容性问题。
 
 下面封装一个懒加载指令兼容两种方法，判断浏览器是否支持 IntersectionObserver API，如果支持就使用 IntersectionObserver 实现懒加载，否则则使用 srcoll 事件监听 + 节流的方法实现。
 
@@ -451,13 +451,13 @@ const lazyload = {
     let timer
     let prevTime
     return function (...args) {
-      const currTime = Date.now()
+      const currentTime = Date.now()
       const context = this
-      if (!prevTime) prevTime = currTime
+      if (!prevTime) prevTime = currentTime
       clearTimeout(timer)
 
-      if (currTime - prevTime > delay) {
-        prevTime = currTime
+      if (currentTime - prevTime > delay) {
+        prevTime = currentTime
         fn.apply(context, args)
         clearTimeout(timer)
         return
@@ -533,7 +533,7 @@ export default permission
 给 v-permission 赋值判断即可
 
 ``` html
-<div class="btns">
+<div class="btn">
   <!-- 显示 -->
   <button v-permission="'1'">权限按钮1</button>
   <!-- 不显示 -->
@@ -609,11 +609,11 @@ const draggable = {
   inserted: function (el) {
     el.style.cursor = 'move'
     el.onmousedown = function (e) {
-      let disx = e.pageX - el.offsetLeft
-      let disy = e.pageY - el.offsetTop
+      let disX = e.pageX - el.offsetLeft
+      let disY = e.pageY - el.offsetTop
       document.onmousemove = function (e) {
-        let x = e.pageX - disx
-        let y = e.pageY - disy
+        let x = e.pageX - disX
+        let y = e.pageY - disY
         let maxX = document.body.clientWidth - parseInt(window.getComputedStyle(el).width)
         let maxY = document.body.clientHeight - parseInt(window.getComputedStyle(el).height)
         if (x < 0) {

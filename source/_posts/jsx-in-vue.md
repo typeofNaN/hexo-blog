@@ -50,7 +50,7 @@ export default Dashboard
 在JSX中使用单个括号来绑定文本插值：
 
 ``` html
-<span>Message: {this.messsage}</span>
+<span>Message: {this.message}</span>
 <!-- 类似于v-html -->
 <div domPropsInnerHTML={this.dangerHtml}/>
 <!-- v-model -->
@@ -508,7 +508,7 @@ export default {
       // 输出DOM属性
       console.log(e.target.value)
       // 输出HTML属性
-      console.log(e.target.getAttribue('value'))
+      console.log(e.target.getAttribute('value'))
     }
   }
 }
@@ -633,7 +633,7 @@ const Demo = () => (
             return <p>Herp</p>
           }
         } else {
-          return <p>Derp</p>
+          return <p>A</p>
         }
       })()
     }
@@ -657,7 +657,7 @@ const Demo = () => (
             <p>Herp</p>
           }
         } else {
-          <p>Derp</p>
+          <p>A</p>
         }
       }
     }
@@ -670,7 +670,7 @@ const Demo = () => (
 ``` js
 const Demo = () => {
   const basicCondition = flag && flag1 && !flag3;
-  if (!basicCondition) return <p>Derp</p>
+  if (!basicCondition) return <p>A</p>
   if (flag4) return <p>Blah</p>
   if (flag5) return <p>Meh</p>
   return <p>Herp</p>

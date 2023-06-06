@@ -45,7 +45,7 @@ TC39成员制定着ECMAScript的未来。
 
 每一项新特性最终要进入到ECMAScript规范里，需要经历5个阶段，这5个阶段如下：
 
-* Stage 0: Strawperson
+* Stage 0: StrawPerson
 
 只要是TC39成员或者贡献者，都可以提交想法
 
@@ -96,15 +96,15 @@ d // 60
 e = 70 // VM231:1 Uncaught TypeError: Assignment to constant variable.
 ```
 
-| | var | let | const |
-| :-: | :-: | :-: | :-: |
-| 变量提升 | √ | × | × |
-| 全局变量 | √ | × | × |
-| 重复声明 | √ | × | × |
-| 重新赋值 | √ | √ | × |
-| 暂时死区 | × | √ | √ |
-| 块作用域 | × | √ | √ |
-| 只声明不初始化 | √ | √ | × |
+|                |  var  |  let  | const |
+| :------------: | :---: | :---: | :---: |
+|    变量提升    |   √   |   ×   |   ×   |
+|    全局变量    |   √   |   ×   |   ×   |
+|    重复声明    |   √   |   ×   |   ×   |
+|    重新赋值    |   √   |   √   |   ×   |
+|    暂时死区    |   ×   |   √   |   √   |
+|    块作用域    |   ×   |   √   |   √   |
+| 只声明不初始化 |   √   |   √   |   ×   |
 
 ## 类（Class）
 
@@ -534,11 +534,11 @@ var o2 = function () {}
 var o3 = window
 
 wm1.set(o1, 37)
-wm1.set(o2, 'azerty')
+wm1.set(o2, 'abc')
 wm2.set(o1, o2) // value可以是任意值,包括一个对象
 wm2.set(o3, undefined)
 wm2.set(wm1, wm2) // 键和值可以是任意对象,甚至另外一个WeakMap对象
-wm1.get(o2) // 'azerty'
+wm1.get(o2) // 'abc'
 wm2.get(o2) // undefined,wm2中没有o2这个键
 wm2.get(o3) // undefined,值就是undefined
 
