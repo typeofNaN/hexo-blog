@@ -1,13 +1,11 @@
 ---
-title: es6
+title: ES6
 date: 2018-12-15 11:28:08
 categories: 技术文章
 tags:
-    - es6
+    - ES6
     - JavaScript
 ---
-
-# 前言
 
 这篇文章的出发点是为了帮助前端开发者串联 ES6前后的 JavaScript 知识，并且可以快速了解 JavaScript 语言的最新进展。
 

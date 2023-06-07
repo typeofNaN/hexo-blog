@@ -3,11 +3,10 @@ title: ECMAScript
 date: 2020-03-03 19:05:10
 categories: 技术文章
 tags:
-    - es6
+    - ES6
+    - ECMAScript
     - JavaScript
 ---
-
-# 前言
 
 ECMAScript是一种由Ecma国际（前身为欧洲计算机制造商协会）在标准ECMA-262中定义的脚本语言规范。这种语言在万维网上应用广泛，它往往被称为JavaScript或JScript，但实际上后两者是ECMA-262标准的实现和扩展。
 
@@ -17,25 +16,25 @@ ECMAScript是一种由Ecma国际（前身为欧洲计算机制造商协会）在
 
 至发稿日为止有九个ECMA-262版本发表。其历史版本如下：
 
-1.1997年6月：第一版
+1. 1997年6月：第一版
 
-2.1998年6月：修改格式，使其与ISO/IEC16262国际标准一样
+2. 1998年6月：修改格式，使其与ISO/IEC16262国际标准一样
 
-3.1999年12月：强大的正则表达式，更好的词法作用域链处理，新的控制指令，异常处理，错误定义更加明确，数据输出的格式化及其它改变
+3. 1999年12月：强大的正则表达式，更好的词法作用域链处理，新的控制指令，异常处理，错误定义更加明确，数据输出的格式化及其它改变
 
-4.2009年12月：添加严格模式("use strict")。修改了前面版本模糊不清的概念。增加了getters，setters，JSON以及在对象属性上更完整的反射。
+4. 2009年12月：添加严格模式("use strict")。修改了前面版本模糊不清的概念。增加了getters，setters，JSON以及在对象属性上更完整的反射。
 
-5.2011年6月：ECMAScript标5.1版形式上完全一致于国际标准ISO/IEC 16262:2011。
+5. 2011年6月：ECMAScript标5.1版形式上完全一致于国际标准ISO/IEC 16262:2011。
 
-6.2015年6月：ECMAScript 2015（ES2015），第 6 版，最早被称作是 ECMAScript 6（ES6），添加了类和模块的语法，其他特性包括迭代器，Python风格的生成器和生成器表达式，箭头函数，二进制数据，静态类型数组，集合（maps，sets 和 weak maps），promise，reflection 和 proxies。作为最早的 ECMAScript Harmony 版本，也被叫做ES6 Harmony。
+6. 2015年6月：ECMAScript 2015（ES2015），第 6 版，最早被称作是 ECMAScript 6（ES6），添加了类和模块的语法，其他特性包括迭代器，Python风格的生成器和生成器表达式，箭头函数，二进制数据，静态类型数组，集合（maps，sets 和 weak maps），promise，reflection 和 proxies。作为最早的 ECMAScript Harmony 版本，也被叫做ES6 Harmony。
 
-7.2016年6月：ECMAScript 2016（ES2016），第 7 版，多个新的概念和语言特性。
+7. 2016年6月：ECMAScript 2016（ES2016），第 7 版，多个新的概念和语言特性。
 
-8.2017年6月：ECMAScript 2017（ES2017），第 8 版，多个新的概念和语言特性。
+8. 2017年6月：ECMAScript 2017（ES2017），第 8 版，多个新的概念和语言特性。
 
-9.2018年6月：ECMAScript 2018 （ES2018），第 9 版，包含了异步循环，生成器，新的正则表达式特性和 rest/spread 语法。
+9. 2018年6月：ECMAScript 2018 （ES2018），第 9 版，包含了异步循环，生成器，新的正则表达式特性和 rest/spread 语法。
 
-10.2019年6月：ECMAScript 2019 （ES2019），第 10 版。
+10. 2019年6月：ECMAScript 2019 （ES2019），第 10 版。
 
 # 发展标准
 

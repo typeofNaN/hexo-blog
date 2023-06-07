@@ -4,12 +4,10 @@ date: 2018-04-19 14:28:12
 categories: 技术文章
 tags:
     - jQuery
-    - js
+    - JavaScript
 ---
 
-# 前言
-
-此为前端学习笔记之 jquery 篇。
+本文为前端学习笔记之 jquery 篇。
 
 <!-- more -->
 
@@ -27,8 +25,8 @@ $(document).ready(function () {
 '$'是在jQuery中使用的变量名，可以使用 jQuery.noConflict()避免冲突，它的返回值就是jQuery对象。
 
 ``` js
-  jQuery.noConflict()
-  $j = jQuery.noConflict()
+jQuery.noConflict()
+$j = jQuery.noConflict()
 ```
 
 ## jQuery对象与DOM对象之间的转换

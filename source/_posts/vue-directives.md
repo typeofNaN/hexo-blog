@@ -3,8 +3,8 @@ title: vue常用自定义指令
 date: 2021-01-26 15:35:00
 categories: 技术文章
 tags:
-    - vue
-    - vue directive
+    - Vue
+    - Vue Directive
 ---
 
 Vue 自定义指令有全局注册和局部注册两种方式。先来看看注册全局指令的方式，通过 Vue.directive( id, [definition] ) 方式注册全局指令。然后在入口文件中进行 Vue.use() 调用。
