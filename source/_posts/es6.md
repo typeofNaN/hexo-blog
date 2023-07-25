@@ -275,9 +275,9 @@ class 具有一个标识符，我们可以使用 new ClassIdentifier() 来创建
 类声明语句中也可以增加类需要的一些原型方法。在这种情况下 hello 是 Person 类的一个原型方法，可以在这个类的对象实例上调用：
 
 ``` js
-const flavio = new Person('Flavio')
+const jack = new Person('jack')
 
-flavio.hello()
+jack.hello()
 ```
 
 ## Class 继承
@@ -293,12 +293,12 @@ class Programmer extends Person {
   }
 }
 
-const flavio = new Programmer('Flavio')
+const jack = new Programmer('jack')
 
-flavio.hello()
+jack.hello()
 ```
 
-(上述代码会打印出：“Hello, I am Flavio. I am a programmer.”)
+(上述代码会打印出：“Hello, I am jack. I am a programmer.”)
 
 类没有显示的类变量声明，但你必须在初始化构造函数 constructor 中去初始化类成员变量。
 
@@ -694,7 +694,7 @@ const x = {
     return super.test() + 'x'
   }
 }
-x.test() //zoox
+x.test() //zoo
 ```
 
 # 动态属性
@@ -818,7 +818,7 @@ const status = response => {
 }
 const json = response => response.json()
 
-fetch('/todos.json')
+fetch('/todo.json')
   .then(status)
   .then(json)
   .then(data => {
@@ -829,7 +829,7 @@ fetch('/todos.json')
   })
 ```
 
-在这个例子当中，我们调用fetch()，从根目录的todos.json文件中获取一系列的TODO项目，并且创建一个链式promise。
+在这个例子当中，我们调用fetch()，从根目录的todo.json文件中获取一系列的TODO项目，并且创建一个链式promise。
 
 运行fetch()方法会返回一个response，它包含很多属性，我们从中引用如下属性：
 
@@ -1261,7 +1261,7 @@ const newObj = { ...oldObj }
 
 ``` js
 const hey = 'hey'
-const arrayized = [...hey] // ['h', 'e', 'y']
+const array = [...hey] // ['h', 'e', 'y']
 ```
 
 这个操作符有一些非常有用的应用。其中最重要的一点就是以一种非常简单的方式使用数组作为函数参数的能力：
@@ -1456,11 +1456,11 @@ const a = [...s.values()]
 ``` js
 const car = {}
 car['color'] = 'red'
-car.owner = 'Flavio'
+car.owner = 'jack'
 console.log(car['color']) //red
 console.log(car.color) //red
-console.log(car.owner) //Flavio
-console.log(car['owner']) //Flavio
+console.log(car.owner) //jack
+console.log(car['owner']) //jack
 ```
 
 ## 引入Map之后
@@ -1528,7 +1528,7 @@ const size = m.size
 你可以用一组value来初始化一个map：
 
 ``` js
-const m = new Map([['color', 'red'], ['owner', 'Flavio'], ['age', 2]])
+const m = new Map([['color', 'red'], ['owner', 'jack'], ['age', 2]])
 ```
 
 ### Map 的key值
