@@ -4,4 +4,4 @@
 
 :cowboy_hat_face: Blog-typeofNaN. My blog website, power by hexo.
 
-[线上地址](https://typeofNaN.github.io/blog/)
+[线上地址](https://typeofNaN.github.io/hexo-blog/)
