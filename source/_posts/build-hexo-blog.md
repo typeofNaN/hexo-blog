@@ -204,7 +204,7 @@ $ hexo d
 
 ## 修改及配置主题
 
-hexo初始化之后默认的主题是landscape , 然后你可以去[这个地址](https://hexo.io/themes/)里面找到你想要的主题。在github中搜索你要的主题名称，里面都会有该主题的如何使用的介绍，按着来就好了。本人采用的是raytaylorism主题，集体配置方法，看[这里](https://github.com/DM2N/DM2N.github.io/blob/hexo/themes/raytaylorism/README.md)。
+hexo初始化之后默认的主题是landscape , 然后你可以去[这个地址](https://hexo.io/themes/)里面找到你想要的主题。在github中搜索你要的主题名称，里面都会有该主题的如何使用的介绍，按着来就好了。
 
 ## 添加RSS
 

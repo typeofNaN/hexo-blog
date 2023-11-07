@@ -980,9 +980,11 @@ export default str => str.toUpperCase()
 
 现在，任何其它的 JavaScript 模块 可以通过 import 导入 uppercase.js 的这个功能。
 
-一个 HTML 页面可以通过使用了特殊的 type=module 属性的 <script> 标签添加一个模块。
+一个 HTML 页面可以通过使用了特殊的 type=module 属性的 script 标签添加一个模块。
 
+``` html
 <script type="module" src="index.js"></script>
+```
 
 注意: 这个模块导入的行为就像 defer 脚本加载一样。具体可以看 efficiently load JavaScript with defer and async
 
@@ -1075,8 +1077,10 @@ import React, { Component } from 'react'
 
 结合 type=”module”、nomodule 一起使用：
 
+``` html
 <script type="module" src="module.js"></script>
 <script nomodule src="fallback.js"></script>
+```
 
 # 包装模块
 
