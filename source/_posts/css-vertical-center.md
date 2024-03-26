@@ -12,7 +12,7 @@ tags:
 
 <!-- more -->
 
-# Line-height
+## Line-height
 
 适用情景：单行文字垂直居中技巧
 
@@ -23,14 +23,15 @@ tags:
   .content {
     width: 400px;
     background: #ccc;
-    line-height:100px;
+    line-height: 100px;
     margin: auto;
   }
 </style>
+
 <div class="content">CSS垂直居中</div>
 ```
 
-# Line-height + inline-block
+## Line-height + inline-block
 
 适用情景：多对象的垂直居中技巧
 
@@ -51,7 +52,7 @@ tags:
   .box2 .content {
     display: inline-block;
     height: auto;
-    line-height:1;
+    line-height: 1;
     width: 400px;
     background: #ccc;
   }
@@ -63,11 +64,11 @@ tags:
 </div>
 ```
 
-# :before + inline-block
+## :before + inline-block
 
 适用情景：多对象的CSS垂直居中技巧
 
-:before 伪类元素搭配 inline-block 属性的写法应该是很传统的垂直居中的技巧了，此方式的好处在于子元素居中可以不需要特别设定高度，我们将利用:before伪类元素设定为100%高的inline-block，再搭配上将需要居中的子元素同样设置成inline-block性质后，就能使用vertical-align:middle来达到垂直居中的目的了，此方式在以往其实是个非常棒的垂直居中解决方案，唯独需要特别处理掉inline-block元素之间的4-5px空间这个小缺陷，但也很实用了。
+:before 伪类元素搭配 inline-block 属性的写法应该是很传统的垂直居中的技巧了，此方式的好处在于子元素居中可以不需要特别设定高度，我们将利用:before伪类元素设定为100%高的inline-block，再搭配上将需要居中的子元素同样设置成inline-block性质后，就能使用vertical-align: middle来达到垂直居中的目的了，此方式在以往其实是个非常棒的垂直居中解决方案，唯独需要特别处理掉inline-block元素之间的4-5px空间这个小缺陷，但也很实用了。
 
 ``` html
 <style>
@@ -82,7 +83,7 @@ tags:
     text-align: center;
   }
   .box::before {
-    content:'';
+    content: '';
     display: inline-block;
     height: 100%;
     width: 0;
@@ -103,7 +104,7 @@ tags:
 </div>
 ```
 
-# absolute + margin 负值
+## absolute + margin 负值
 
 适用情景：多行文字的垂直居中技巧
 
@@ -140,7 +141,7 @@ tags:
 </div>
 ```
 
-# absolute + margin auto
+## absolute + margin auto
 
 适用情景：多行文字的垂直居中技巧
 
@@ -178,7 +179,7 @@ tags:
 </div>
 ```
 
-# absolute + translate
+## absolute + translate
 
 适用情景：多行文字的垂直居中技巧
 
@@ -213,7 +214,7 @@ tags:
 </div>
 ```
 
-# Flex + align-items
+## Flex + align-items
 
 适用情景：多行文字的垂直居中技巧
 
@@ -246,7 +247,7 @@ Flex！前端的毒品！后端的宝物！这东西自从面世之后就不断�
 </div>
 ```
 
-# Flex + :before + flex-grow
+## Flex + :before + flex-grow
 
 适用情景：多行文字的垂直居中技巧
 
@@ -283,7 +284,7 @@ Flex有多种方式可以让你把数据居中，适用Flex-grow的延展特性�
 </div>
 ```
 
-# Flex + margin
+## Flex + margin
 
 适用情景：多行文字的垂直居中技巧
 
@@ -315,7 +316,7 @@ Flex有多种方式可以让你把数据居中，适用Flex-grow的延展特性�
 </div>
 ```
 
-# Flex + align-self
+## Flex + align-self
 
 适用情景：多行文字的垂直居中技巧
 
@@ -337,7 +338,7 @@ align-self 应该大家都不陌生，基本上就是对flex次轴cross axis 的
   .content {
     width: 400px;
     background: #ccc;
-    align-self: center
+    align-self: center;
   }
 </style>
 <h2>10.Flex + align-self</h2>
@@ -348,7 +349,7 @@ align-self 应该大家都不陌生，基本上就是对flex次轴cross axis 的
 </div>
 ```
 
-# Flex + align-content
+## Flex + align-content
 
 适用情景：多行文字的垂直居中技巧
 
@@ -388,7 +389,7 @@ align-self 应该大家都不陌生，基本上就是对flex次轴cross axis 的
 </div>
 ```
 
-# Grid + template
+## Grid + template
 
 适用情景：多行文字的垂直居中技巧
 
@@ -426,7 +427,7 @@ CSS Grid最令人惊讶的就是这个template的功能了，简直就是把块�
 </div>
 ```
 
-# Grid + align-items
+## Grid + align-items
 
 适用情景：多行文字的垂直居中技巧
 
@@ -459,7 +460,7 @@ align-items不仅是Flex可用，连CSS Grid也拥有此属性可使用，但在
 </div>
 ```
 
-# Grid + align-content
+## Grid + align-content
 
 适用情景：杜航文字的垂直居中技巧
 
@@ -492,7 +493,7 @@ CSS Grid的align-content跟Flex的align-content有点差异，CSS Grid对于空�
 </div>
 ```
 
-# Grid + align-self
+## Grid + align-self
 
 适用情景：多行文字的垂直居中技巧
 
@@ -525,7 +526,7 @@ align-self 应该大家都不陌生，基本上就是对grid Y轴的个别对齐
 </div>
 ```
 
-# Grid + place-items
+## Grid + place-items
 
 适用情景：多行文字的垂直居中技巧
 
@@ -559,7 +560,7 @@ place-items这属性不知道有多少人用过，此属性是align-items与just
 </div>
 ```
 
-# Grid + place-content
+## Grid + place-content
 
 适用情景：多行文字的垂直居中技巧
 
@@ -593,7 +594,7 @@ place-content这属性有多少人用过，此属性是align-content与justify-c
 </div>
 ```
 
-# Grid + margin
+## Grid + margin
 
 适用情景：多行文字的垂直居中技巧
 
@@ -614,7 +615,7 @@ place-content这属性有多少人用过，此属性是align-content与justify-c
   .content {
     width: 400px;
     background: #ccc;
-    margin:auto;
+    margin: auto;
   }
 </style>
 <h2>18.Grid + margin</h2>
@@ -625,7 +626,7 @@ place-content这属性有多少人用过，此属性是align-content与justify-c
 </div>
 ```
 
-# Display：table-cell
+## Display：table-cell
 
 适用情景：多行文字的垂直居中技巧
 
@@ -659,7 +660,7 @@ place-content这属性有多少人用过，此属性是align-content与justify-c
 </div>
 ```
 
-# calc
+## calc
 
 适用情景：多行文字的垂直居中技巧
 
@@ -680,8 +681,8 @@ Calc是计算机英文单词calculator的缩写，这个由微软提出的css �
     width: 400px;
     background: #ccc;
     position: relative;
-    top:calc((100% - 70px) / 2);
-    margin:auto;
+    top: calc((100% - 70px) / 2);
+    margin: auto;
     height: 70px;
   }
 </style>
@@ -693,7 +694,7 @@ Calc是计算机英文单词calculator的缩写，这个由微软提出的css �
 </div>
 ```
 
-# Relative + translateY
+## Relative + translateY
 
 适用情景：多行文字的垂直居中技巧
 
@@ -727,7 +728,7 @@ Calc是计算机英文单词calculator的缩写，这个由微软提出的css �
 </div>
 ```
 
-# padding
+## padding
 
 适用情景：多行文字的垂直居中技巧
 
@@ -761,7 +762,7 @@ Calc是计算机英文单词calculator的缩写，这个由微软提出的css �
 </div>
 ```
 
-# write-mode
+## write-mode
 
 适用情景：多行文字的垂直剧种技巧
 
@@ -782,7 +783,7 @@ Calc是计算机英文单词calculator的缩写，这个由微软提出的css �
     writing-mode: tb-lr; /* for ie11 */
     writing-mode: vertical-lr;
     text-align: center;
-    margin:0 auto;
+    margin: 0 auto;
   }
   .content {
     width: 400px;
@@ -798,7 +799,7 @@ Calc是计算机英文单词calculator的缩写，这个由微软提出的css �
     margin: auto;
   }
 </style>
-<h2>23.writing-mode</h2>立马来看Amos实际完成的
+<h2>23.writing-mode</h2>
 <div class="box box23">
   <div class="content">
     <div class="txt">

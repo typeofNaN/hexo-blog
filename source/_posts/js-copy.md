@@ -11,7 +11,7 @@ tags:
 
 <!-- more -->
 
-# 1、实现点击按钮，复制文本框中的的内容
+## 1、实现点击按钮，复制文本框中的的内容
 
 ``` html
 <script type="text/javascript">
@@ -29,7 +29,7 @@ function copy() {
 
 原理：点击按钮的时候触发copy函数，根据id ID选中对象，然后在根据execCommand复制选中内容，所以此时选择的内容必须是可视的，也就是说不能是隐藏的文本域。
 
-# 2、复制专题地址和 url 地址，传给 QQ/MSN 上的好友
+## 2、复制专题地址和 url 地址，传给 QQ/MSN 上的好友
 
 ``` html
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -52,7 +52,7 @@ function copy() {
 </body>
 ```
 
-# 3、直接复制 url
+## 3、直接复制 url
 
 ``` html
 <input type="button" name="btn" onClick='copyUrl()' value="复制URL地址">
@@ -66,7 +66,7 @@ function copyUrl() {
 </script>
 ```
 
-# 4、点击文本框时，复制文本框里面的内容
+## 4、点击文本框时，复制文本框里面的内容
 
 ``` html
 <input onclick="oCopy(this)" value="你好.要copy的内容!">
@@ -118,7 +118,7 @@ function AddImg(target) {
 </script>
 ```
 
-# 7、浏览器兼容 copyToClipboard("拷贝内容")
+## 7、浏览器兼容 copyToClipboard("拷贝内容")
 
 ``` js
 function copyToClipboard(txt) {
@@ -159,7 +159,7 @@ function copyToClipboard(txt) {
 }
 ```
 
-# 8、兼容各大浏览器的复制代码（结合ZeroClipboard.js）
+## 8、兼容各大浏览器的复制代码（结合ZeroClipboard.js）
 
 ``` html
 <html>

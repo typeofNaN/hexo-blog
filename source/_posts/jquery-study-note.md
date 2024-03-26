@@ -7,7 +7,7 @@ tags:
     - JavaScript
 ---
 
-本文为前端学习笔记之 jquery 篇。
+本文为前端学习笔记之 jQuery 篇。
 
 <!-- more -->
 
@@ -47,9 +47,9 @@ $(function () {
 })
 ```
 
-# jQuery选择器
+## jQuery选择器
 
-## 常规选择器
+### 常规选择器
 
 * $('*') 选择所有节点
 * $('#id') ID选择器，注意其中的一些特殊字符，如 .
@@ -67,14 +67,14 @@ $(function () {
 * :nth-child(even)
 * :nth-child(4n)
 
-## 属性选择器
+### 属性选择器
 
 * [name~="value"] 属性中包括某单词
 * [name="value"] 属性完全等于指定值
 * [name!="value"] 属性不等于指定值
 * [name] 包括有指定属性的元素
 
-## 控件选择器
+### 控件选择器
 
 * :checked 选择所有被选中的元素
 * :selected 被选择的元素
@@ -83,7 +83,7 @@ $(function () {
 * :visible 可见控件， visibility:hidden和 opacity:0同样被认为是可见
 * :input:button:checkbox:file:image:password:radio:reset:submit:text 具体控件，图像控件是 [type="image"]
 
-## 其他选择器
+### 其他选择器
 
 * [name="value"][name2="value2"] 多个AND条件
 * ("selector1, selector2, selectorN") 多个OR条件
@@ -96,9 +96,9 @@ $(function () {
 * :empty 空元素，即无内容也无元素
 * :parent 非空元素
 
-# 节点漫游
+## 节点漫游
 
-## 调用链处理
+### 调用链处理
 
 * .add() 向已有的节点序列中添加新的对象
 * .andSelf() 在调用链中，随时加入原始序列
@@ -108,25 +108,30 @@ $(function () {
 
 ``` js
 $(function () {
-    $('ul.first').find('.foo').css('background-color', 'red').end().find('.bar').css('background-color', 'green')
+  $('ul.first')
+    .find('.foo')
+    .css('background-color', 'red')
+    .end()
+    .find('.bar')
+    .css('background-color', 'green')
 });
 ```
 
-## 子节点
+### 子节点
 
 * .children() 所有的子节点，可加入过滤条件， .children(selector)
 
-## 兄弟节点
+### 兄弟节点
 
 * .siblings().next().nextAll().nextUntil().prevAll().prevUntil().closet() 选择兄弟节点
 
-## 父节点
+### 父节点
 
 * .parent().parents().parentUntil() 父节点选择
 
-# 元素控制
+## 元素控制
 
-## attributes和 properties的区别
+### attributes和 properties的区别
 
 attributes 是XML结构中的属性节点
 
@@ -140,7 +145,7 @@ properties 是DOM对象，对象属性
 $('body').get(0).tagName
 ```
 
-## 类与属性控制
+### 类与属性控制
 
 * .addCLass().hasClass().removeClass() 添加一个类，判断是否有指定类，删除类
 
@@ -148,13 +153,13 @@ $('body').get(0).tagName
 $('body').addClass('test')
 
 $('body').addClass(function (index, current) {
-    return current + 'new'
+  return current + 'new'
 })
 
 $('body').removeClass('test')
 
 $('body').removeClass(function (index, current) {
-    return current + ' ' + 'other'
+  return current + ' ' + 'other'
 })
 ```
 
@@ -214,7 +219,7 @@ $('div').html(function (index, old) {
 })
 ```
 
-## 样式控制
+### 样式控制
 
 * .css() 获取或设置指定的CSS样式
 
@@ -240,13 +245,13 @@ $('body').width(function (index, value) {
 * .scrollLeft().scrollTop() 获取或设置滚动条的位置
 * .offset().position() 获取元素的坐标。 offset是相对于 document， position是相对于父级元素
 
-## 结构控制
+### 结构控制
 
-### 文本节点
+#### 文本节点
 
 .html().text() 设置和获取节点的文本值。设置时 .text()会转义标签，获取时 .text()会移除所有标签。
 
-### 子节点
+#### 子节点
 
 .append().prepend()
 
@@ -263,7 +268,7 @@ var $newDiv1 = $('<div id="object1"/>'),
 $('body').append($newDiv1, [newDiv2, existingDiv1])
 ```
 
-### 兄弟节点
+#### 兄弟节点
 
 .after().before()
 
@@ -271,7 +276,7 @@ $('body').append($newDiv1, [newDiv2, existingDiv1])
 $('.inner').after('<p>Test</p>')
 ```
 
-### 父节点
+#### 父节点
 
 .wrap().wrap().wrapInner()
 
@@ -281,7 +286,7 @@ $('.inner').wrapAll('<div class="new"></div>')
 $('.inner').wrapInner('<div class="new"></div>')
 ```
 
-### 复制/删除/替换节点
+#### 复制/删除/替换节点
 
 * .clone() 复制节点，可选参数表示是否处理已绑定的事件与数据
 * .clone(true) 处理当前节点的事件与数据
@@ -291,7 +296,7 @@ $('.inner').wrapInner('<div class="new"></div>')
 * .empty() 清除一个节点的所有内部内容
 * .unwrap() 移除节点的父节点
 
-## 工具函数
+### 工具函数
 
 * .map() 遍历所有成员
 
@@ -312,7 +317,7 @@ $('li').slice(2, 4).css('background-color', 'green')
 $('li').slice(-2, -1).css('background-color', 'blue')
 ```
 
-## 通用工具
+### 通用工具
 
 * $.each()$.map() 遍历列表， $.map()可以用于对象
 
@@ -367,10 +372,10 @@ $.merge([0, 1, 22, 3, 4])
 
 ``` js
 $.grep([0, 1, ], function (array, index) {
-    return n > 0
+  return n > 0
 }) // [1, 2]
 $.grep([0, 1, 2], function (array, index) {
-    return n > 0
+  return n > 0
 }, true) // [0]
 ```
 
@@ -392,7 +397,7 @@ var xml = "<rss version='2.0'><channel><title>RSS Title</title></channel></rss>"
 * $.type() 判断参数的类型
 * $.unique() 遍历后去重。 $.unique(array)
 
-# 上下文绑定
+## 上下文绑定
 
 * $.proxy() 为函数绑定上下文
 * $.proxy(function,context)
@@ -421,7 +426,7 @@ $.proxy(o, 'f')() //123
 
 当一个函数被传递之后，它就失去了原先的上下文。
 
-# **把数据存到节点中**
+## **把数据存到节点中**
 
 jQuery提供了一种机制，可以把节点作为数据存储的容器。
 
@@ -437,9 +442,9 @@ $.data($('#data').get(0), 'test', '123')
 $('#data').data('test', '456')
 ```
 
-# 事件处理
+## 事件处理
 
-## 事件绑定
+### 事件绑定
 
 在 jQuery1.7之后，推荐统一使用 on()来进行事件绑定。
 
@@ -524,7 +529,7 @@ $('#btn').on('click', f)
 $('#btn').off('click')
 ```
 
-## 事件触发
+### 事件触发
 
 事件的触发有两种方式，一是使用预定的“事件函数”（ .click()， .focus()），二是使用 trigger()或 triggerHandler()。
 
@@ -563,7 +568,7 @@ $('#btn').on('my', function (event) {
 $('#btn').trigger('my', {a: 123})
 ```
 
-## 事件类型
+### 事件类型
 
 行为事件：
 
@@ -600,7 +605,7 @@ $('#btn').trigger('my', {a: 123})
 * .error() 发生错误时
 * .load() 正在载入
 
-# **事件对象**
+## **事件对象**
 
 * event.currentTarget,event,target 事件绑定节点/事件的触发节点（冒泡行为）
 * event.delegateTarget 绑定事件的对象，通常就是 event.currentTarget
@@ -618,9 +623,9 @@ $('#btn').trigger('my', {a: 123})
 
 如果一个绑定函数最后返回了 false，则默认是 event.preventDefault()和 event.stopPropagation()行为。
 
-# AJAX
+## AJAX
 
-## 请求与回调
+### 请求与回调
 
 jQuery的AJAX，核心的请求处理函数只有一个，就是 $.ajax()，然后就是一个简单的上层函数。
 
@@ -645,7 +650,7 @@ jQuey.ajax(settings) settings是一个对象，里面包含了所有的配置项
 * jsonp 一个参数名，默认是 callback，一般用于指明回调函数名。设置成 false可以让请求没有 callback参数。
 * jsonpCallback callback参数值。默认是自动生成的一个随机值。
 
-## 请求的状态
+### 请求的状态
 
 对于全局的所有AJAX请求而言，可以在任意节点上绑定到全局任意AJAX请求的每一个事件：
 
@@ -664,7 +669,7 @@ $('#loading').ajaxStart(function () {
 * .ajaxComplete() 请求完成
 * .ajaxStop() 请求结束（在 .ajaxComplete()后）
 
-## 工具函数
+### 工具函数
 
 * .serialize() 解析表单参数项，返回字符串
 
@@ -684,9 +689,9 @@ $('form').submit(function () {
 })
 ```
 
-# 泛化回调
+## 泛化回调
 
-## Deferred
+### Deferred
 
 Deferred对象是在jQuery1.5中引入的回调管理对象。其作用是把一堆函数按顺序放入一个调用链，然后根据状态来依次调用这些函数。AJAX的所有操作都是使用它来进行封装的。
 
@@ -804,7 +809,7 @@ defer.then(function (res) {
 
 上面代码的输入结果是：`ajax response`，`1`，`2`。
 
-## **Callbacks**
+### **Callbacks**
 
 事实上，`Deferred`机制，只是在`Callbacks`机制的上层进行了一层简单封装。`Callbacks`对象才是真正的jQuery中定义的原始的回调管理机制。
 

@@ -13,7 +13,7 @@ Observer API（观察者API）释放了Web隐藏的超能力，以创建真正�
 
 有四种不同类型的观察者可以观察不同的东西——从DOM到浏览器性能。
 
-# MutationObserver
+## MutationObserver
 
 MutationObserver观察DOM树，监听DOM的变化。
 
@@ -50,7 +50,7 @@ observer.disconnect()
 
 这对于调整DOM中元素的大小以及重置DOM值特别有用。
 
-# IntersectionObserver
+## IntersectionObserver
 
 IntersectionObserver观察一个DOM元素的可见性，监听其位置的变化。
 
@@ -81,7 +81,7 @@ intersectionObserver.observe(targetNode, config)
 
 这在基于目标元素的可见性和位置的懒惰加载和动画内容方面非常有用。
 
-# ResizeObserver
+## ResizeObserver
 
 ResizeObserver观察元素的内容或边框，监听元素及其子元素的变化。
 
@@ -91,8 +91,8 @@ const targetNode = document.getElementById('element')
 
 const resizeObserver = new ResizeObserver((entries, observer) => {
   entries.forEach(entry => {
-    console.log(`Element size: ${entry.width}px x ${entry.height}px`)
-    console.log(`Element padding: ${entry.top}px ; ${entry.left}px`)
+    console.log(`Element size: ${entry.width}px ${entry.height}px`)
+    console.log(`Element padding: ${entry.top}px ${entry.left}px`)
 
     // 之后，你可以停止观察
     observer.unobserve(entry.target)
@@ -105,7 +105,7 @@ resizeObserver.observe(targetNode)
 
 创建基于输入或触发器包装的动态内容时，此观察者非常重要。
 
-# PerformanceObserver
+## PerformanceObserver
 
 PerformanceObserver观察性能测量事件，监听新的性能条目。
 

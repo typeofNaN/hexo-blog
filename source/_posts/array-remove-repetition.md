@@ -12,7 +12,7 @@ tags:
 
 <!-- more -->
 
-# 利用ES6 Set去重（ES6中最常用）
+## 利用ES6 Set去重（ES6中最常用）
 
 ``` js
 function unique(arr) {
@@ -27,7 +27,7 @@ console.log(unique(arr))
 // 不考虑兼容性，这种去重的方法代码最少。这种方法还无法去掉“{}”空对象，后面的高阶方法会添加去掉重复“{}”的方法。
 ```
 
-# 利用for嵌套for，然后splice去重（ES5中最常用）
+## 利用for嵌套for，然后splice去重（ES5中最常用）
 
 ``` js
 function unique(arr) {
@@ -42,6 +42,7 @@ function unique(arr) {
 
   return arr
 }
+
 const arr = [1, 1, 'true', 'true', true, true, 15, 15, false, false, undefined, undefined, null, null, NaN, NaN, 'NaN', 'NaN', 0, 0, 'a', 'a', {}, {}]
 
 console.log(unique(arr))
@@ -51,7 +52,7 @@ console.log(unique(arr))
 // 双层循环，外层循环元素，内层循环时比较值。值相同时，则删去这个值。
 ```
 
-# 利用indexOf去重
+## 利用indexOf去重
 
 ``` js
 function unique(arr) {
@@ -80,7 +81,7 @@ console.log(unique(arr))
 // 新建一个空的结果数组，for 循环原数组，判断结果数组是否存在当前元素，如果有相同的值则跳过，不相同则push进数组。
 ```
 
-# 利用sort()
+## 利用sort()
 
 ``` js
 function unique(arr) {
@@ -110,7 +111,7 @@ console.log(unique(arr))
 // 利用sort()排序方法，然后根据排序后的结果进行遍历及相邻元素比对。
 ```
 
-# 利用对象的属性不能相同的特点进行去重（这种数组去重的方法有问题，不建议用，有待改进）
+## 利用对象的属性不能相同的特点进行去重（这种数组去重的方法有问题，不建议用，有待改进）
 
 ``` js
 function unique(arr) {
@@ -142,7 +143,7 @@ console.log(unique(arr))
 // 两个true直接去掉了，NaN和{}去重
 ```
 
-# 利用includes
+## 利用includes
 
 ``` js
 function unique(arr) {
@@ -170,7 +171,7 @@ console.log(unique(arr))
 // {}没有去重
 ```
 
-# 利用hasOwnProperty
+## 利用hasOwnProperty
 
 ``` js
 function unique(arr) {
@@ -189,7 +190,7 @@ console.log(unique(arr))
 // 利用hasOwnProperty 判断是否存在对象属性
 ```
 
-# 利用filter
+## 利用filter
 
 ``` js
 function unique(arr) {
@@ -206,7 +207,7 @@ console.log(unique(arr))
 // [1, 'true', true, 15, false, undefined, null, 'NaN', 0, 'a', {…}, {…}]
 ```
 
-# 利用递归去重
+## 利用递归去重
 
 ``` js
 function unique(arr) {
@@ -231,12 +232,15 @@ function unique(arr) {
 
   return array
 }
+
 const arr = [1, 1, 'true', 'true', true, true, 15, 15, false, false, undefined, undefined, null, null, NaN, NaN, 'NaN', 'NaN', 0, 0, 'a', 'a', {}, {}]
+
 console.log(unique(arr))
+
 // [1, 'a', 'true', true, 15, false, 1, {…}, null, NaN, NaN, 'NaN', 0, 'a', {…}, undefined]
 ```
 
-# 利用Map数据结构去重
+## 利用Map数据结构去重
 
 ``` js
 function unique(arr) {
@@ -254,6 +258,7 @@ function unique(arr) {
 
   return array
 }
+
 const arr = [1, 1, 'true', 'true', true, true, 15, 15, false, false, undefined, undefined, null, null, NaN, NaN, 'NaN', 'NaN', 0, 0, 'a', 'a', {}, {}]
 
 console.log(unique(arr))
@@ -262,7 +267,7 @@ console.log(unique(arr))
 // 创建一个空Map数据结构，遍历需要去重的数组，把数组的每一个元素作为key存到Map中。由于Map中不会出现相同的key值，所以最终得到的就是去重后的结果。
 ```
 
-# 利用reduce+includes
+## 利用reduce+includes
 
 ``` js
 function unique(arr) {
@@ -276,12 +281,12 @@ console.log(unique(arr))
 // [1, 'true', true, 15, false, undefined, null, NaN, 'NaN', 0, 'a', {…}, {…}]
 ```
 
-# […new Set(arr)]
+## […new Set(arr)]
 
 ``` js
 [...new Set(arr)]
 
-//代码就是这么少----（其实，严格来说并不算是一种，相对于第一种方法来说只是简化了代码）
+// 代码就是这么少----（其实，严格来说并不算是一种，相对于第一种方法来说只是简化了代码）
 ```
 
 方法多种多样！
