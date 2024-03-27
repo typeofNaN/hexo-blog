@@ -286,7 +286,7 @@ class WorkExperience
 
 ``` cs
 // 简历
-class Resume:ICloneable
+class Resume : ICloneable
 {
     private string name;
     private string sex;
