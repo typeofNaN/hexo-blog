@@ -2327,7 +2327,7 @@ testSymbol.description  // 'Test'
 
 修复 JSON.stringify() 在处理 UTF-8 code points (U+D800 to U+DFFF)。
 
-在修复之前，调用 JSON.stringify() 将返回格式错误的 Unicode 字符，如（a “�”)。
+在修复之前，调用 JSON.stringify() 将返回格式错误的 Unicode 字符，如（a “�”）。
 
 现在你可以安全放心的使用 JSON.stringify() 转成字符串，也可以使用 JSON.parse() 将它转换回原始表示的形态。
 

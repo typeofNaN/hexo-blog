@@ -393,8 +393,7 @@ public class Resume : ICloneable
 
     public void Display()
     {
-        Console.WriteLine(
-            $"{ Name } Worded in { work.Company } from { work.WorkDate }.");
+        Console.WriteLine($"{ Name } Worded in { work.Company } from { work.WorkDate }.");
     }
 
     public Resume(string name)
@@ -486,8 +485,8 @@ alert(dogA.name);   // 大毛
 
 ``` js
 function Dog(name) {
-　　this.name = name;
-　　this.species = '犬科';
+    this.name = name;
+    this.species = '犬科';
 }
 
 var dogA = new Dog('大毛');
@@ -511,7 +510,7 @@ alert(dogB.species);   // 显示"犬科"，不受dogA的影响
 
 ``` js
 function Dog(name) {
-　　this.name = name;
+    this.name = name;
 }
 
 Dog.prototype = { species : '犬科' };
@@ -585,16 +584,16 @@ public class ModelCache
     // 实际开发中，模型对象从数据库中取出
     public static void Load()
     {
-        User user = new User { 
-            Id = "#1001", 
-            Name = "John Doe" 
+        User user = new User {
+            Id = "#1001",
+            Name = "John Doe"
         };
         modelMap.Add(user.Id, user);
 
-        Product product = new Product { 
-            Id = "#2001", 
-            Name = "Illustrated C# 2012", 
-            Price = "￥89.00" 
+        Product product = new Product {
+            Id = "#2001",
+            Name = "Illustrated C# 2012",
+            Price = "￥89.00"
         };
         modelMap.Add(product.Id, product);
 
@@ -627,11 +626,8 @@ class Program
         if (userCloned == null || productCloned == null)
             return;
 
-        Console.WriteLine(
-            $"ID: { userCloned.Id } Name: { userCloned.Name }");
-
-        Console.WriteLine(
-            $"ID: { productCloned.Id } Name: { productCloned.Name } Price: { productCloned.Price }");
+        Console.WriteLine($"ID: { userCloned.Id } Name: { userCloned.Name }");
+        Console.WriteLine($"ID: { productCloned.Id } Name: { productCloned.Name } Price: { productCloned.Price }");
     }
 }
 ```

@@ -120,11 +120,11 @@ height: 100px;
 
 ##### 四边
 
-* border: border-width || border-style || border-color
-* border-top: border-width || border-style || border-color
-* border-right: border-width || border-style || border-color
-* border-bottom: border-width || border-style || border-color
-* border-left: border-width || border-style || border-color
+* border: border-width | border-style | border-color
+* border-top: border-width | border-style | border-color
+* border-right: border-width | border-style | border-color
+* border-bottom: border-width | border-style | border-color
+* border-left: border-width | border-style | border-color
 
 ##### 边宽
 
@@ -137,10 +137,10 @@ height: 100px;
 ##### 边样式
 
 * border-style: none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset
-* border-top-style: border-width || border-style || border-color
-* border-right-style: border-width || border-style || border-color
-* border-bottom-style: border-width || border-style || border-color
-* border-left-style: border-width || border-style || border-color
+* border-top-style: border-width | border-style | border-color
+* border-right-style: border-width | border-style | border-color
+* border-bottom-style: border-width | border-style | border-color
+* border-left-style: border-width | border-style | border-color
 
 ##### 边颜色
 
@@ -156,8 +156,8 @@ height: 100px;
 
 ##### 外边线
 
-* outline: outline-color || outline-style || outline-width
-* list-style: list-style-image || list-style-position || list-style-type
+* outline: outline-color | outline-style | outline-width
+* list-style: list-style-image | list-style-position | list-style-type
 
 ##### 其他边
 
@@ -177,7 +177,7 @@ height: 100px;
 * text-align: left | right | center | justify
 * text-indent: length
 * text-transform: none | capitalize | uppercase | lowercase
-* text-decoration: none || underline || blink || overline || line-through
+* text-decoration: none | underline | blink | overline | line-through
 * letter-spacing: normal | length
 * word-spacing: normal | length
 * white-space: normal | pre | nowrap
@@ -186,11 +186,11 @@ height: 100px;
 
 ### 背景类
 
-* background: background-color || background-image || background-repeat || background-attachment || background-position
+* background: background-color | background-image | background-repeat | background-attachment | background-position
 * background-color: transparent | color
 * background-image: none | url ( url )
 * background-repeat: repeat | no-repeat | repeat-x | repeat-y
-* background-position: length || length || position
+* background-position: length | length | position
 
 ### 其他
 
