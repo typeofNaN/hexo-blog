@@ -1,0 +1,1436 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/hexo-blog/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/hexo-blog/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/hexo-blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/hexo-blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/hexo-blog/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/hexo-blog/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/hexo-blog/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/hexo-blog/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/hexo-blog/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Vue,jsx,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="在使用 Vue 开发项目时绝大多数情况下都是使用模板来写 HTML，但是有些时候页面复杂又存在各种条件判断来显示/隐藏和拼凑页面内容，或者页面中很多部分存在部分DOM结构一样的时候就略显捉襟见肘，会写大量重复的代码，会出现单个 .vue 文件过长的情况，这个时候我们就需要更多的代码控制，这时候可以使用渲染函数。">
+<meta name="keywords" content="Vue,jsx">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在 Vue 中使用 JSX">
+<meta property="og:url" content="https://github.com/typeofNaN/typeofNaN.github.io/2022/10/23/jsx-in-vue/index.html">
+<meta property="og:site_name" content="typeofNaN">
+<meta property="og:description" content="在使用 Vue 开发项目时绝大多数情况下都是使用模板来写 HTML，但是有些时候页面复杂又存在各种条件判断来显示/隐藏和拼凑页面内容，或者页面中很多部分存在部分DOM结构一样的时候就略显捉襟见肘，会写大量重复的代码，会出现单个 .vue 文件过长的情况，这个时候我们就需要更多的代码控制，这时候可以使用渲染函数。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2024-03-27T12:53:20.921Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在 Vue 中使用 JSX">
+<meta name="twitter:description" content="在使用 Vue 开发项目时绝大多数情况下都是使用模板来写 HTML，但是有些时候页面复杂又存在各种条件判断来显示/隐藏和拼凑页面内容，或者页面中很多部分存在部分DOM结构一样的时候就略显捉襟见肘，会写大量重复的代码，会出现单个 .vue 文件过长的情况，这个时候我们就需要更多的代码控制，这时候可以使用渲染函数。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/hexo-blog/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://github.com/typeofNaN/typeofNaN.github.io/2022/10/23/jsx-in-vue/">
+
+
+
+
+
+  <title>在 Vue 中使用 JSX | typeofNaN</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/hexo-blog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">typeofNaN</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">typeofNaN's blog</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/hexo-blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/hexo-blog/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/hexo-blog/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/hexo-blog/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/hexo-blog/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/typeofNaN/typeofNaN.github.io/hexo-blog/2022/10/23/jsx-in-vue/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="typeofNaN">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/hexo-blog/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="typeofNaN">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">在 Vue 中使用 JSX</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-10-23T11:09:49+08:00">
+                2022-10-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/hexo-blog/categories/技术文章/" itemprop="url" rel="index">
+                    <span itemprop="name">技术文章</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/hexo-blog/2022/10/23/jsx-in-vue/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/hexo-blog/2022/10/23/jsx-in-vue/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在使用 Vue 开发项目时绝大多数情况下都是使用模板来写 HTML，但是有些时候页面复杂又存在各种条件判断来显示/隐藏和拼凑页面内容，或者页面中很多部分存在部分DOM结构一样的时候就略显捉襟见肘，会写大量重复的代码，会出现单个 .vue 文件过长的情况，这个时候我们就需要更多的代码控制，这时候可以使用渲染函数。</p>
+<a id="more"></a>
+<p>渲染函数想必平时几乎没有人去写，因为写起来很痛苦（本人也没有写过）。更多的是在 Vue 中使用 JSX 语法。写法上和在 React 中差不多，但是功能上还是没有 React 中那么完善。</p>
+<p>在写 JSX 的过程中不得考虑一个样式的问题，虽然可以直接在 .vue 文件中不写 <code>&lt;template&gt;</code> 部分，只写 <code>&lt;script&gt;</code> 和 <code>&lt;style&gt;</code> 部分，而不用担心样式作用域问题。但是更多的时候还是推荐直接使用 .js 的方式来写组件，这个时候就涉及到样式作用域的问题了。</p>
+<p>在 React 的生态中，有很多 CSS-IN-JS 的解决方案，比如 styled-jsx、emotion、styled-components 等，目前最活跃和用户量最多的是 styled-components ，目前已经拥有良好的生态圈子。如果需要在样式中作一些像 Sass/Less 中的颜色计算，可以使用 polished 来实现，当然不止这么简单的功能。但是在 Vue 中可使用的方案就太少了，因为 Vue 使用模板来写 HTM L本身是开箱即用的样式 scoped，在使用 JSX 写组件的时候就面临着样式问题，一种方案是在组件包裹 <code>&lt;div&gt;</code> 中取一个特殊的名字，然后样式都嵌套写在这个 class 下面，但是难免会遇到命名冲突的情况，而且每次还得变着花样取名称。此外，就是引入 CSS-IN-JS 在 Vue 对应的实现，但目前来看 Styled-components 官方提供了一个 Vue 版本的叫 vue-styled-components 和 emotion 的 vue-emotion，但是用的人实在太少。像 styled-components 进行了重大更新和变化，但是 Vue 版本的还是最初的版本，而且有时候还出现样式不生效的情况。</p>
+<h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><p>首先需要约定一下，使用 JSX 组件命名采用首字母大写的驼峰命名方式，样式可以少的可以直接基于 vue-styled-components 写在同一个文件中，复杂的建议放在单独的 _Styles.js 文件中，当然也可以不采用 CSS-IN-JS 的方式，使用 Less/Sass 来写，然后在文件中 import 进来。</p>
+<p>下面是一个通用的骨架：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> styled <span class="keyword">from</span> <span class="string">'vue-styled-components'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Container = styled.div<span class="string">`</span></span><br><span class="line"><span class="string">  height: 100%;</span></span><br><span class="line"><span class="string">`</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Dashboard = &#123;</span><br><span class="line">  name: <span class="string">'Dashboard'</span>,</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;Container&gt;内容&lt;<span class="regexp">/Container&gt;</span></span><br><span class="line"><span class="regexp">    )</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default Dashboard</span></span><br></pre></td></tr></table></figure>
+<h3 id="插值"><a href="#插值" class="headerlink" title="插值"></a>插值</h3><p>在JSX中使用单个括号来绑定文本插值：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;span&gt;Message: &#123;<span class="keyword">this</span>.message&#125;&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ 类似于v-html</span></span><br><span class="line"><span class="regexp">&lt;div domPropsInnerHTML=&#123;this.dangerHtml&#125;/</span>&gt;</span><br><span class="line"><span class="comment">// v-model</span></span><br><span class="line">&lt;el-input v-model=&#123;<span class="keyword">this</span>.vm.name&#125; /&gt;</span><br></pre></td></tr></table></figure>
+<p>在 jsx 中不需要把 v-model 分成事件绑定和赋值二部分分开来写，因为有相应的 babel 插件来专门处理。</p>
+<h3 id="样式"><a href="#样式" class="headerlink" title="样式"></a>样式</h3><p>在 JSX 中可以直接使用 class=”xx” 来指定样式类，内联样式可以直接写成 style=”xxx”：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"btn btn-default"</span> style=<span class="string">"font-size: 12px;"</span>&gt;Button&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ 动态指定</span></span><br><span class="line"><span class="regexp">&lt;div class=&#123;`btn btn-$&#123;this.isDefault ? 'default' : ''&#125;`&#125;&gt;&lt;/</span>div&gt;</span><br><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=&#123;&#123;<span class="string">'btn-default'</span>: <span class="keyword">this</span>.isDefault, <span class="string">'btn-primary'</span>: <span class="keyword">this</span>.isPrimary&#125;&#125;&gt;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;div style=&#123;&#123;color: 'red', fontSize: '14px'&#125;&#125;&gt;&lt;/</span>div&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a>遍历</h3><p>在 JSX 中没有 v-for 和 v-if 等指令的存在，这些全部需要采用 js 的方式来实现：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123; <span class="comment">/* 类似于v-if */</span> &#125;</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">this</span>.withTitle &amp;&amp; <span class="xml"><span class="tag">&lt;<span class="name">Title</span> /&gt;</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#123; <span class="comment">/* 类似于v-if 加 v-else */</span> &#125;</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">this</span>.isSubTitle ? <span class="xml"><span class="tag">&lt;<span class="name">SubTitle</span> /&gt;</span></span> : <span class="xml"><span class="tag">&lt;<span class="name">Title</span> /&gt;</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#123; <span class="comment">/* 类似于v-for */</span> &#125;</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">this</span>.options.map(<span class="function"><span class="params">option</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div&gt;&#123;option.title&#125;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    )</span></span><br><span class="line"><span class="regexp">  &#125;)</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+<h3 id="事件绑定"><a href="#事件绑定" class="headerlink" title="事件绑定"></a>事件绑定</h3><p>事件绑定需要在事件名称前端加上 on 前缀，原生事件添加 nativeOn ：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 对应@click</span></span><br><span class="line">&lt;el-button onClick=&#123;<span class="keyword">this</span>.handleClick&#125;&gt;Click me&lt;<span class="regexp">/el-button&gt;</span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ 对应@click.native</span></span><br><span class="line"><span class="regexp">&lt;el-button nativeOnClick=&#123;this.handleClick&#125;&gt;Native click&lt;/</span>el-button&gt;</span><br><span class="line"><span class="comment">// 传递参数</span></span><br><span class="line">&lt;el-button onClick=&#123;e =&gt; <span class="keyword">this</span>.handleClick(<span class="keyword">this</span>.id)&#125;&gt;Click and pass data&lt;<span class="regexp">/el-button&gt;</span></span><br></pre></td></tr></table></figure>
+<p>注意：如果需要给事件处理函数传参数，需要使用箭头函数来实现。如果不使用箭头函数那么接收的将会是事件的对象event属性。</p>
+<h3 id="高级部分"><a href="#高级部分" class="headerlink" title="高级部分"></a>高级部分</h3><p>在 Vue 中基于 jsx 也可以把组件拆分成一个个小的函数式组件，但是有一个限制是必需有一个外层的包裹元素，不能直接写类似：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Demo = <span class="function"><span class="params">()</span> =&gt;</span> (</span><br><span class="line">  &lt;li&gt;One&lt;<span class="regexp">/li&gt;</span></span><br><span class="line"><span class="regexp">  &lt;li&gt;Two&lt;/</span>li&gt;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>必需写成：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Demo = <span class="function"><span class="params">()</span> =&gt;</span> (</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;li&gt;One&lt;<span class="regexp">/li&gt;</span></span><br><span class="line"><span class="regexp">    &lt;li&gt;Two&lt;/</span>li&gt;</span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">)</span></span><br></pre></td></tr></table></figure>
+<p>而在React中可以使用空标签 <code>&lt;&gt;&lt;/&gt;</code> 和 <code>&lt;react.Fragment&gt;&lt;/react.Fragment&gt;</code> 来实现包裹元素，这里的空标签其实只是 react.Fragment 的一个语法糖。同时在 React 16 中直接支持返回数组的形式：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Demo = <span class="function"><span class="params">()</span> =&gt;</span> [</span><br><span class="line">  &lt;li&gt;One&lt;<span class="regexp">/li&gt;</span></span><br><span class="line"><span class="regexp">  &lt;li&gt;Two&lt;/</span>li&gt;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>那么在 Vue 中就只能通过遍历来实现类似的功能，大体思路就是把数据先定义好数据然后直接一个 map 生成，当然如果说元素的标签是不同类型的那就需要额外添加标识来判断了。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  data() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      options: [<span class="string">'one'</span>, <span class="string">'two'</span>]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">const</span> LiItem = <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">this</span>.options.map(<span class="function"><span class="params">option</span> =&gt;</span> <span class="xml"><span class="tag">&lt;<span class="name">li</span>&gt;</span>&#123;option&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;ul&gt;</span><br><span class="line">          &lt;LiItem /&gt;</span><br><span class="line">        &lt;<span class="regexp">/ul&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>div&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="事件修饰符"><a href="#事件修饰符" class="headerlink" title="事件修饰符"></a>事件修饰符</h3><p>在基础部分简单介绍了事件的绑定用法，这里主要是补充一下事件修饰符的写法。</p>
+<p>在模板语法中 Vue 提供了很多事件修饰符来快速处理事件的冒泡、捕获、事件触发频率、按键识别等。可以直接查看官方文档的事件和按键修饰符部分，这里把相关内容原样搬运过来：</p>
+<table>
+<thead>
+<tr>
+<th>修饰符</th>
+<th>前缀</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>.passive</td>
+<td>&amp;</td>
+</tr>
+<tr>
+<td>.capture</td>
+<td>!</td>
+</tr>
+<tr>
+<td>.once</td>
+<td>~</td>
+</tr>
+<tr>
+<td>.capture.once或.once.capture</td>
+<td>~!</td>
+</tr>
+</tbody>
+</table>
+<p>使用方式如下：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;el-button &#123;...&#123;</span><br><span class="line"> <span class="string">'!click'</span>: <span class="keyword">this</span>.doThisInCapturingMode,</span><br><span class="line"> <span class="string">'!keyup'</span>: <span class="keyword">this</span>.doThisOnce,</span><br><span class="line"> <span class="string">'~!mouseover'</span>: <span class="keyword">this</span>.doThisOnceInCapturingMode</span><br><span class="line">&#125;&#125;&gt;Click Me!&lt;<span class="regexp">/el-button&gt;</span></span><br></pre></td></tr></table></figure>
+<p>下面给出的事件修饰符是需要在事件处理函数中写出对应的等价操作：</p>
+<table>
+<thead>
+<tr>
+<th>修饰符</th>
+<th>处理函数中的等价操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>.stop</td>
+<td>event.stopPropagation()</td>
+</tr>
+<tr>
+<td>.prevent</td>
+<td>event.preventDefault()</td>
+</tr>
+<tr>
+<td>.self</td>
+<td>if (event.target !== event.currentTarget) return</td>
+</tr>
+<tr>
+<td>按键： .enter, .13</td>
+<td>if (event.keyCode !== 13) return (对于别的按键修饰符来说，可将 13 改为另一个按键码)</td>
+</tr>
+<tr>
+<td>修饰键： .ctrl, .alt, .shift, .meta</td>
+<td>if (!event.ctrlKey) return (将 ctrlKey 分别修改为 altKey、shiftKey 或者 metaKey)</td>
+</tr>
+</tbody>
+</table>
+<p>下面是在事件处理函数中使用修饰符的例子：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  methods: &#123;</span><br><span class="line">    keyup(e) &#123;</span><br><span class="line">      <span class="comment">// 对应`.self`</span></span><br><span class="line">      <span class="keyword">if</span> (e.target !== e.currentTarget) <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">      <span class="comment">// 对应 `.enter`, `.13`</span></span><br><span class="line">      <span class="keyword">if</span> (!e.shiftKey || e.keyCode !== <span class="number">13</span>) <span class="keyword">return</span></span><br><span class="line">      </span><br><span class="line">      <span class="comment">// 对应 `.stop`</span></span><br><span class="line">      e.stopPropagation()</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 对应 `.prevent`</span></span><br><span class="line">      e.preventDefault()</span><br><span class="line"></span><br><span class="line">      <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="ref-和-refInFor"><a href="#ref-和-refInFor" class="headerlink" title="ref 和 refInFor"></a>ref 和 refInFor</h3><p>在 Vue 中 ref 被用来给元素或子组件注册引用信息。引用信息将会注册在父组件的 $refs 对象上。如果在普通的 DOM 元素上使用，引用指向的就是 DOM 元素；如果用在子组件上，引用就指向组件。</p>
+<p>注意：</p>
+<ul>
+<li>因为 ref 本身是作为渲染结果被创建的，在初始渲染的时候你不能访问它们 - 它们还不存在</li>
+<li>$refs 不是响应式的，因此你不应该试图用它在模板中做数据绑定。</li>
+</ul>
+<p>当 v-for 用于元素或组件的时候，引用信息将是包含 DOM 节点或组件实例的数组。</p>
+<p>假如在jsx中想要引用遍历元素或组件的时候，例如：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> LiArray = <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">this</span>.options.map(<span class="function"><span class="params">option</span> =&gt;</span> (</span><br><span class="line">  &lt;li ref=<span class="string">"li"</span> key=&#123;option&#125;&gt;&#123;option&#125;&lt;<span class="regexp">/li&gt;</span></span><br><span class="line"><span class="regexp">))</span></span><br></pre></td></tr></table></figure>
+<p>会发现从 this.$refs.li 中获取的并不是期望的数组值，这个时候就需要使用 refInFor 属性，并置为 true 来达到在模板中 v-for 中使用 ref 的效果：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> LiArray = <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">this</span>.options.map(<span class="function"><span class="params">option</span> =&gt;</span> (</span><br><span class="line">  &lt;li ref=<span class="string">"li"</span> refInFor=&#123;<span class="literal">true</span>&#125; key=&#123;option&#125;&gt;&#123;option&#125;&lt;<span class="regexp">/li&gt;</span></span><br><span class="line"><span class="regexp">))</span></span><br></pre></td></tr></table></figure>
+<h3 id="插槽（v-slot）"><a href="#插槽（v-slot）" class="headerlink" title="插槽（v-slot）"></a>插槽（v-slot）</h3><p>在 jsx 中可以使用 this.$slots 来访问静态插槽的内容。</p>
+<p>注意：在 Vue 2.6.x 版本后废弃了 slot 和 slot-scope，在模板中统一使用新的统一语法 v-slot 指令。v-slot 只能用于 Vue 组件和 template 标签。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"page-header__title"</span>&gt;</span><br><span class="line">  &#123;<span class="keyword">this</span>.$slots.title ? <span class="keyword">this</span>.$slots.title : <span class="keyword">this</span>.title&#125;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure>
+<p>等价于模板的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;page-header__title&quot;&gt;</span><br><span class="line">  &lt;slot name=&quot;title&quot;&gt;&#123;&#123; title &#125;&#125;&lt;/slot&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p>在 Vue 官方文档中提到：父级模板里的所有内容都是在父级作用域中编译的；子模板里的所有内容都是在子作用域中编译的。因此像下面的示例是无法正常工作的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;current-user&gt;</span><br><span class="line">  &#123;&#123; user.firstName &#125;&#125;</span><br><span class="line">&lt;/current-user&gt;</span><br></pre></td></tr></table></figure>
+<p>在 <code>&lt;current-user&gt;</code> 组件中可以访问到 user 属性，但是提供的内容却是在父组件渲染的。如果想要达到期望的效果，这个时候就需要使用作用域插槽了。下面是改写后的代码，更多知识点可以直接查看官方文档的作用域插槽。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- current-user组件定义部分 --&gt;</span><br><span class="line">&lt;span&gt;</span><br><span class="line">  &lt;slot v-bind:user=&quot;user&quot;&gt;</span><br><span class="line">    &#123;&#123; user.lastName &#125;&#125;</span><br><span class="line">  &lt;/slot&gt;</span><br><span class="line">&lt;/span&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- current-user 使用 --&gt;</span><br><span class="line">&lt;current-user&gt;</span><br><span class="line">  &lt;template v-slot:default=&quot;slotProps&quot;&gt;</span><br><span class="line">    &#123;&#123; slotProps.user.firstName &#125;&#125;</span><br><span class="line">  &lt;/template&gt;</span><br><span class="line">&lt;/current-user&gt;</span><br></pre></td></tr></table></figure>
+<p>上面的示例其实就是官方的示例，这里需要说明的是，其实在Vue中所谓的作用域插槽功能类似于 React 中的 Render Props 的概念，只不过在 React 中我们更多时候不仅提供了属性，还提供了操作方法。但是在 Vue 中更多的是提供数据供父作用域渲染展示，当然我们也可以把方法提供出去，例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;slot v-bind:injectedProps=&quot;slotProps&quot;&gt;</span><br><span class="line">      &#123;&#123; user.lastName &#125;&#125;</span><br><span class="line">    &lt;/slot&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  data() &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      user: &#123;</span><br><span class="line">        firstName: &apos;snow&apos;,</span><br><span class="line">        lastName: &apos;wolf&apos;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  computed: &#123;</span><br><span class="line">    slotProps() &#123;</span><br><span class="line">      return &#123;</span><br><span class="line">        user: this.user,</span><br><span class="line">        logFullName: this.logFullName</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  methods: &#123;</span><br><span class="line">    logFullName() &#123;</span><br><span class="line">      console.log(`$&#123;this.firstName&#125; $&#123;this.lastName&#125;`)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>在父组件中使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;current-user&gt;</span><br><span class="line">  &lt;template v-slot:default=&quot;&#123; injectedProps &#125;&quot;&gt;</span><br><span class="line">    &lt;div&gt;&#123;&#123; injectedProps.user.firstName &#125;&#125;&lt;/div&gt;</span><br><span class="line">    &lt;el-button @click=&quot;injectedProps.logFullName&quot;&gt;Log Full Name&lt;/el-button&gt;</span><br><span class="line">  &lt;/template&gt;</span><br><span class="line">&lt;/current-user&gt;</span><br></pre></td></tr></table></figure>
+<p>在上面的代码中我们实际上使用解构的方式来取得 injectedProps，基于解构的特性还可以重命名属性名，在 prop 为 undefined 的时候指定初始值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;current-user v-slot=&quot;&#123; user = &#123; firstName: &apos;Guest&apos; &#125; &#125;&quot;&gt;</span><br><span class="line">  &#123;&#123; user.firstName &#125;&#125;</span><br><span class="line">&lt;/current-user&gt;</span><br></pre></td></tr></table></figure>
+<p>如果组件只有一个默认的插槽还可以使用缩写语法，将 <code>v-slot:default=&quot;slotProps&quot;</code> 写成 <code>v-slot=&quot;slotProps&quot;</code>，命名插槽写成 <code>v-slot:user=&quot;slotProps&quot;</code>，如果想要动态插槽名还可以写成 <code>v-slot:[dynamicSlotName]</code>，此外具名插槽同样也有缩写语法，例如 <code>v-slot:header</code> 可以被重写为 <code>#header</code></p>
+<p>上面介绍了很多插槽相关的知识点足已说明其在开发过程中的重要性。说了很多在模板中如何定义和使用作用域插槽，现在进入正题如何在 jsx 中同样使用呢？</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="comment">// current-user components</span></span><br><span class="line">  data() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      user: &#123;</span><br><span class="line">        firstName: <span class="string">'snow'</span>,</span><br><span class="line">        lastName: <span class="string">'wolf'</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  computed: &#123;</span><br><span class="line">    slotProps() &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123;</span><br><span class="line">        user: <span class="keyword">this</span>.user,</span><br><span class="line">        logFullName: <span class="keyword">this</span>.logFullName</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  methods: &#123;</span><br><span class="line">    logFullName() &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;<span class="keyword">this</span>.firstName&#125;</span> <span class="subst">$&#123;<span class="keyword">this</span>.lastName&#125;</span>`</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="keyword">this</span>.$scopedSlots.subTitle(&#123;</span><br><span class="line">            injectedProps: <span class="keyword">this</span>.slotProps</span><br><span class="line">          &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    )</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>然后在父组件中以 jsx 使用：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;current-user &#123;...&#123;</span><br><span class="line">  scopedSlots: &#123;</span><br><span class="line">    subTitle: <span class="function">(<span class="params">&#123; injectedProps &#125;</span>) =&gt;</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;h3&gt;injectedProps.user&lt;<span class="regexp">/h3&gt;</span></span><br><span class="line"><span class="regexp">        &lt;el-button onClick=&#123;injectedProps.logFullName&#125;&gt;Log Full Name&lt;/</span>el-button&gt;</span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    )</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;&#125;&gt;&lt;/</span>current-user&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h3><p>这里需要注意的是在 jsx 中所有 Vue 内置的指令除了 v-show 以外都不支持，需要使用一些等价方式来实现，比如 v-if 使用三目运算表达式、v-for 使用 Array.map() 等。</p>
+<p>对于自定义的指令可以使用 v-name={value} 的语法来写，需要注意的是指令的参数、修饰符此种方式并不支持。以官方文档指令部分给出的示例 v-focus 使用为例，介绍二种解决办法：</p>
+<ol>
+<li>直接使用对象传递所有指令属性</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;text&quot; v-focus=&#123;&#123; value: true &#125;&#125; /&gt;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>使用原始的vNode指令数据格式</li>
+</ol>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  directives：&#123;</span><br><span class="line">    focus: &#123;</span><br><span class="line">      inserted: <span class="function"><span class="keyword">function</span>(<span class="params">el</span>) </span>&#123;</span><br><span class="line">        el.focus()</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">const</span> directives = [</span><br><span class="line">      &#123; <span class="attr">name</span>: <span class="string">'focus'</span>, <span class="attr">value</span>: <span class="literal">true</span> &#125;</span><br><span class="line">    ]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;input type=<span class="string">"text"</span> &#123;...&#123; directives &#125;&#125; /&gt;</span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    )</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+<h3 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h3><p>过滤器其实在开发过程中用得倒是不多，因为更多时候可以通过计算属性来对数据做一些转换和筛选。这里只是简单提及一下并没有什么可以深究的知识点。</p>
+<p>在模板中的用法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 在双花括号中 --&gt;</span><br><span class="line">&#123;&#123; message | capitalize &#125;&#125;</span><br><span class="line"></span><br><span class="line">&lt;!-- 在 `v-bind` 中 --&gt;</span><br><span class="line">&lt;div v-bind:id=&quot;rawId | formatId&quot;&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p>在jsx中使用方法为：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;&#123;<span class="keyword">this</span>.$options.filters(<span class="string">'formatDate'</span>)(<span class="string">'2019-07-01'</span>)&#125;&lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure>
+<p>注意：由于 Vue 全局的过滤器只用于模板中，如果需要用于组件的方法中，可以把过滤器方法单独抽离出一个公共Js文件，然后引入组件中，然后用于方法中。</p>
+<h3 id="一些简单经验分享"><a href="#一些简单经验分享" class="headerlink" title="一些简单经验分享"></a>一些简单经验分享</h3><p>并不是说我们在开发 Vue 项目的时候一定要使用 jsx 的方式来写，但是多掌握一种方式来灵活变通，提高工作效率，扩展思路何尝不值得一试。而且，在有些场景下释放 js 的完全编程能力会让你更加能够得心应手。其实在使用模板方式的时候我们并没有完全采用组件的思维方式来做，或者说是做得不彻底，不纯粹，拆分的粒度不够。更多 的时候并没有考虑到组件怎么切分和抽象，多人协作的时候如何处理依赖并明确自己的功能点。</p>
+<h4 id="关于DOM属性、HTML属性和组件属性"><a href="#关于DOM属性、HTML属性和组件属性" class="headerlink" title="关于DOM属性、HTML属性和组件属性"></a>关于DOM属性、HTML属性和组件属性</h4><p>在 React 中所有数据均挂载在 props 下，Vue 则不然，仅属性就有三种：组件属性 props，普通 html 属性 attrs 和 DOM 属性 domProps。在 Angular 的文档中关于插值绑定部分是重点说明了 DOM 属性和 HTML 属性的区别，在大多数情况下两者都有对应的同名属性，也就是 1:1 映射关系，但是也有例外的情况，比如 HTML 中 colspan，DOM 中的 textContent。HTML 属性的值指定了初始值，并且不能改变，而 DOM 属性的值表示当前值，是可以改变的。</p>
+<p>然后在 Vue 的模板语法中是不区分 DOM 属性和 HTML 属性的，例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line"> &lt;div&gt;</span><br><span class="line">  &lt;div&gt;输入的值：&#123;&#123; title &#125;&#125;&lt;/div&gt;</span><br><span class="line">  &lt;input type=&quot;text&quot; value=&quot;我是DOM属性值&quot; v-model=&quot;title&quot; @input=&quot;logTitle&quot; /&gt;</span><br><span class="line"> &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  data() &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      title: &apos;&apos;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  methods: &#123;</span><br><span class="line">    logTitle(e) &#123;</span><br><span class="line">      // 输出DOM属性</span><br><span class="line">      console.log(e.target.value)</span><br><span class="line">      // 输出HTML属性</span><br><span class="line">      console.log(e.target.getAttribute(&apos;value&apos;))</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>运行示例可以看到 input 的初始值被设置为了“我是 DOM 属性值”，当我们在输入框中添加或者删除文字时，HTML 属性始终没有变化，而绑定的 DOM 值一值在变动。然后再看一下在 jsx 中的实现：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;输入值：&#123; <span class="keyword">this</span>.title &#125;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;input type="text" value="我是DOM属性" v-model=&#123;this.title&#125; onInput=&#123;this.logTitle&#125; /</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>同样运行后会发现在 jsx 写法中并没有直接将 HTML 属性初始化为 DOM 属性值，即输入框中当前值为空字符串，这符合预期的行为。</p>
+<p>此外在模板语法中是无法区分 HTML 属性和 DOM 属性命名一样的场景，但是在 jsx 中可以很好的区分：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Demo title=<span class="string">"我是组件属性"</span> domPropsTitle=<span class="string">"我是DOM属性"</span> /&gt;</span><br></pre></td></tr></table></figure>
+<p>结果会就是在 HTML 中显示 title=”我是DOM属性，而”我是组件属性” 传递给了组件。</p>
+<p>在 React 中 CSS 的样式写义在 jsx 中的语法是以 className=”xx” 的形式，而在 Vue 的 jsx 中可以直接写成 class=”xx”。实际上由于 class 是 js 的保留字，因此在 DOM 中其属性名为 className 而在 HTML 属性中为 class，我们可以在 Vue 中这样写，经过 Babel 转译后得到正确的样式类名：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div domPropsClassName=<span class="string">"mt__xs"</span>&gt;&lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure>
+<p>注意：如果同时写了 class=”xx” domPropsClassName=”yy” 那么后者的优先级较高，和位置无关。所以尽量还是采用 class 的写法。</p>
+<p>有使用过 Bootstrap 经验的可能会注意到它里面包含了很多 ARIA 属性，这些属性并不属于 DOM，在 jsx 中可以通过 attrsXX 或者直接 aria-xx 的方式来添加：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;label aria-label=<span class="string">"title"</span>&gt;&lt;<span class="regexp">/label&gt;</span></span><br><span class="line"><span class="regexp">&lt;label attrsAria-label="title"&gt;&lt;/</span>label&gt;</span><br></pre></td></tr></table></figure>
+<p>但是上面的换成 domPropsAria-label 就没有任何效果。</p>
+<p>注意：在 jsx 中所有 DOM 属性(Property)语法为 domPropsXx, HTML 特性(Attribute)语法为 attrsXx。更多的时候建议还是少使用，或者说合理使用。</p>
+<p>在 jsx 中还可以使用混用的写法，例如在组件中写了<code>&lt;Demo title=&quot;demo&quot; /&gt;</code>，还可以定义一个属性对象，然后使用{…props}的方式写在一起，这个时候就会出现属性合并的问题，同样的事件多个地方声明事件处理函数，都会触发。</p>
+<p>最后需要提及一点的是，在 Vue 中当给一个组件传了很多 props，但是有的并不是组件声明的，也有可能是一些通用的 HTML 或者 DOM 属性，但是在最终编译后的 HTML 中会直接显示这些 props，如果不希望这些属性显示在最终的 HTML 中，可以在组件中设 inheritAttrs: false。虽然不显示了，但是我们依然可以通过 vm.$attrs 获取所有（除 class 和 style）绑定的属性，包括不在 props 中定义的。</p>
+<h4 id="关于事件"><a href="#关于事件" class="headerlink" title="关于事件"></a>关于事件</h4><p>前面已经把事件相关的知识点都介绍了，这里主要是提及一下关于 jsx 事件绑定语法 onXx 和组件属性（主要是函数prop）以 on 开头的情况如何处理。</p>
+<p>虽然在写组件的时候可以避开命名以 on 开头，但是在使用第三库的时候，如果遇到了该如何处理呢？比如Element组件 Upload 很多钩子都是以 on 开头。 下面提供两种解决办法：</p>
+<ol>
+<li>使用展开</li>
+</ol>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;el-upload &#123;...&#123;</span><br><span class="line">  props: &#123;</span><br><span class="line">    onPreview: <span class="keyword">this</span>.handlePreview</span><br><span class="line">  &#125;</span><br><span class="line">&#125;&#125; /&gt;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>使用propsXx</li>
+</ol>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;el-upload propsOnPreview=&#123;<span class="keyword">this</span>.handlePreview&#125; /&gt;</span><br></pre></td></tr></table></figure>
+<p>推荐使用第二种方式，写起来要简单些。</p>
+<h4 id="复杂逻辑条件判断"><a href="#复杂逻辑条件判断" class="headerlink" title="复杂逻辑条件判断"></a>复杂逻辑条件判断</h4><p>在模板语法中可以使用 v-if、v-else-if 和 v-else 来做条件判断。在 jsx 中可以通过 ?: 三元运算符(Ternary operator)运算符来做 if-else 判断：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Demo = <span class="function"><span class="params">()</span> =&gt;</span> isTrue ? <span class="xml"><span class="tag">&lt;<span class="name">p</span>&gt;</span>True!<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span> : <span class="literal">null</span></span><br></pre></td></tr></table></figure>
+<p>然后可以利用 &amp;&amp; 运算符的特性简写为：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Demo = <span class="function"><span class="params">()</span> =&gt;</span> isTrue &amp;&amp; <span class="xml"><span class="tag">&lt;<span class="name">p</span>&gt;</span>True!<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p>对于复杂的条件判断，例如：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Demo = <span class="function"><span class="params">()</span> =&gt;</span> (</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &#123;</span><br><span class="line">      flag &amp;&amp; flag2 &amp;&amp; !flag3</span><br><span class="line">        ? flag4</span><br><span class="line">          ? <span class="xml"><span class="tag">&lt;<span class="name">p</span>&gt;</span>aa<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line">          : flag5</span><br><span class="line">            ? <span class="xml"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Meh<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line">            : <span class="xml"><span class="tag">&lt;<span class="name">p</span>&gt;</span>hErp<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line">        : <span class="xml"><span class="tag">&lt;<span class="name">p</span>&gt;</span>bb<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line">    &#125;</span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">)</span></span><br></pre></td></tr></table></figure>
+<p>可以采用几种方式来降低判断识别的复杂度：</p>
+<ul>
+<li>最好的办法：将判断逻辑转移到子组件</li>
+<li>可选的 hacky 方法：使用 IIFE (立即执行表达式)</li>
+<li>使用第三方库解决：<code>jsx-control-statements</code></li>
+</ul>
+<p>下面是使用 IIFE 通过内部使用 if-else 返回值来优化上述问题：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Demo = <span class="function"><span class="params">()</span> =&gt;</span> (</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &#123;</span><br><span class="line">      (<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (flag &amp;&amp; flag2 &amp;&amp;!flag3) &#123;</span><br><span class="line">          <span class="keyword">if</span> (flag4) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Blah<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line">          &#125; <span class="keyword">else</span> <span class="keyword">if</span> (flag5) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Meh<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line">          &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Herp<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line">          &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">p</span>&gt;</span>A<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)()</span><br><span class="line">    &#125;</span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">)</span></span><br></pre></td></tr></table></figure>
+<p>还可以使用 do 表达式，但是需要插件 @babel/plugin-proposal-do-expressions 的转译来支持</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Demo = <span class="function"><span class="params">()</span> =&gt;</span> (</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">do</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (flag1 &amp;&amp; flag2 &amp;&amp; !flag3) &#123;</span><br><span class="line">          <span class="keyword">if</span> (flag4) &#123;</span><br><span class="line">            &lt;p&gt;Blah&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">          &#125; else if (flag5) &#123;</span></span><br><span class="line"><span class="regexp">            &lt;p&gt;Meh&lt;/</span>p&gt;</span><br><span class="line">          &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            &lt;p&gt;Herp&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">          &#125;</span></span><br><span class="line"><span class="regexp">        &#125; else &#123;</span></span><br><span class="line"><span class="regexp">          &lt;p&gt;A&lt;/</span>p&gt;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">)</span></span><br></pre></td></tr></table></figure>
+<p>再就是一种比较简单的可选办法，如下：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Demo = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> basicCondition = flag &amp;&amp; flag1 &amp;&amp; !flag3;</span><br><span class="line">  <span class="keyword">if</span> (!basicCondition) <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">p</span>&gt;</span>A<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line">  <span class="keyword">if</span> (flag4) <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Blah<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line">  <span class="keyword">if</span> (flag5) <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Meh<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Herp<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="组件的传值"><a href="#组件的传值" class="headerlink" title="组件的传值"></a>组件的传值</h3><p>在单个 jsx 文件中可以写很多函数式组件来切分更小的粒度，例如之前的文章 Vue 后台管理系统开发日常总结__组件PageHeader，组件的形态有两种，一种是普通标题，另一种是带有选项卡的标题，那么在写的时候就可以这样写：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">render() &#123;</span><br><span class="line">  <span class="comment">// partial html</span></span><br><span class="line">  <span class="keyword">const</span> TabHeader = (</span><br><span class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"page-header page-header--tab"</span>&gt;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">  )</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">  /</span><span class="regexp">/ function partial</span></span><br><span class="line"><span class="regexp">  const Header = () =&gt; (</span></span><br><span class="line"><span class="regexp">    &lt;div class="page-header"&gt;&lt;/</span>div&gt;</span><br><span class="line">  )</span><br><span class="line"></span><br><span class="line">  &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"page-header"</span>&gt;</span><br><span class="line">    &#123;<span class="keyword">this</span>.withTab ? TabHeader : <span class="xml"><span class="tag">&lt;<span class="name">Header</span>/&gt;</span></span>&#125;</span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>注意在拆分的时候，如果不需要做任何判断可以纯粹是 HTML 片段赋值给变量，如果需要条件判断就使用函数式组件的方式来写。需要注意的是由于 render 函数会多次被调用，写的时候注意一下对性能的影响，目前能力有限这方面就不作展开了。</p>
+<p>既然使用函数式组件，那么同样可以在函数中传递参数了，参数是一个对象中，包含了以下属性：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">children       # VNode数组，类似于React的children</span><br><span class="line">data           # 绑定的属性</span><br><span class="line">attrs          # Attribute</span><br><span class="line">domProps       # DOM property</span><br><span class="line">on             # 事件</span><br><span class="line">injection      # 注入的对象</span><br><span class="line">listeners:     # 绑定的事件类型</span><br><span class="line">click          # 点击事件</span><br><span class="line">parent         # 父组件</span><br><span class="line">props          # 属性</span><br><span class="line">scopedSlots    # 对象，作用域插槽，使用中发现作用域插槽也挂在这个下面</span><br><span class="line">slots          # 函数，插槽</span><br></pre></td></tr></table></figure>
+<p>虽然可以在函数式组件中传参数、事件、slot 但是个人觉得不建议这样做，反而搞复杂了。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">render() &#123;</span><br><span class="line">  <span class="keyword">const</span> Demo = <span class="function"><span class="params">props</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;h3&gt;Jsx中的内部组件 &#123; props.data.title &#125;&lt;<span class="regexp">/h3&gt;</span></span><br><span class="line"><span class="regexp">        &#123; props.children &#125;</span></span><br><span class="line"><span class="regexp">        &lt;br /</span>&gt;</span><br><span class="line">        &#123; props.scopedSlots.bar() &#125;</span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    )</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">  return (</span></span><br><span class="line"><span class="regexp">    &lt;div&gt;</span></span><br><span class="line"><span class="regexp">      &lt;Demo title="test" attrsA="a" domPropsB="b" onClick=&#123;this.demo&#125;&gt;</span></span><br><span class="line"><span class="regexp">        &lt;h3&gt;我是Children&lt;/</span>h3&gt;</span><br><span class="line">        &lt;template slot=<span class="string">"bar"</span>&gt;</span><br><span class="line">          &lt;p&gt;我是Slot内容&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>template&gt;</span><br><span class="line">      &lt;<span class="regexp">/Demo&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>div&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面的示例最终生成的HTML中会将 <code>&lt;template&gt;</code> 的内容转换为 #document-fragment。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/hexo-blog/tags/Vue/" rel="tag"><i class="fa fa-tag"></i> Vue</a>
+          
+            <a href="/hexo-blog/tags/jsx/" rel="tag"><i class="fa fa-tag"></i> jsx</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/hexo-blog/2021/11/23/observer-api/" rel="next" title="Observer API">
+                <i class="fa fa-chevron-left"></i> Observer API
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/hexo-blog/2023/03/07/node-sass-version/" rel="prev" title="node-sass 版本与 Node 版本对应关系">
+                node-sass 版本与 Node 版本对应关系 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/hexo-blog/images/avatar.jpeg" alt="typeofNaN">
+            
+              <p class="site-author-name" itemprop="name">typeofNaN</p>
+              <p class="site-description motion-element" itemprop="description">Not a Number</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/hexo-blog/archives/">
+              
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/hexo-blog/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/hexo-blog/tags/index.html">
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/typeofNaN" target="_blank" title="GitHub">
+                      GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:dmdefine6@gmail.com" target="_blank" title="Email">
+                      Email</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本用法"><span class="nav-number">1.</span> <span class="nav-text">基本用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#插值"><span class="nav-number">1.1.</span> <span class="nav-text">插值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#样式"><span class="nav-number">1.2.</span> <span class="nav-text">样式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#遍历"><span class="nav-number">1.3.</span> <span class="nav-text">遍历</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事件绑定"><span class="nav-number">1.4.</span> <span class="nav-text">事件绑定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高级部分"><span class="nav-number">1.5.</span> <span class="nav-text">高级部分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事件修饰符"><span class="nav-number">1.6.</span> <span class="nav-text">事件修饰符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ref-和-refInFor"><span class="nav-number">1.7.</span> <span class="nav-text">ref 和 refInFor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插槽（v-slot）"><span class="nav-number">1.8.</span> <span class="nav-text">插槽（v-slot）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指令"><span class="nav-number">1.9.</span> <span class="nav-text">指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#过滤器"><span class="nav-number">1.10.</span> <span class="nav-text">过滤器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一些简单经验分享"><span class="nav-number">1.11.</span> <span class="nav-text">一些简单经验分享</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#关于DOM属性、HTML属性和组件属性"><span class="nav-number">1.11.1.</span> <span class="nav-text">关于DOM属性、HTML属性和组件属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于事件"><span class="nav-number">1.11.2.</span> <span class="nav-text">关于事件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#复杂逻辑条件判断"><span class="nav-number">1.11.3.</span> <span class="nav-text">复杂逻辑条件判断</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组件的传值"><span class="nav-number">1.12.</span> <span class="nav-text">组件的传值</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">typeofNaN</span>
+
+  
+</div>
+
+<!--
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+-->
+
+
+
+        
+<div class="busuanzi-count">
+  <!--<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>-->
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/hexo-blog/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/hexo-blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/hexo-blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/hexo-blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/hexo-blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/hexo-blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/hexo-blog/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/hexo-blog/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/hexo-blog/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/hexo-blog/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/hexo-blog/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'PJDwoaTBvRYHpKLWyNSgztAg-gzGzoHsz',
+        appKey: 'g0cyYda5a0QwOcMzug9yqTs6',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/hexo-blog/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #4D4D4C;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #F7F7F7;
+      background-image: linear-gradient(#F7F7F7, #F7F7F7);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+          if(result)$(this).text('复制成功')
+          else $(this).text('复制失败')
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+</body>
+</html>
